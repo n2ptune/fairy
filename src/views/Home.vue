@@ -1,5 +1,3 @@
 <template>
-  <main>
-    Home
-  </main>
+  <main class="relative"></main>
 </template>
