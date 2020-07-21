@@ -9,16 +9,6 @@
   </div>
 </template>
 
-<script>
-import { db } from '@/plugins/db'
-
-export default {
-  created() {
-    console.log(db.collection('d'))
-  }
-}
-</script>
-
 <style scoped>
 @import '~@/assets/css/global.css';
 
