@@ -7,7 +7,12 @@ import {
   Step,
   Button,
   Row,
-  Col
+  Col,
+  Input,
+  Form,
+  FormItem,
+  ColorPicker,
+  Icon
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/ko'
 import locale from 'element-ui/lib/locale'
@@ -22,3 +27,8 @@ Vue.use(Step)
 Vue.use(Button)
 Vue.use(Row)
 Vue.use(Col)
+Vue.use(Input)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(ColorPicker)
+Vue.use(Icon)
