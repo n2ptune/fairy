@@ -18,6 +18,11 @@ import {
 import lang from 'element-ui/lib/locale/lang/ko'
 import locale from 'element-ui/lib/locale'
 
+lang.el.image.error = '실패'
+lang.el.pageHeader.title = '이전'
+lang.el.popconfirm.confirmButtonText = '예'
+lang.el.popconfirm.cancelButtonText = '아니오'
+
 locale.use(lang)
 
 Vue.use(Container)
