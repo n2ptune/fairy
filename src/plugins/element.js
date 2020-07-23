@@ -12,7 +12,8 @@ import {
   Form,
   FormItem,
   ColorPicker,
-  Icon
+  Icon,
+  Divider
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/ko'
 import locale from 'element-ui/lib/locale'
@@ -32,3 +33,4 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(ColorPicker)
 Vue.use(Icon)
+Vue.use(Divider)
