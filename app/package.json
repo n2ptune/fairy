@@ -1,0 +1,7 @@
+{
+  "name": "fairy-app",
+  "version": "1.0.0",
+  "description": "fairy app",
+  "main": "index.js",
+  "license": "MIT"
+}
