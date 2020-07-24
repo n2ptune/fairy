@@ -1,10 +1,10 @@
 <template>
-  <el-form ref="form" :model="form" class="form">
+  <el-form :model="form" class="form" :rules="rules">
     <div class="wrap">
       <h1>
         사이트 정보 입력
       </h1>
-      <el-form-item label="사이트 이름">
+      <el-form-item label="사이트 이름" required prop="siteName">
         <el-input
           type="text"
           v-model="form.siteName"
@@ -13,7 +13,7 @@
           placeholder="20자 이내"
         ></el-input>
       </el-form-item>
-      <el-form-item label="사이트 주소">
+      <el-form-item label="사이트 주소" required prop="siteAddr">
         <el-input type="url" v-model="form.siteAddr" placeholder="example.com">
           <template #prepend>
             https://
@@ -46,17 +46,19 @@
         :key="index"
         :label="`컨텐츠 - ${index + 1}`"
       >
-        <!-- @TODO: THIS!! -->
-        <span :style="{ float: 'right', marginBottom: '0.5rem' }">
-          <el-button
-            type="danger"
-            icon="el-icon-close"
-            circle
-            size="mini"
+        <el-popconfirm
+          confirmButtonText="예"
+          cancelButtonText="아니오"
+          title="해당 컨텐츠를 삭제하시겠습니까?"
+          @onConfirm="deleteContent(index)"
+        >
+          <span
+            :style="{ float: 'right', marginBottom: '0.5rem' }"
             slot="reference"
-            @click="deleteContent(index)"
-          />
-        </span>
+          >
+            <el-button type="danger" icon="el-icon-close" circle size="mini" />
+          </span>
+        </el-popconfirm>
         <el-input
           v-model="content.title"
           type="text"
@@ -92,6 +94,45 @@ export default {
         }
       ]
     },
+    rules: {
+      siteName: [
+        {
+          required: true,
+          message: '사이트 이름은 반드시 입력해야 합니다.',
+          trigger: 'blur'
+        },
+        {
+          max: 20,
+          min: 1,
+          message: '사이트 이름은 최소 1글자 최대 20글자 이하여야 합니다.',
+          trigger: 'blur'
+        }
+      ],
+      siteAddr: [
+        {
+          required: true,
+          message: '사이트 주소는 반드시 입력해야 합니다.',
+          trigger: blur
+        },
+        {
+          /**
+           * @param {Object} r
+           * @param {String} v
+           * @param {Function} cb
+           */
+          validator: (r, v, cb) => {
+            const reg = /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_+.~#?&//=]*)/gm
+            const isURL = reg.test(v)
+
+            if (isURL) {
+              cb()
+            } else {
+              cb(new Error('유효한 사이트 주소가 아닙니다.'))
+            }
+          }
+        }
+      ]
+    },
     predefineColors: [
       '#D2082D',
       '#5E2728',
@@ -113,7 +154,7 @@ export default {
       })
     },
     deleteContent(index) {
-      console.log(index)
+      this.form.contents.splice(index, 1)
     }
   }
 }

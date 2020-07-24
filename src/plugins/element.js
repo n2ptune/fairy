@@ -13,7 +13,9 @@ import {
   FormItem,
   ColorPicker,
   Icon,
-  Divider
+  Divider,
+  Popconfirm,
+  Popover
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/ko'
 import locale from 'element-ui/lib/locale'
@@ -39,3 +41,5 @@ Vue.use(FormItem)
 Vue.use(ColorPicker)
 Vue.use(Icon)
 Vue.use(Divider)
+Vue.use(Popconfirm)
+Vue.use(Popover)

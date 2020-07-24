@@ -15,7 +15,8 @@
           </el-steps>
         </div>
         <div class="step-contents">
-          <component :is="componentByStep" />
+          <Preview v-if="componentByStep" />
+          <Create v-else :ref="refFormName" />
         </div>
         <div class="step-footer text-center">
           <el-button @click="nextStep">
@@ -34,21 +35,53 @@ import Preview from '@/components/form/Preview.vue'
 
 export default {
   components: {
-    ResponsiveContainer
+    ResponsiveContainer,
+    Create,
+    Preview
   },
 
   data: () => ({
-    stepActive: 0
+    stepActive: 0,
+    refFormName: 'createForm'
   }),
 
   computed: {
     componentByStep() {
-      return this.stepActive ? Preview : Create
+      return !!this.stepActive
     }
   },
 
   methods: {
-    nextStep() {}
+    nextStep() {
+      const { contents, siteAddr, siteName, themeColor } = this.$refs[
+        this.refFormName
+      ].form
+
+      // 컨텐츠 갯수 부족
+      if (!contents.length) {
+        // 처리
+        return
+      }
+
+      const validateContents = content => {
+        return content.title.length >= 5 && content.body.length >= 10
+      }
+
+      // 컨텐츠 검증 실패
+      // (제목 5자 이상, 내용 10자 이상)
+      if (!contents.every(validateContents)) {
+        // 처리
+        return
+      }
+
+      // 주소, 이름, 테마 색 검증
+      if (!siteAddr || !siteName || !themeColor) {
+        // 처리
+        return
+      }
+
+      alert('성공!')
+    }
   }
 }
 </script>
