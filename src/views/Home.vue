@@ -6,13 +6,11 @@
 export default {
   mounted() {
     const script = document.createElement('script')
-    script.setAttribute('src', 'http://localhost:5000/test.js')
+    script.setAttribute('src', 'http://localhost:5000/dist/fairy.dist.js')
     document.head.appendChild(script)
 
     script.onload = function() {
-      const fairyApp = window.FAIRY_APP('1234-5a')
-
-      console.log(fairyApp)
+      window.FAIRY_INIT('123456')
     }
   }
 }
