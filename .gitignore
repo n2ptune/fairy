@@ -22,3 +22,7 @@ pnpm-debug.log*
 *.sw?
 
 *.drawio
+
+/app/dist
+/app/dummy.json
+/app/test.js
