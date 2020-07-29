@@ -26,7 +26,7 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.s[ac]ss$/i,
         use: [
           {
             loader: 'style-loader',
@@ -35,10 +35,8 @@ module.exports = {
                 const _shadowContainer = document.querySelector(
                   '#fairy-app-container'
                 )
-
-                console.log(_shadowContainer)
-
                 const _shadowRoot = _shadowContainer.shadowRoot
+
                 const lastInsertedElement =
                   window._lastElementInsertedByStyleLoader
 
@@ -54,7 +52,8 @@ module.exports = {
               }
             }
           },
-          'css-loader'
+          'css-loader',
+          'sass-loader'
         ]
       }
     ]
@@ -65,5 +64,8 @@ module.exports = {
     process.env.NODE_ENV === 'development'
       ? new HtmlWebpackPlugin({ template: './public/index.html' })
       : function() {}
-  ]
+  ],
+  devServer: {
+    port: 9000
+  }
 }

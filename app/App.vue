@@ -1,6 +1,11 @@
 <template>
   <div id="fairy-app">
-    <FairyButton />
+    <FairyButton
+      v-if="testLoadFairy"
+      :is-fairy="isFairy"
+      @on-fairy="onFairy"
+      @off-fairy="offFairy"
+    />
   </div>
 </template>
 
@@ -13,12 +18,37 @@ export default {
   },
 
   data: () => ({
-    message: 'Hello Fairy App !!!!'
-  })
+    testLoadFairy: false,
+    isFairy: ''
+  }),
+
+  created() {
+    const loadFairy = () => {
+      // eslint-disable-next-line
+      return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(), 1000)
+      })
+    }
+
+    loadFairy().then(() => {
+      this.testLoadFairy = true
+    })
+  },
+
+  methods: {
+    onFairy() {
+      this.isFairy = 'ON'
+      console.log('on')
+    },
+    offFairy() {
+      this.isFairy = 'OFF'
+      console.log('off')
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #fairy-app {
   position: fixed;
   bottom: 15px;
