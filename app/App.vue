@@ -1,24 +1,27 @@
 <template>
   <div id="fairy-app">
-    <span class="red">
-      {{ message }}
-    </span>
+    <FairyButton />
   </div>
 </template>
 
 <script>
+import FairyButton from './components/FairyButton.vue'
+
 export default {
+  components: {
+    FairyButton
+  },
+
   data: () => ({
     message: 'Hello Fairy App !!!!'
-  }),
-
-  mounted() {}
+  })
 }
 </script>
 
 <style scoped>
-.red {
-  color: red;
-  font-size: 10rem;
+#fairy-app {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
 }
 </style>

@@ -1,9 +1,5 @@
 function init() {
-  function getRandomValue() {
-    return Math.abs(window.crypto.getRandomValues(new Int8Array(1))[0])
-  }
-
-  const _elContainerName = 'fairy-app-container-' + getRandomValue()
+  const _elContainerName = 'fairy-app-container'
   const _elRootName = 'fairy-app'
 
   const container = document.createElement('div')

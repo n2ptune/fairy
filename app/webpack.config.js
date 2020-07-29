@@ -19,15 +19,39 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        exclude: path.resolve(__dirname, 'node_modules'),
+        options: {
+          shadowMode: true
+        }
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: 'vue-style-loader',
+            loader: 'style-loader',
             options: {
-              shadowMode: true
+              insert: function(el) {
+                const _shadowContainer = document.querySelector(
+                  '#fairy-app-container'
+                )
+
+                console.log(_shadowContainer)
+
+                const _shadowRoot = _shadowContainer.shadowRoot
+                const lastInsertedElement =
+                  window._lastElementInsertedByStyleLoader
+
+                if (!lastInsertedElement) {
+                  _shadowRoot.insertBefore(el, _shadowRoot.firstChild)
+                } else if (lastInsertedElement.nextSibling) {
+                  _shadowRoot.insertBefore(el, lastInsertedElement.nextSibling)
+                } else {
+                  _shadowRoot.appendChild(el)
+                }
+
+                window._lastElementInsertedByStyleLoader = el
+              }
             }
           },
           'css-loader'
