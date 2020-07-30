@@ -26,7 +26,7 @@
       <h1>
         테마 지정
       </h1>
-      <el-form-item label="베이스 색상 지정">
+      <el-form-item label="베이스 색상 지정" required>
         <el-color-picker
           :predefine="predefineColors"
           v-model="form.themeColor"
@@ -121,11 +121,16 @@ export default {
            * @param {Function} cb
            */
           validator: (r, v, cb) => {
-            const reg = /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_+.~#?&//=]*)/gm
-            const isURL = reg.test(v)
+            const reg = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm
+            const url = 'https://' + v
+            const isURL = reg.test(url)
 
             if (isURL) {
-              cb()
+              if (url.includes('?') || url.includes('&')) {
+                cb(new Error('사이트 주소에 "?"나 "&"를 포함시킬 수 없습니다.'))
+              } else {
+                cb()
+              }
             } else {
               cb(new Error('유효한 사이트 주소가 아닙니다.'))
             }
@@ -146,7 +151,14 @@ export default {
 
   methods: {
     appendContent() {
-      if (this.form.contents.length > 4) return
+      if (this.form.contents.length > 4) {
+        return this.$notify({
+          type: 'error',
+          title: '컨텐츠를 추가할 수 없음',
+          message: '컨텐츠는 최대 5개까지 만들 수 있습니다.',
+          showClose: false
+        })
+      }
 
       this.form.contents.push({
         title: '',
@@ -154,7 +166,16 @@ export default {
       })
     },
     deleteContent(index) {
-      this.form.contents.splice(index, 1)
+      if (this.form.contents.length > 1) {
+        this.form.contents.splice(index, 1)
+      } else {
+        this.$notify({
+          type: 'error',
+          title: '컨텐츠를 제거할 수 없음',
+          message: '최소 하나 이상의 컨텐츠를 가져야 합니다.',
+          showClose: false
+        })
+      }
     }
   }
 }

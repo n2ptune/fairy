@@ -17,4 +17,6 @@ export const db = firebase
 const { Timestamp, GeoPoint } = firebase.firestore
 export { Timestamp, GeoPoint }
 
+export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp()
+
 db.settings({})

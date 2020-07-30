@@ -15,7 +15,7 @@
           </el-steps>
         </div>
         <div class="step-contents">
-          <Preview v-if="componentByStep" />
+          <Preview v-if="componentByStep" :preview-data="previewData" />
           <Create v-else :ref="refFormName" />
         </div>
         <div class="step-footer text-center">
@@ -32,6 +32,7 @@
 import ResponsiveContainer from '@/components/utils/ResponsiveContainer.vue'
 import Create from '@/components/form/Create.vue'
 import Preview from '@/components/form/Preview.vue'
+import createFairy from '@/functions/create'
 
 export default {
   components: {
@@ -42,7 +43,8 @@ export default {
 
   data: () => ({
     stepActive: 0,
-    refFormName: 'createForm'
+    refFormName: 'createForm',
+    previewData: null
   }),
 
   computed: {
@@ -53,14 +55,30 @@ export default {
 
   methods: {
     nextStep() {
+      // eslint-disable-next-line
       const { contents, siteAddr, siteName, themeColor } = this.$refs[
         this.refFormName
       ].form
 
+      // 주소, 이름, 테마 색 검증
+      if (!siteAddr || !siteName || !themeColor) {
+        return this.$notify({
+          type: 'error',
+          title: '필수 요소 누락',
+          message:
+            '사이트 주소와 이름 그리고 테마 색은 반드시 지정되어야 합니다.',
+          showClose: false
+        })
+      }
+
       // 컨텐츠 갯수 부족
       if (!contents.length) {
-        // 처리
-        return
+        return this.$notify({
+          type: 'error',
+          title: '컨텐츠 갯수 부족',
+          message: '최소 하나 이상의 컨텐츠를 가져야 합니다.',
+          showClose: false
+        })
       }
 
       const validateContents = content => {
@@ -70,21 +88,54 @@ export default {
       // 컨텐츠 검증 실패
       // (제목 5자 이상, 내용 10자 이상)
       if (!contents.every(validateContents)) {
-        // 처리
-        return
+        return this.$notify({
+          type: 'error',
+          title: '컨텐츠 제목과 내용의 길이 부적절',
+          message:
+            '컨텐츠 제목은 5자 이상 내용은 10자 이상이 포함되어야 합니다.',
+          showClose: false
+        })
       }
 
-      // 주소, 이름, 테마 색 검증
-      if (!siteAddr || !siteName || !themeColor) {
-        // 처리
-        return
-      }
+      const loadingForWaitCreate = this.$loading({
+        lock: true,
+        text: '데이터 저장중...',
+        background: 'rgba(255, 255, 255, 0.85)',
+        customClass: 'full-loading-create'
+      })
 
-      alert('성공!')
+      createFairy({ contents, siteAddr, siteName, themeColor })
+        .then(fairy => {
+          this.stepActive++
+          this.previewData = fairy
+        })
+        .catch(error => {
+          this.$notify({
+            type: 'error',
+            title: error.title,
+            message: error.message,
+            showClose: false
+          })
+        })
+        .finally(() => loadingForWaitCreate.close())
     }
   }
 }
 </script>
+
+<style lang="scss">
+.full-loading-create {
+  $--loading-color: #f05408;
+
+  & .el-loading-text {
+    color: $--loading-color !important;
+  }
+
+  & .path {
+    stroke: $--loading-color !important;
+  }
+}
+</style>
 
 <style scoped>
 .step-contents {

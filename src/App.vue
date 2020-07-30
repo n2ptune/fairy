@@ -10,8 +10,6 @@
 </template>
 
 <style scoped>
-@import '~@/assets/css/global.css';
-
 .el-container {
   align-items: center;
 }
