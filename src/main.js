@@ -5,6 +5,7 @@ import './plugins/element.js'
 import 'element-ui/lib/theme-chalk/reset.css'
 import './assets/css/global.css'
 import { firestorePlugin } from 'vuefire'
+import { fairyInit } from './functions/init'
 
 Vue.use(firestorePlugin)
 
@@ -14,3 +15,5 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+fairyInit()

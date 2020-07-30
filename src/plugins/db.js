@@ -3,14 +3,14 @@ import 'firebase/firestore'
 
 export const db = firebase
   .initializeApp({
-    apiKey: 'AIzaSyA9CYvJsRvQshwxCclNgTS6j46zGrw2cws',
-    authDomain: 'fairy-web-service.firebaseapp.com',
-    databaseURL: 'https://fairy-web-service.firebaseio.com',
-    projectId: 'fairy-web-service',
-    storageBucket: 'fairy-web-service.appspot.com',
-    messagingSenderId: '579939145788',
-    appId: '1:579939145788:web:22fa84485a8e44ccd00b39',
-    measurementId: 'G-7PTSRP2242'
+    apiKey: process.env.VUE_APP_API_KEY,
+    authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+    databaseURL: process.env.VUE_APP_DATABASE_URL,
+    projectId: process.env.VUE_APP_PROJECT_ID,
+    storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
+    appId: process.env.VUE_APP_FIREBASE_APP_ID,
+    measurementId: process.env.VUE_APP_MEASUREMENT_ID
   })
   .firestore()
 
