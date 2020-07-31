@@ -17,7 +17,9 @@ import {
   Popconfirm,
   Popover,
   Notification,
-  Loading
+  Loading,
+  Menu,
+  MenuItem
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/ko'
 import locale from 'element-ui/lib/locale'
@@ -45,6 +47,8 @@ Vue.use(Icon)
 Vue.use(Divider)
 Vue.use(Popconfirm)
 Vue.use(Popover)
+Vue.use(Menu)
+Vue.use(MenuItem)
 
 Vue.prototype.$notify = Notification
 Vue.prototype.$loading = Loading.service
