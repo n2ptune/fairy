@@ -14,14 +14,15 @@ const MAX_UNIQUE_ID_LENGTH = 20
  * }} fairy
  */
 function createFairy(fairy) {
-  // eslint-disable-next-line
   return new Promise((resolve, reject) => {
     const currentDoc = db.collection('fairies').doc()
     const fairyID = uid(MAX_UNIQUE_ID_LENGTH)
 
+    // Fairy object extend
     fairy.id = fairyID
     fairy.createdAt = serverTimestamp
     fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
+    fairy.success = false
 
     // 검증
     db.collection('fairies')
@@ -54,4 +55,47 @@ function createFairy(fairy) {
   })
 }
 
-export default createFairy
+function updateFairy(fairy, id) {
+  return new Promise((resolve, reject) => {
+    const fairies = db.collection('fairies')
+
+    fairies
+      .where('id', '==', id)
+      .get()
+      .then(q => {
+        if (q.empty) {
+          reject({
+            title: '데이터를 찾을 수 없음',
+            message: '업데이트할 데이터를 찾지 못했습니다.'
+          })
+        } else if (q.size > 1) {
+          reject({
+            title: '데이터 중복 발생',
+            message: '데이터가 중복되었습니다.'
+          })
+        } else {
+          q.forEach(doc => {
+            const docID = doc.id
+
+            // Fairy object extend
+            fairy.createdAt = serverTimestamp
+            fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
+            fairy.success = false
+
+            fairies
+              .doc(docID)
+              .update(fairy)
+              .then(() => {
+                fairies
+                  .doc(docID)
+                  .get()
+                  .then(updatedFairy => resolve(updatedFairy.data()))
+                  .catch(error => reject(error))
+              })
+          })
+        }
+      })
+  })
+}
+
+export { createFairy, updateFairy }

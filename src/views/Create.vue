@@ -10,17 +10,23 @@
             ></el-step>
             <el-step
               title="내용 확인"
-              description="입력한 내용 혹은 컨텐츠 한번 더 확인하고 미리보기"
+              description="입력한 내용 혹은 컨텐츠 한번 더 확인"
             ></el-step>
           </el-steps>
         </div>
         <div class="step-contents">
-          <Preview v-if="componentByStep" :preview-data="previewData" />
-          <Create v-else :ref="refFormName" />
+          <Preview
+            v-if="componentByStep"
+            :preview-data="previewData"
+            @cancel-accept="cancelAccept"
+          />
+          <keep-alive v-else>
+            <Create :ref="refFormName" />
+          </keep-alive>
         </div>
-        <div class="step-footer text-center">
+        <div v-if="!stepActive" class="step-footer text-center">
           <el-button @click="nextStep">
-            Next Steps
+            다음
           </el-button>
         </div>
       </ResponsiveContainer>
@@ -32,7 +38,7 @@
 import ResponsiveContainer from '@/components/utils/ResponsiveContainer.vue'
 import Create from '@/components/form/Create.vue'
 import Preview from '@/components/form/Preview.vue'
-import createFairy from '@/functions/create'
+import { createFairy, updateFairy } from '@/functions/create'
 
 export default {
   components: {
@@ -44,7 +50,8 @@ export default {
   data: () => ({
     stepActive: 0,
     refFormName: 'createForm',
-    previewData: null
+    previewData: null,
+    isUpdateProcess: false
   }),
 
   computed: {
@@ -54,8 +61,18 @@ export default {
   },
 
   methods: {
+    cancelAccept(fairyID) {
+      this.isUpdateProcess = {
+        status: true,
+        id: fairyID
+      }
+      this.stepActive = 0
+
+      this.$nextTick(() => {
+        this.$refs[this.refFormName].form = this.previewData
+      })
+    },
     nextStep() {
-      // eslint-disable-next-line
       const { contents, siteAddr, siteName, themeColor } = this.$refs[
         this.refFormName
       ].form
@@ -104,20 +121,40 @@ export default {
         customClass: 'full-loading-create'
       })
 
-      createFairy({ contents, siteAddr, siteName, themeColor })
-        .then(fairy => {
-          this.stepActive++
-          this.previewData = fairy
+      const alreadyNextStep = fairy => {
+        this.stepActive++
+        this.previewData = fairy
+      }
+
+      const errorHandler = error =>
+        this.$notify({
+          type: 'error',
+          title: error.title,
+          message: error.message,
+          showClose: false
         })
-        .catch(error => {
-          this.$notify({
-            type: 'error',
-            title: error.title,
-            message: error.message,
-            showClose: false
+
+      const loadingHandler = () => loadingForWaitCreate.close()
+
+      if (this.isUpdateProcess) {
+        // 업데이트일 경우
+        updateFairy(
+          { contents, siteAddr, siteName, themeColor },
+          this.isUpdateProcess.id
+        )
+          .then(alreadyNextStep)
+          .catch(errorHandler)
+          .finally(loadingHandler)
+      } else {
+        // 업데이트가 아닐 경우
+        createFairy({ contents, siteAddr, siteName, themeColor })
+          .then(fairy => {
+            this.stepActive++
+            this.previewData = fairy
           })
-        })
-        .finally(() => loadingForWaitCreate.close())
+          .catch(errorHandler)
+          .finally(loadingHandler)
+      }
     }
   }
 }
