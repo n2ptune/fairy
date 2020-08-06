@@ -1,11 +1,13 @@
 <template>
   <div id="fairy-app">
-    <FairyButton
-      v-if="fairyApp"
-      :is-fairy="isFairy"
-      @on-fairy="onFairy"
-      @off-fairy="offFairy"
-    />
+    <div class="fairy-inner-container">
+      <FairyButton
+        v-if="fairyApp"
+        :is-fairy="isFairy"
+        @on-fairy="onFairy"
+        @off-fairy="offFairy"
+      />
+    </div>
   </div>
 </template>
 
@@ -23,10 +25,7 @@ export default {
   }),
 
   mounted() {
-    if (window.FAIRY_APP) {
-      // Loaded this
-      console.log(window.FAIRY_APP)
-    }
+    console.log(this.$fairy)
   },
 
   methods: {

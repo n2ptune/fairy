@@ -52,7 +52,10 @@ module.exports = {
               }
             }
           },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {}
+          },
           'sass-loader'
         ]
       }

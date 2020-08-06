@@ -1,13 +1,13 @@
 const siteNameRule = [
   {
-    required: true,
-    message: '사이트 이름은 반드시 입력해야 합니다.',
-    trigger: 'blur'
-  },
-  {
     max: 20,
     min: 1,
     message: '사이트 이름은 최소 1글자 최대 20글자 이하여야 합니다.',
+    trigger: 'blur'
+  },
+  {
+    required: true,
+    message: '사이트 이름은 반드시 입력해야 합니다.',
     trigger: 'blur'
   }
 ]
