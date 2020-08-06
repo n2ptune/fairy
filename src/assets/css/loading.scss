@@ -1,0 +1,11 @@
+.full-loading-orange {
+  $--loading-color: #f05408;
+
+  & .el-loading-text {
+    color: $--loading-color !important;
+  }
+
+  & .path {
+    stroke: $--loading-color !important;
+  }
+}

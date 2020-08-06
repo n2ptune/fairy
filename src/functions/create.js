@@ -98,4 +98,34 @@ function updateFairy(fairy, id) {
   })
 }
 
-export { createFairy, updateFairy }
+/**
+ * 최종 등록 'success' 필드 false -> true
+ *
+ * @param {String} id
+ */
+function accpetFairy(id) {
+  return new Promise((resolve, reject) => {
+    const fairies = db.collection('fairies')
+
+    fairies
+      .where('id', '==', id)
+      .get()
+      .then(docs => {
+        if (docs.empty) {
+          reject({
+            title: '데이터를 찾을 수 없음',
+            message: `${id}는 유효한 아이디 값이 아닙니다.`
+          })
+        } else {
+          docs.forEach(doc =>
+            doc.ref
+              .update({ success: true })
+              .then(resolve)
+              .catch(error => reject(error))
+          )
+        }
+      })
+  })
+}
+
+export { createFairy, updateFairy, accpetFairy }

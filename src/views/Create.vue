@@ -118,7 +118,7 @@ export default {
         lock: true,
         text: '데이터 저장중...',
         background: 'rgba(255, 255, 255, 0.85)',
-        customClass: 'full-loading-create'
+        customClass: 'full-loading-orange'
       })
 
       const alreadyNextStep = fairy => {
@@ -159,20 +159,6 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.full-loading-create {
-  $--loading-color: #f05408;
-
-  & .el-loading-text {
-    color: $--loading-color !important;
-  }
-
-  & .path {
-    stroke: $--loading-color !important;
-  }
-}
-</style>
 
 <style scoped>
 .step-contents {

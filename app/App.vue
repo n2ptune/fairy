@@ -1,7 +1,7 @@
 <template>
   <div id="fairy-app">
     <FairyButton
-      v-if="testLoadFairy"
+      v-if="fairyApp"
       :is-fairy="isFairy"
       @on-fairy="onFairy"
       @off-fairy="offFairy"
@@ -18,21 +18,15 @@ export default {
   },
 
   data: () => ({
-    testLoadFairy: false,
-    isFairy: ''
+    isFairy: '',
+    fairyApp: null
   }),
 
-  created() {
-    const loadFairy = () => {
-      // eslint-disable-next-line
-      return new Promise((resolve, reject) => {
-        setTimeout(() => resolve(), 1000)
-      })
+  mounted() {
+    if (window.FAIRY_APP) {
+      // Loaded this
+      console.log(window.FAIRY_APP)
     }
-
-    loadFairy().then(() => {
-      this.testLoadFairy = true
-    })
   },
 
   methods: {

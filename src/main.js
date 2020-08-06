@@ -5,6 +5,7 @@ import './plugins/element.js'
 import 'element-ui/lib/theme-chalk/reset.css'
 import 'element-ui/lib/theme-chalk/display.css'
 import './assets/css/global.css'
+import './assets/css/loading.scss'
 import { firestorePlugin } from 'vuefire'
 // import { fairyInit } from './functions/init'
 

@@ -21,27 +21,38 @@
       <h1>위의 정보로 입력을 완료시킬까요?</h1>
       <p class="desciprtion">(정보는 추후에 수정할 수 있습니다.)</p>
       <div class="accept-wrap">
-        <el-button @click="accept">
+        <el-button @click="accept" :disabled="accepted">
           예
         </el-button>
-        <el-button @click="cancelAccept">
+        <el-button @click="cancelAccept" :disabled="accepted">
           아니오 (정보 수정)
         </el-button>
       </div>
     </div>
+    <LoadPreview v-if="accepted" :fairy-id="previewData.id" />
   </div>
 </template>
 
 <script>
 import { convertTimestampToDate, dateFormatKorean } from '@/functions/time'
+import { accpetFairy } from '@/functions/create'
+import LoadPreview from '@/components/utils/LoadPreview.vue'
 
 export default {
+  components: {
+    LoadPreview
+  },
+
   props: {
     previewData: {
       type: Object,
       required: true
     }
   },
+
+  data: () => ({
+    accepted: false
+  }),
 
   computed: {
     time() {
@@ -111,12 +122,28 @@ export default {
     }
   },
 
-  created() {
-    console.log(this.previewData)
-  },
-
   methods: {
-    accept() {},
+    accept() {
+      const loadingWaitForAccept = this.$loading({
+        lock: true,
+        text: '완료중...',
+        background: 'rgba(255,255,255,0.85)',
+        customClass: 'full-loading-orange'
+      })
+
+      accpetFairy(this.previewData.id)
+        .then(() => {
+          this.accepted = true
+        })
+        .catch(error => {
+          this.accepted = false
+          this.$notify.error({
+            message: error.message,
+            title: error.title
+          })
+        })
+        .finally(() => loadingWaitForAccept.close())
+    },
     cancelAccept() {
       this.$emit('cancel-accept', this.previewData.id)
     }
