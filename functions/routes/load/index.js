@@ -10,6 +10,8 @@ router.get('/:id', (req, res) => {
   loadFairyData(id)
     .then(fairy => {
       if (process.env.NODE_ENV === 'production') {
+        // Fairy에 등록되어 있지 않은 출처에서 요청시
+        // CORS 발생
         res.set('Access-Control-Allow-Origin', fairy.siteAddrWithPrefix)
       }
       res.append('Content-Type', 'application/json; charset=utf-8')

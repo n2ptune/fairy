@@ -13,12 +13,20 @@ function loadFairyData(id) {
         if (docs.empty) {
           reject(new Error('NotFoundFairy'))
         } else {
-          docs.forEach(doc => resolve(doc.data()))
+          docs.forEach(doc => {
+            const fairy = doc.data()
+
+            // 콘텐츠 부분을 없애고 전송
+            delete fairy.contents
+            resolve(fairy)
+          })
         }
       })
       .catch(error => reject(error))
   })
 }
+
+function loadFairyContents(id) {}
 
 module.exports = {
   loadFairyData
