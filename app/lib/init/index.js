@@ -1,6 +1,10 @@
+import axios from 'axios'
+
 class Fairy {
   constructor(id) {
     this.id = id
+    this.data = null
+
     this.el = {
       containerName: 'fairy-app-container',
       rootName: 'fairy-app'
@@ -26,7 +30,43 @@ class Fairy {
     this.el.container.attachShadow({ mode: 'open' }).appendChild(this.el.root)
   }
 
-  loadData() {}
+  loadData() {
+    return new Promise((resolve, reject) => {
+      const url =
+        process.env.NODE_ENV === 'production'
+          ? 'product:url'
+          : 'http://localhost:5001/fairy-web-service/us-central1/api/load/' +
+            this.id
+
+      if (url) {
+        axios
+          .get(url)
+          .then(result => {
+            this.data = result.data
+            resolve(result.data)
+          })
+          .catch(error => reject(error))
+      } else {
+        reject(new Error('InvalidURL'))
+      }
+    })
+  }
+
+  get id() {
+    return this.__id__
+  }
+
+  get data() {
+    return this.__data__
+  }
+
+  set id(id) {
+    this.__id__ = id
+  }
+
+  set data(data) {
+    this.__data__ = data
+  }
 }
 
 export default Fairy

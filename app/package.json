@@ -26,5 +26,8 @@
     "preserve": "yarn build",
     "serve": "serve . -n",
     "serve:no-build": "serve . -n"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
   }
 }

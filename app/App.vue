@@ -1,8 +1,9 @@
 <template>
   <div id="fairy-app">
+    {{ fairyData }}
     <div class="fairy-inner-container">
       <FairyButton
-        v-if="fairyApp"
+        v-if="true"
         :is-fairy="isFairy"
         @on-fairy="onFairy"
         @off-fairy="offFairy"
@@ -21,11 +22,15 @@ export default {
 
   data: () => ({
     isFairy: '',
-    fairyApp: null
+    fairyApp: null,
+    fairyData: null
   }),
 
-  mounted() {
-    console.log(this.$fairy)
+  created() {
+    this.$fairy
+      .loadData()
+      .then(data => (this.fairyData = data))
+      .catch(error => console.error(error))
   },
 
   methods: {
