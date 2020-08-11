@@ -1,9 +1,9 @@
 <template>
   <div id="fairy-app">
-    {{ fairyData }}
     <div class="fairy-inner-container">
       <FairyButton
-        v-if="true"
+        v-if="fairyData"
+        :color="fairyData.themeColor"
         :is-fairy="isFairy"
         @on-fairy="onFairy"
         @off-fairy="offFairy"
@@ -47,9 +47,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './styles/variables.scss';
+
 #fairy-app {
   position: fixed;
-  bottom: 15px;
-  right: 15px;
+  bottom: $fairy-area-distance;
+  right: $fairy-area-distance;
 }
 </style>

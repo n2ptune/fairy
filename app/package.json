@@ -29,6 +29,7 @@
     "serve:nb": "serve . -n"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "vue-unicons": "^2.3.0"
   }
 }
