@@ -1,11 +1,10 @@
 const { Router } = require('express')
 const router = Router()
 const { loadFairyData } = require('../../lib/load')
+const { requireIDMiddleware } = require('./middleware')
 
-router.get('/:id', (req, res) => {
+router.get('/:id', requireIDMiddleware, (req, res) => {
   const { id } = req.params
-
-  if (!id) return res.status(400).end()
 
   loadFairyData(id)
     .then(fairy => {
@@ -30,6 +29,10 @@ router.get('/:id', (req, res) => {
 
       return res.status(status).end()
     })
+})
+
+router.get('/contents/:id', requireIDMiddleware, (req, res) => {
+  const { id } = req.params
 })
 
 module.exports = router

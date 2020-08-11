@@ -33,10 +33,12 @@ class Fairy {
   loadData() {
     return new Promise((resolve, reject) => {
       const url =
-        process.env.NODE_ENV === 'production'
-          ? 'product:url'
-          : 'http://localhost:5001/fairy-web-service/us-central1/api/load/' +
-            this.id
+        // process.env.NODE_ENV === 'production'
+        //   ? 'http://localhost:5001/fairy-web-service/us-central1/api/load/'
+        //   : 'http://localhost:5001/fairy-web-service/us-central1/api/load/' +
+        //     this.id
+        'http://localhost:5001/fairy-web-service/us-central1/api/load/' +
+        this.id
 
       if (url) {
         axios

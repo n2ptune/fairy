@@ -2,17 +2,40 @@
   <div>
     <el-divider />
     <h1>Fairy 등록 완료</h1>
-    <p>아이디 : {{ fairyId }}</p>
+    <h3>
+      아래 코드를 HTML 페이지에 삽입해주세요.
+    </h3>
+    <div class="code-wrap">
+      <Prism language="html" :code="generatedCode" />
+      <div class="icon" @click="copyCode">
+        <i class="el-icon-magic-stick"></i>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Prism from 'vue-prism-component'
+import { generateCode } from '@/functions/create'
+
 export default {
+  components: {
+    Prism
+  },
+
   props: {
     fairyId: {
       type: String,
       required: true
     }
+  },
+
+  data: () => ({
+    generatedCode: null
+  }),
+
+  created() {
+    this.generatedCode = generateCode(this.fairyId)
   },
 
   mounted() {
@@ -35,6 +58,51 @@ export default {
         ta.parentNode.insertBefore(fs, ta)
       })(document, 'fairy-app-inject')
     }
+  },
+
+  methods: {
+    copyCode() {
+      /* eslint no-unused-vars: "off" */
+      this.$copyText(this.generatedCode).then(
+        e => {
+          this.$notify({
+            type: 'success',
+            title: '코드 복사됨',
+            message:
+              '코드가 복사되었습니다. 삽입하고 싶은 페이지에 코드를 붙여넣어 주세요.',
+            showClose: true
+          })
+        },
+        e => {
+          this.$notify({
+            type: 'error',
+            title: '코드를 복사할 수 없음',
+            message: '코드를 복사할 수 없습니다.',
+            showClose: true
+          })
+        }
+      )
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.code-wrap {
+  position: relative;
+
+  & .icon {
+    font-size: 1.25rem;
+    bottom: 20px;
+    right: 15px;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    position: absolute;
+    transition: color 0.35s ease;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+</style>

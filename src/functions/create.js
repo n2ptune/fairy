@@ -128,4 +128,30 @@ function accpetFairy(id) {
   })
 }
 
-export { createFairy, updateFairy, accpetFairy }
+function generateCode(id) {
+  /* eslint no-useless-escape: "off" */
+  const url = 'http://localhost:5000/dist/fairy.app.js'
+
+  const code = `
+<script>
+  var url = '${url}';
+
+  window.FAIRY_APP = {
+    id: ${id}
+  };
+
+  (function(t, i) {
+    if (t.getElementById(i)) return;
+
+    var fs = t.createElement('script')
+    var ta = t.getElementsByTagName('script')[0]
+    fs.async = true
+    fs.src = url
+    ta.parentNode.insertBefore(fs, ta)
+  })(document, 'fairy-app-inject')
+<\/script>`.trim()
+
+  return code
+}
+
+export { createFairy, updateFairy, accpetFairy, generateCode }

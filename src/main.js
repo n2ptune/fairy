@@ -7,8 +7,13 @@ import 'element-ui/lib/theme-chalk/display.css'
 import './assets/css/global.css'
 import './assets/css/loading.scss'
 import { firestorePlugin } from 'vuefire'
-// import { fairyInit } from './functions/init'
+import 'prismjs'
+import 'prismjs/themes/prism-okaidia.css'
+import VueClipboard from 'vue-clipboard2'
 
+VueClipboard.config.autoSetContainer = true
+
+Vue.use(VueClipboard)
 Vue.use(firestorePlugin)
 
 Vue.config.productionTip = false
@@ -17,5 +22,3 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
-
-// fairyInit()

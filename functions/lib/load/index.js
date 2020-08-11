@@ -1,13 +1,13 @@
 const { db } = require('../firebase')
+const collection = db.collection('fairies')
 
 function loadFairyData(id) {
   if (!id) return
 
   return new Promise((resolve, reject) => {
-    const collection = db.collection('fairies')
-
     collection
       .where('id', '==', id)
+      .where('success', '==', true)
       .get()
       .then(docs => {
         if (docs.empty) {
@@ -26,8 +26,30 @@ function loadFairyData(id) {
   })
 }
 
-function loadFairyContents(id) {}
+function loadFairyContents(id) {
+  if (!id) return
+
+  return new Promise((resolve, reject) => {
+    collection
+      .doc(id)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          const fairy = doc.data()
+
+          if (fairy.success) {
+            resolve(fairy.contents)
+          } else {
+            reject(new Error('NotAcceptFairy'))
+          }
+        } else {
+          reject(new Error('NotFoundFairy'))
+        }
+      })
+  })
+}
 
 module.exports = {
-  loadFairyData
+  loadFairyData,
+  loadFairyContents
 }
