@@ -4,12 +4,11 @@ Helpful fairy for your web service
 
 ### Project
 
-- vue
+- vue(2.6.11)
 - firebase
+- element-ui
 
 ### Process
-
-`Fairy-App`, `Fairy-Web`, `Fairy-Server`
 
 1. 사용자가 Fairy-Web에서 Fairy를 등록하고 정보를 입력
 2. Fairy-Web에서 Fairy-Server로 정보를 전송하고 서버는 해당 내용을 저장 후 Fairy의 아이디를 해시로 저장
