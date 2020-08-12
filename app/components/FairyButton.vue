@@ -44,6 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/_variables.scss';
+@import '../styles/_mixins.scss';
 
 .fairy-button {
   width: $fairy-area-size;
@@ -53,7 +54,7 @@ export default {
   cursor: pointer;
   display: block;
   float: right;
-  box-shadow: 0 3px 6px 2px rgba(0, 0, 0, 0.29);
+  @include shadow;
 
   &:focus {
     outline: none;

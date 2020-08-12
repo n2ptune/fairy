@@ -1,9 +1,10 @@
 import axios from 'axios'
 
 class Fairy {
-  constructor(id) {
+  constructor(id, vue) {
     this.id = id
     this.data = null
+    this.vue = vue
 
     this.el = {
       containerName: 'fairy-app-container',
@@ -62,12 +63,20 @@ class Fairy {
     return this.__data__
   }
 
+  get vue() {
+    return this.__vue__
+  }
+
   set id(id) {
     this.__id__ = id
   }
 
   set data(data) {
     this.__data__ = data
+  }
+
+  set vue(vue) {
+    this.__vue__ = vue
   }
 }
 

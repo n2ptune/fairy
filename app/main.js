@@ -2,9 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import Fairy from './lib/init'
 import Unicon from 'vue-unicons'
-import { uniCommentNotes } from 'vue-unicons/src/icons'
+import { uniCommentNotes, uniTimes } from 'vue-unicons/src/icons'
 
-Unicon.add([uniCommentNotes])
+Unicon.add([uniCommentNotes, uniTimes])
 
 Vue.use(Unicon)
 
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 
 /** Entry Point in production mode */
 if (window.FAIRY_APP) {
-  const fairy = new Fairy(window.FAIRY_APP.id)
+  const fairy = new Fairy(window.FAIRY_APP.id, Vue)
 
   Vue.prototype.$fairy = fairy
 

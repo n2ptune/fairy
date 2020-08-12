@@ -18,7 +18,7 @@ export default {
 <style lang="scss" scoped>
 // Transition
 // Entry point (enter, leave)
-$translate-distance: 20%;
+$translate-distance: 10%;
 
 .appear-from-bottom-enter-active,
 .appear-from-bottom-leave-active {

@@ -15,6 +15,10 @@ module.exports = {
     rules: [
       {
         test: /\.m?js$/,
+        exclude:
+          process.env.NODE_ENV === 'production'
+            ? path.resolve(__dirname, 'node_modules/')
+            : [],
         use: {
           loader: 'babel-loader',
           options: {
