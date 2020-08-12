@@ -1,11 +1,17 @@
 <template>
-  <transition name="appear-from-bottom">
-    <div class="fairy-inner-box"></div>
+  <transition name="appear-from-bottom" appear>
+    <Box />
   </transition>
 </template>
 
 <script>
+import Box from '@components/inner/Box.vue'
+
 export default {
+  components: {
+    Box
+  },
+
   props: {
     active: {
       type: Boolean,
@@ -35,39 +41,5 @@ $translate-distance: 10%;
 .appear-from-bottom-leave {
   opacity: 1;
   transform: translateY(0);
-}
-
-@import '@styles/_variables.scss';
-@import '@styles/_breakpoints.scss';
-
-.fairy-inner-box {
-  background: darkslateblue;
-}
-
-@include mobile {
-  .fairy-inner-box {
-    // Only mobile property
-    z-index: 100;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    // Common
-    width: $fairy-inner-box-mobile-width;
-    height: $fairy-inner-box-mobile-height;
-    border-radius: 0;
-  }
-}
-
-@include not-mobile {
-  .fairy-inner-box {
-    // Only not-mobile property
-    margin-bottom: $fairy-area-distance;
-    border-radius: $fairy-inner-box-radius;
-
-    // Common
-    width: $fairy-inner-box-width;
-    height: $fairy-inner-box-height;
-  }
 }
 </style>

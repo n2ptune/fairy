@@ -1,10 +1,9 @@
 <template>
   <div id="fairy-app">
-    <div class="fairy-inner-container">
+    <div class="fairy-inner-container" v-if="fairyData">
       <InnerContainer v-show="activeFairy" :active="activeFairy" />
       <FairyButton
         v-if="fairyData"
-        :color="fairyData.themeColor"
         :active="activeFairy"
         @active="onFairy"
         @close="offFairy"

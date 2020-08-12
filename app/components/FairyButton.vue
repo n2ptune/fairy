@@ -1,9 +1,9 @@
 <template>
-  <transition name="scale-up" appear>
+  <transition name="scale-up" mode="out-in">
     <button
       class="fairy-button"
       @click="switchFairy"
-      :style="{ backgroundColor: color }"
+      :style="{ backgroundColor: $fairy.data.themeColor }"
     >
       <unicon name="comment-notes" fill="white" />
     </button>
@@ -16,10 +16,6 @@ export default {
     active: {
       type: Boolean,
       requried: true
-    },
-    color: {
-      type: String,
-      required: true
     }
   },
 
