@@ -70,6 +70,12 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    alias: {
+      '@styles': path.resolve(__dirname, './styles/'),
+      '@components': path.resolve(__dirname, './components/')
+    }
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new VueLoaderPlugin(),

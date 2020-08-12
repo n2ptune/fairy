@@ -1,7 +1,7 @@
 <template>
   <div id="fairy-app">
     <div class="fairy-inner-container">
-      <FairyInner v-show="activeFairy" :active="activeFairy" />
+      <InnerContainer v-show="activeFairy" :active="activeFairy" />
       <FairyButton
         v-if="fairyData"
         :color="fairyData.themeColor"
@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import FairyButton from './components/FairyButton.vue'
-import FairyInner from './components/FairyInner.vue'
+import FairyButton from '@components/FairyButton.vue'
+import InnerContainer from '@components/inner/Container.vue'
 
 export default {
   components: {
     FairyButton,
-    FairyInner
+    InnerContainer
   },
 
   data: () => ({

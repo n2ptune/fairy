@@ -37,8 +37,8 @@ $translate-distance: 10%;
   transform: translateY(0);
 }
 
-@import '../styles/_variables.scss';
-@import '../styles/_breakpoints.scss';
+@import '@styles/_variables.scss';
+@import '@styles/_breakpoints.scss';
 
 .fairy-inner-box {
   background: darkslateblue;
