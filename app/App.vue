@@ -1,12 +1,13 @@
 <template>
   <div id="fairy-app">
     <div class="fairy-inner-container">
+      <FairyInner v-show="activeFairy" :active="activeFairy" />
       <FairyButton
         v-if="fairyData"
         :color="fairyData.themeColor"
-        :is-fairy="isFairy"
-        @on-fairy="onFairy"
-        @off-fairy="offFairy"
+        :active="activeFairy"
+        @active="onFairy"
+        @close="offFairy"
       />
     </div>
   </div>
@@ -14,14 +15,16 @@
 
 <script>
 import FairyButton from './components/FairyButton.vue'
+import FairyInner from './components/FairyInner.vue'
 
 export default {
   components: {
-    FairyButton
+    FairyButton,
+    FairyInner
   },
 
   data: () => ({
-    isFairy: '',
+    activeFairy: false,
     fairyApp: null,
     fairyData: null
   }),
@@ -35,19 +38,17 @@ export default {
 
   methods: {
     onFairy() {
-      this.isFairy = 'ON'
-      console.log('on')
+      this.activeFairy = true
     },
     offFairy() {
-      this.isFairy = 'OFF'
-      console.log('off')
+      this.activeFairy = false
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import './styles/variables.scss';
+@import './styles/_variables.scss';
 
 #fairy-app {
   position: fixed;

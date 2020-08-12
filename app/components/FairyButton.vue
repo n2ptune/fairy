@@ -13,8 +13,8 @@
 <script>
 export default {
   props: {
-    isFairy: {
-      type: String,
+    active: {
+      type: Boolean,
       requried: true
     },
     color: {
@@ -23,18 +23,19 @@ export default {
     }
   },
 
-  computed: {
-    onFairy() {
-      return !(!this.isFairy || this.isFairy === 'OFF')
-    }
-  },
-
   methods: {
     switchFairy() {
-      if (this.onFairy) {
-        this.$emit('off-fairy')
+      /**
+       * Emit event to switch active variable to parent
+       * @event close
+       * Emit close event to parent if active fairy
+       * @event active
+       * Emit active event to parent if closed fairy
+       */
+      if (this.active) {
+        this.$emit('close')
       } else {
-        this.$emit('on-fairy')
+        this.$emit('active')
       }
     }
   }
@@ -42,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/variables.scss';
+@import '../styles/_variables.scss';
 
 .fairy-button {
   width: $fairy-area-size;
@@ -51,6 +52,7 @@ export default {
   border: none;
   cursor: pointer;
   display: block;
+  float: right;
   box-shadow: 0 3px 6px 2px rgba(0, 0, 0, 0.29);
 
   &:focus {
