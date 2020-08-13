@@ -1,5 +1,5 @@
 <template>
-  <transition name="scale-up" mode="out-in">
+  <transition name="scale-up" appear>
     <button
       class="fairy-button"
       @click="switchFairy"
@@ -63,10 +63,10 @@ export default {
 }
 
 .scale-up-enter-active {
-  transition: transform 0.55s ease-out;
+  transition: transform 0.4s ease-out;
 }
 .scale-up-enter {
-  transform: scale(0.3);
+  transform: scale(0);
 }
 .scale-up-enter-to {
   transform: scale(1);
