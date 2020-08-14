@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 // }
 
 if (window.FAIRY_APP) {
-  Store.dispatch('')
+  Store.dispatch('loadFairy', window.FAIRY_APP.id)
 
   new Vue({
     el: FairyElement.root,

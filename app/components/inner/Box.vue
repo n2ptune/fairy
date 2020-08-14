@@ -1,14 +1,12 @@
 <template>
-  <main
-    class="fairy-inner-box"
-    :style="{ backgroundColor: $fairy.data.themeColor }"
-  >
+  <main class="fairy-inner-box" :style="{ backgroundColor: fairy.themeColor }">
     <InnerHeader />
     <InnerContents />
   </main>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import InnerHeader from './Header.vue'
 import InnerContents from './Contents.vue'
 
@@ -16,6 +14,12 @@ export default {
   components: {
     InnerHeader,
     InnerContents
+  },
+
+  computed: {
+    ...mapGetters({
+      fairy: 'getFairyData'
+    })
   }
 }
 </script>

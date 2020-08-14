@@ -10,13 +10,6 @@ import Box from '@components/inner/Box.vue'
 export default {
   components: {
     Box
-  },
-
-  props: {
-    active: {
-      type: Boolean,
-      required: true
-    }
   }
 }
 </script>

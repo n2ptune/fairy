@@ -11,31 +11,33 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data: () => ({
     contents: null
   }),
 
   computed: {
-    active() {
-      return {
-        fairy: this.$fairy.isActiveFairy,
-        content: this.$fairy.isLoadedContents
-      }
-    }
+    ...mapGetters({
+      active: 'getFairyActive'
+    })
   },
 
   created() {
-    if (this.active.fairy) {
+    if (this.active && this.active.fairy) {
       if (!this.active.content) {
-        this.$fairy
-          .loadContents()
-          .then(() => (this.contents = this.$fairy.data.contents))
-          .catch(error => console.log(error))
+        this.loadContents()
       }
     }
   },
 
-  mounted() {}
+  mounted() {},
+
+  methods: {
+    ...mapActions({
+      loadContents: 'loadContents'
+    })
+  }
 }
 </script>

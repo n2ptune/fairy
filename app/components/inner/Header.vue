@@ -1,15 +1,17 @@
 <template>
   <header class="inner-header">
-    <div class="site-name">{{ fr.siteName }}</div>
+    <div class="site-name">{{ fairy.siteName }}</div>
   </header>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   computed: {
-    fr() {
-      return this.$fairy.data
-    }
+    ...mapGetters({
+      fairy: 'getFairyData'
+    })
   }
 }
 </script>

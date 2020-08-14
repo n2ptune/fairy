@@ -1,18 +1,14 @@
 <template>
   <div id="fairy-app">
     <div class="fairy-inner-container" v-if="fairyData">
-      <InnerContainer v-show="activeFairy" :active="activeFairy" />
-      <FairyButton
-        v-if="fairyData"
-        :active="activeFairy"
-        @active="onFairy"
-        @close="offFairy"
-      />
+      <InnerContainer v-show="activeFairy" />
+      <FairyButton v-if="fairyData" @active="onFairy" @close="offFairy" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import FairyButton from '@components/FairyButton.vue'
 import InnerContainer from '@components/inner/Container.vue'
 
@@ -23,26 +19,26 @@ export default {
   },
 
   data: () => ({
-    activeFairy: false,
-    fairyApp: null,
-    fairyData: null
+    activeFairy: false
   }),
 
-  created() {
-    this.$fairy
-      .loadData()
-      .then(data => (this.fairyData = data))
-      .catch(error => console.error(error))
+  computed: {
+    ...mapGetters({
+      fairyData: 'getFairyData'
+    })
   },
 
   methods: {
+    ...mapActions({
+      loadData: 'loadFairy'
+    }),
     onFairy() {
+      this.$store.commit('SET_FAIRY_ACTIVE', { fairy: true })
       this.activeFairy = true
-      this.$fairy.active()
     },
     offFairy() {
+      this.$store.commit('SET_FAIRY_ACTIVE', { fairy: false })
       this.activeFairy = false
-      this.$fairy.deactive()
     }
   }
 }

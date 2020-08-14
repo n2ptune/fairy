@@ -3,7 +3,7 @@
     <button
       class="fairy-button"
       @click="switchFairy"
-      :style="{ backgroundColor: $fairy.data.themeColor }"
+      :style="{ backgroundColor: fairy.themeColor }"
     >
       <unicon name="comment-notes" fill="white" />
     </button>
@@ -11,12 +11,16 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
+
 export default {
-  props: {
-    active: {
-      type: Boolean,
-      requried: true
-    }
+  computed: {
+    ...mapGetters({
+      fairy: 'getFairyData'
+    }),
+    ...mapState({
+      fairyStatus: 'fairy'
+    })
   },
 
   methods: {
@@ -28,7 +32,7 @@ export default {
        * @event active
        * Emit active event to parent if closed fairy
        */
-      if (this.active) {
+      if (this.fairyStatus.active.fairy) {
         this.$emit('close')
       } else {
         this.$emit('active')
