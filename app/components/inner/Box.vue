@@ -47,7 +47,6 @@ export default {
     // Common
     width: $fairy-inner-box-mobile-width;
     height: $fairy-inner-box-mobile-height;
-    border-radius: 0;
   }
 }
 

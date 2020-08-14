@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "vue-unicons": "^2.3.0"
+    "vue-unicons": "^2.3.0",
+    "vuex": "^3.5.1"
   }
 }

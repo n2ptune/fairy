@@ -31,19 +31,26 @@ function loadFairyContents(id) {
 
   return new Promise((resolve, reject) => {
     collection
-      .doc(id)
+      .where('id', '==', id)
       .get()
-      .then(doc => {
-        if (doc.exists) {
-          const fairy = doc.data()
-
-          if (fairy.success) {
-            resolve(fairy.contents)
-          } else {
-            reject(new Error('NotAcceptFairy'))
-          }
-        } else {
+      .then(docs => {
+        if (docs.empty) {
           reject(new Error('NotFoundFairy'))
+        } else {
+          docs.forEach(doc => {
+            const data = doc.data()
+
+            if (data.success) {
+              const result = {
+                contents: data.contents,
+                cors: data.siteAddrWithPrefix
+              }
+
+              resolve(result)
+            } else {
+              reject(new Error('NotAcceptFairy'))
+            }
+          })
         }
       })
   })

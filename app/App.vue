@@ -38,9 +38,11 @@ export default {
   methods: {
     onFairy() {
       this.activeFairy = true
+      this.$fairy.active()
     },
     offFairy() {
       this.activeFairy = false
+      this.$fairy.deactive()
     }
   }
 }

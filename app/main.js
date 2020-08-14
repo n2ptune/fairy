@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Fairy from './lib/init'
+import FairyElement from './lib/init'
+import Store from './store'
 import Unicon from 'vue-unicons'
 import { uniCommentNotes, uniTimes } from 'vue-unicons/src/icons'
 
@@ -16,13 +17,24 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 /** Entry Point in production mode */
-if (window.FAIRY_APP) {
-  const fairy = new Fairy(window.FAIRY_APP.id, Vue)
+// if (window.FAIRY_APP) {
+//   const fairy = new Fairy(window.FAIRY_APP.id, Vue)
 
-  Vue.prototype.$fairy = fairy
+//   Vue.prototype.$fairy = fairy
+
+//   new Vue({
+//     el: fairy.el.root,
+//     store: Store,
+//     render: h => h(App)
+//   })
+// }
+
+if (window.FAIRY_APP) {
+  Store.dispatch('')
 
   new Vue({
-    el: fairy.el.root,
+    el: FairyElement.root,
+    store: Store,
     render: h => h(App)
   })
 }
