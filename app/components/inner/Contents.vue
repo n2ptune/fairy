@@ -1,15 +1,24 @@
 <template>
   <section class="contents">
-    <ContentList v-once />
+    <keep-alive>
+      <ContentList v-if="fairyActive" />
+    </keep-alive>
   </section>
 </template>
 
 <script>
 import ContentList from '@components/inner/ContentList.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     ContentList
+  },
+
+  computed: {
+    ...mapGetters({
+      fairyActive: 'getFairyActive'
+    })
   }
 }
 </script>

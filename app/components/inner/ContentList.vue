@@ -1,38 +1,38 @@
 <template>
-  <keep-alive>
-    <ul class="content-list">
-      <li class="content-wrap">
+  <div class="content-container">
+    <ul v-if="active.contents" class="content-list">
+      <li
+        v-for="content in fairyData.contents"
+        :key="content.title"
+        class="content-wrap"
+      >
         <div class="content">
-          {{ contents }}
+          {{ fairyData.contents }}
         </div>
       </li>
     </ul>
-  </keep-alive>
+    <div v-else class="content-loading-container">
+      Loading...
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  data: () => ({
-    contents: null
-  }),
-
   computed: {
     ...mapGetters({
-      active: 'getFairyActive'
+      active: 'getActive',
+      fairyData: 'getFairyData'
     })
   },
 
-  created() {
-    if (this.active && this.active.fairy) {
-      if (!this.active.content) {
-        this.loadContents()
-      }
+  activated() {
+    if (!this.active.contents) {
+      this.loadContents()
     }
   },
-
-  mounted() {},
 
   methods: {
     ...mapActions({
@@ -41,3 +41,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.content {
+  color: black;
+}
+</style>

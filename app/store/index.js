@@ -6,29 +6,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: () => ({
-    fairy: null,
+    fairy: {
+      active: {
+        fairy: false,
+        contents: false
+      }
+    },
     data: null
   }),
 
   mutations: {
     SET_FAIRY_STATUS(state, data) {
       if (data) {
-        state.fairy = data
+        state.fairy = {
+          ...state.fairy,
+          ...data
+        }
       }
     },
 
     SET_FAIRY_ACTIVE(state, active) {
-      if (!active) {
-        state.fairy.active = {
-          fairy: false,
-          content: false
-        }
-      } else {
-        state.fairy.active = {
-          ...state.fairy.active,
-          ...active
-        }
-      }
+      state.fairy.active.fairy = active
+    },
+
+    SET_FAIRY_CONTENTS_ACTIVE(state, active) {
+      state.fairy.active.contents = active
     },
 
     SET_FAIRY_DATA(state, data) {
@@ -39,7 +41,7 @@ export default new Vuex.Store({
 
     SET_FAIRY_CONTENTS(state, contents) {
       if (!state.data.contents) {
-        state.contents = contents
+        state.data.contents = contents
       }
     }
   },
@@ -51,6 +53,10 @@ export default new Vuex.Store({
 
     getContentActive(state) {
       return state.fairy.active.content
+    },
+
+    getActive(state) {
+      return state.fairy.active
     },
 
     getServerURL(state) {
@@ -74,7 +80,8 @@ export default new Vuex.Store({
           : 'http://localhost:5001/fairy-web-service/us-central1/api'
 
       commit('SET_FAIRY_STATUS', { url, id })
-      commit('SET_FAIRY_ACTIVE')
+      commit('SET_FAIRY_ACTIVE', false)
+      commit('SET_FAIRY_CONTENTS_ACTIVE', false)
 
       return new Promise((resolve, reject) => {
         const url = getters.getServerURL + '/load/' + getters.getFairyID
@@ -101,7 +108,7 @@ export default new Vuex.Store({
           .get(url)
           .then(result => {
             commit('SET_FAIRY_CONTENTS', result.data)
-            commit('SET_FAIRY_ACTIVE', { content: true })
+            commit('SET_FAIRY_CONTENTS_ACTIVE', true)
             resolve()
           })
           .catch(error => reject(error))

@@ -1,7 +1,7 @@
 <template>
   <div id="fairy-app">
     <div class="fairy-inner-container" v-if="fairyData">
-      <InnerContainer v-show="activeFairy" />
+      <InnerContainer v-show="fairyActive" />
       <FairyButton v-if="fairyData" @active="onFairy" @close="offFairy" />
     </div>
   </div>
@@ -18,13 +18,10 @@ export default {
     InnerContainer
   },
 
-  data: () => ({
-    activeFairy: false
-  }),
-
   computed: {
     ...mapGetters({
-      fairyData: 'getFairyData'
+      fairyData: 'getFairyData',
+      fairyActive: 'getFairyActive'
     })
   },
 
@@ -33,12 +30,10 @@ export default {
       loadData: 'loadFairy'
     }),
     onFairy() {
-      this.$store.commit('SET_FAIRY_ACTIVE', { fairy: true })
-      this.activeFairy = true
+      this.$store.commit('SET_FAIRY_ACTIVE', true)
     },
     offFairy() {
-      this.$store.commit('SET_FAIRY_ACTIVE', { fairy: false })
-      this.activeFairy = false
+      this.$store.commit('SET_FAIRY_ACTIVE', false)
     }
   }
 }

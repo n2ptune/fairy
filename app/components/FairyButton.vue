@@ -11,15 +11,13 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({
-      fairy: 'getFairyData'
-    }),
-    ...mapState({
-      fairyStatus: 'fairy'
+      fairy: 'getFairyData',
+      fairyActive: 'getFairyActive'
     })
   },
 
@@ -32,7 +30,7 @@ export default {
        * @event active
        * Emit active event to parent if closed fairy
        */
-      if (this.fairyStatus.active.fairy) {
+      if (this.fairyActive) {
         this.$emit('close')
       } else {
         this.$emit('active')
