@@ -1,5 +1,5 @@
 <template>
-  <div class="content-box">
+  <div class="content-box" @click="detail">
     <div v-if="!isLoading" class="content">
       <p class="title">
         {{ title }}
@@ -17,8 +17,10 @@
 </template>
 
 <script>
-const LIMIT_TITLE_LENGTH = 20
-const LIMIT_BODY_LENGTH = 50
+import { mapMutations } from 'vuex'
+
+const LIMIT_TITLE_LENGTH = 40
+const LIMIT_BODY_LENGTH = 100
 
 /**
  * @typedef {object} Content
@@ -45,7 +47,8 @@ export default {
       let title = ''
 
       if (this.content.title.length > LIMIT_TITLE_LENGTH) {
-        title = this.content.title.substring(0, LIMIT_TITLE_LENGTH)
+        title =
+          this.content.title.substring(0, LIMIT_TITLE_LENGTH).trim() + '...'
       } else {
         title = this.content.title
       }
@@ -56,12 +59,25 @@ export default {
       let body = ''
 
       if (this.content.body.length > LIMIT_BODY_LENGTH) {
-        body = this.content.body.substring(0, LIMIT_BODY_LENGTH)
+        body = this.content.body.substring(0, LIMIT_BODY_LENGTH).trim() + '...'
       } else {
         body = this.content.body
       }
 
       return body
+    }
+  },
+
+  methods: {
+    ...mapMutations({
+      mutateDetailContent: 'detail/SET_CONTENT',
+      mutateDetailActive: 'detail/SWITCH_ACTIVE'
+    }),
+    detail() {
+      if (this.isLoading) return
+
+      this.mutateDetailContent(this.content)
+      this.mutateDetailActive()
     }
   }
 }
@@ -91,14 +107,17 @@ export default {
   & .title,
   & .body {
     margin: 0;
+    word-break: break-all;
   }
 
   & .title {
     color: $color-dodger-blue;
+    font-weight: bold;
   }
 
   & .body {
     margin: 0.5rem 0;
+    font-size: 0.85rem;
   }
 }
 </style>

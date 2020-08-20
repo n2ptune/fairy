@@ -1,7 +1,11 @@
 <template>
-  <main class="fairy-inner-box" :style="{ backgroundColor: fairy.themeColor }">
+  <main
+    class="fairy-inner-box no-scroll"
+    :style="{ backgroundColor: fairy.themeColor }"
+  >
     <InnerHeader />
     <InnerContents />
+    <DetailContent v-if="detailActive" />
   </main>
 </template>
 
@@ -9,16 +13,19 @@
 import { mapGetters } from 'vuex'
 import InnerHeader from './Header.vue'
 import InnerContents from './Contents.vue'
+import DetailContent from './DetailContent.vue'
 
 export default {
   components: {
     InnerHeader,
-    InnerContents
+    InnerContents,
+    DetailContent
   },
 
   computed: {
     ...mapGetters({
-      fairy: 'getFairyData'
+      fairy: 'getFairyData',
+      detailActive: 'detail/getActive'
     })
   }
 }
@@ -30,14 +37,15 @@ export default {
 
 .fairy-inner-box {
   overflow-y: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  // -ms-overflow-style: none;
+  // scrollbar-width: none;
   display: flex;
   flex-direction: column;
+  position: relative;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
 }
 
 @include mobile {

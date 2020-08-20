@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import detail from './detail'
 
 Vue.use(Vuex)
 
@@ -114,5 +115,9 @@ export default new Vuex.Store({
           .catch(error => reject(error))
       })
     }
+  },
+
+  modules: {
+    detail
   }
 })

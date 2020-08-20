@@ -10,6 +10,11 @@ $fairy-inner-box-mobile-width: 100%;
 $fairy-inner-box-mobile-height: 100%;
 $fairy-inner-contents-box-radius: 5px;
 
+$fairy-detail-cp-size: 96%;
+$fairy-detail-cp-distance: calc((100% - #{$fairy-detail-cp-size}) / 2);
+$fairy-detail-cp-close-distance: 5px;
+$fairy-detail-cp-bg-color: white;
+
 $breakpoints-mobile-max: 767px;
 $breakpoints-mobile-min: 320px;
 $breakpoints-not-mobile-min: 768px;
