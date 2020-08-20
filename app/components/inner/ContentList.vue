@@ -6,21 +6,24 @@
         :key="content.title"
         class="content-wrap"
       >
-        <div class="content">
-          {{ fairyData.contents }}
-        </div>
+        <ContentBox :isLoading="false" :content="content" />
       </li>
     </ul>
     <div v-else class="content-loading-container">
-      Loading...
+      <ContentBox v-for="i in 3" :key="i" :isLoading="true" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import ContentBox from './ContentBox.vue'
 
 export default {
+  components: {
+    ContentBox
+  },
+
   computed: {
     ...mapGetters({
       active: 'getActive',
@@ -43,7 +46,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content {
-  color: black;
+.content-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 </style>

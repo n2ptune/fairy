@@ -24,13 +24,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.contents {
-  $inner-contents-bor-rad: 15px;
+@import '@styles/_variables.scss';
 
+.contents {
   background-color: white;
   padding: 1rem;
-  border-top-left-radius: $inner-contents-bor-rad;
-  border-top-right-radius: $inner-contents-bor-rad;
+  border-top-left-radius: $fairy-inner-contents-box-radius;
+  border-top-right-radius: $fairy-inner-contents-box-radius;
   height: 100%;
 }
 </style>
