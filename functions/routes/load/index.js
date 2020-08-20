@@ -44,8 +44,8 @@ router.get('/contents/:id', requireIDMiddleware, (req, res) => {
       res.append('Content-Type', 'application/json; charset=utf-8')
       res.append('Vary', 'Origin')
 
-      // return res.status(200).send(result.contents)
-      setTimeout(() => res.status(200).send(result.contents), 3000)
+      return res.status(200).send(result.contents)
+      // setTimeout(() => res.status(200).send(result.contents), 3000)
     })
     .catch(error => {
       let status
