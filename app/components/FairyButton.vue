@@ -23,13 +23,6 @@ export default {
 
   methods: {
     switchFairy() {
-      /**
-       * Emit event to switch active variable to parent
-       * @event close
-       * Emit close event to parent if active fairy
-       * @event active
-       * Emit active event to parent if closed fairy
-       */
       if (this.fairyActive) {
         this.$emit('close')
       } else {
