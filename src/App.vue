@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <el-container direction="horizontal">
+    <Header />
+    <!-- <el-container direction="horizontal">
       <el-header :style="{ padding: '0', width: '100%' }" height="auto">
         <el-menu
           :default-active="menuActive"
@@ -20,13 +21,19 @@
           </el-menu-item>
         </el-menu>
       </el-header>
-    </el-container>
+    </el-container> -->
     <router-view />
   </div>
 </template>
 
 <script>
+import Header from '@/components/layout/Header.vue'
+
 export default {
+  components: {
+    Header
+  },
+
   data: () => ({
     menuActive: '1',
     menuItems: [

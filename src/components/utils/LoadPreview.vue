@@ -11,6 +11,12 @@
         <i class="el-icon-magic-stick"></i>
       </div>
     </div>
+    <div class="preview-alert">
+      <h3>
+        입력한 정보로 <strong>Fairy</strong> 미리보기가 생성되었습니다. 우측
+        하단을 확인해주세요.
+      </h3>
+    </div>
   </div>
 </template>
 
@@ -31,7 +37,8 @@ export default {
   },
 
   data: () => ({
-    generatedCode: null
+    generatedCode: null,
+    loadedFairy: false
   }),
 
   created() {
@@ -56,6 +63,10 @@ export default {
         fs.async = true
         fs.src = src
         ta.parentNode.insertBefore(fs, ta)
+
+        fs.onload = function() {
+          this.loadedFairy = true
+        }.bind(this)
       })(document, 'fairy-app-inject')
     }
   },
@@ -104,5 +115,9 @@ export default {
       color: white;
     }
   }
+}
+
+.preview-alert {
+  margin: 1rem 0;
 }
 </style>
