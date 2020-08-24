@@ -7,7 +7,11 @@
       </el-col>
       <!-- 메뉴 -->
       <el-col :md="10" :lg="6" class="hidden-sm-and-down">
-        <el-menu :router="true" mode="horizontal">
+        <el-menu
+          :router="true"
+          mode="horizontal"
+          background-color="transparent"
+        >
           <el-menu-item :route="{ path: '/' }" index="1">
             Home
           </el-menu-item>
@@ -40,11 +44,29 @@ export default {
     height: auto !important;
     font-size: 1.05rem !important;
     border-bottom: none !important;
+
+    &:hover {
+      // hover on item
+      // background-color: black !important;
+    }
   }
 }
 
 .logo-text {
   // font-weight: bold;
   font-size: 1.3rem;
+}
+
+.header {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background-color: #f05e23;
+    z-index: -15;
+  }
 }
 </style>
