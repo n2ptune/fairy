@@ -25,7 +25,7 @@
 @include mobile {
   .top-wrap {
     & .left {
-      margin-bottom: 5rem;
+      margin-bottom: 1.5rem;
     }
   }
 }

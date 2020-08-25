@@ -19,7 +19,8 @@ import {
   Notification,
   Loading,
   Menu,
-  MenuItem
+  MenuItem,
+  Card
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/ko'
 import locale from 'element-ui/lib/locale'
@@ -49,6 +50,7 @@ Vue.use(Popconfirm)
 Vue.use(Popover)
 Vue.use(Menu)
 Vue.use(MenuItem)
+Vue.use(Card)
 
 Vue.prototype.$notify = Notification
 Vue.prototype.$loading = Loading.service
