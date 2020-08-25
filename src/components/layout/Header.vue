@@ -1,29 +1,36 @@
 <template>
-  <el-header class="header">
-    <el-row type="flex" justify="center" align="middle" :gutter="20">
+  <el-header :class="$route.path === '/' ? 'header' : 'header-no-main'">
+    <el-row type="flex" justify="center" align="middle">
       <!-- 로고 -->
-      <el-col :xs="22" :md="4" :lg="2">
-        <h1 class="logo-text">Fairy</h1>
+      <el-col :xs="22" :md="3" :lg="2" :xl="1">
+        <router-link to="/" :style="{ display: 'inline-block' }">
+          <div class="logo-text font-logo">
+            fairy
+          </div>
+        </router-link>
       </el-col>
       <!-- 메뉴 -->
-      <el-col :md="10" :lg="6" class="hidden-sm-and-down">
-        <el-menu
-          :router="true"
-          mode="horizontal"
-          background-color="transparent"
-        >
-          <el-menu-item :route="{ path: '/' }" index="1">
-            Home
-          </el-menu-item>
-          <el-menu-item :route="{ path: '/about' }" index="2">
-            About
-          </el-menu-item>
-        </el-menu>
+      <el-col :md="10" :lg="6" :xl="5" class="hidden-sm-and-down menu-wrap">
+        <ul class="menu">
+          <li v-for="route in menuRoutes" :key="route.name">
+            <router-link :to="route.path" exact>
+              {{ route.name }}
+            </router-link>
+          </li>
+        </ul>
       </el-col>
       <!-- Create Fairy Button -->
-      <el-col :span="2" class="hidden-xs-only">3</el-col>
+      <el-col :lg="4" :xl="2" class="hidden-md-and-down create-button-wrap">
+        <div class="create-button-container">
+          <button class="create-button">
+            <router-link to="/create">
+              Create Fairy
+            </router-link>
+          </button>
+        </div>
+      </el-col>
       <!-- 모바일 메뉴 -->
-      <el-col class="hidden-sm-and-up" :span="2">Menu</el-col>
+      <el-col class="hidden-md-and-up" :span="2">Menu</el-col>
     </el-row>
   </el-header>
 </template>
@@ -31,30 +38,96 @@
 <script>
 export default {
   data: () => ({
-    height: '120px'
+    menuRoutes: [
+      {
+        path: '/',
+        name: 'Home'
+      },
+      {
+        path: '/about',
+        name: 'About'
+      },
+      {
+        path: '/lorem',
+        name: 'Lorem'
+      },
+      {
+        path: '/ipsum',
+        name: 'Ipsum'
+      }
+    ]
   })
 }
 </script>
 
 <style lang="scss" scoped>
-.el-menu {
-  border-bottom: none !important;
+$color-dark-menu-active: rgba(255, 255, 255, 0.99);
+$color-dark-menu-default: rgba(255, 255, 255, 0.65);
+$color-dark-header-default: #f05e23;
+$color-dark-logo: rgba(255, 255, 255, 0.87);
+$color-light-menu-active: rgba(0, 0, 0, 0.88);
+$color-light-menu-default: rgba(0, 0, 0, 0.55);
 
-  &-item {
-    height: auto !important;
-    font-size: 1.05rem !important;
-    border-bottom: none !important;
-
-    &:hover {
-      // hover on item
-      // background-color: black !important;
+@media screen and (max-width: 768px) {
+  .header {
+    &::before {
+      height: 65% !important;
     }
   }
 }
 
-.logo-text {
-  // font-weight: bold;
-  font-size: 1.3rem;
+.header,
+.header-no-main {
+  margin-top: 1rem;
+
+  & .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    & li {
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 1.6rem;
+      }
+    }
+  }
+
+  & .logo-text {
+    font-size: 1.6rem;
+    transition: color 0.6s ease;
+  }
+
+  & .menu-wrap {
+    text-align: center;
+  }
+
+  & .create-button-wrap {
+    text-align: center;
+
+    & .create-button-container {
+      & .create-button {
+        font: inherit;
+        font-size: 0.9rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 9999px;
+        cursor: pointer;
+        padding: 0 1rem;
+
+        transition: color 0.4s ease, background-color 0.4s ease;
+
+        & a {
+          color: inherit;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
 }
 
 .header {
@@ -64,9 +137,83 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 30%;
-    background-color: #f05e23;
+    height: 45%;
+    background-color: $color-dark-header-default;
     z-index: -15;
+  }
+
+  & .menu {
+    & li {
+      & a {
+        color: $color-dark-menu-default;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $color-dark-menu-active;
+        }
+
+        &.router-link-exact-active {
+          color: $color-dark-menu-active;
+        }
+      }
+    }
+  }
+
+  & .create-button-wrap {
+    & .create-button-container {
+      & .create-button {
+        background-color: transparent;
+        color: $color-dark-menu-active;
+        border: 3px solid $color-dark-menu-active;
+
+        &:hover {
+          background-color: $color-dark-menu-active;
+          color: $color-dark-header-default;
+        }
+      }
+    }
+  }
+
+  & .logo-text {
+    color: $color-dark-logo;
+  }
+
+  &-no-main {
+    & .logo-text {
+      color: $color-dark-header-default;
+    }
+
+    & .menu {
+      & li {
+        & a {
+          color: $color-light-menu-default;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: $color-light-menu-active;
+          }
+
+          &.router-link-exact-active {
+            color: $color-light-menu-active;
+          }
+        }
+      }
+    }
+
+    & .create-button-wrap {
+      & .create-button-container {
+        & .create-button {
+          background-color: transparent;
+          color: $color-dark-header-default;
+          border: 3px solid $color-dark-header-default;
+
+          &:hover {
+            background-color: $color-dark-header-default;
+            color: $color-dark-menu-active;
+          }
+        }
+      }
+    }
   }
 }
 </style>
