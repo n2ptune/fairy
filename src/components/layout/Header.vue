@@ -109,7 +109,7 @@ $color-light-menu-default: rgba(0, 0, 0, 0.55);
     & .create-button-container {
       & .create-button {
         font: inherit;
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: bold;
         border: none;
         border-radius: 9999px;

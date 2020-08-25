@@ -1,0 +1,16 @@
+$breakpoints-mobile-max: 767px;
+$breakpoints-mobile-min: 320px;
+$breakpoints-not-mobile-min: 768px;
+
+@mixin mobile {
+  @media (min-width: #{$breakpoints-mobile-min}) and
+  (max-width: #{$breakpoints-mobile-max}) {
+    @content;
+  }
+}
+
+@mixin not-mobile {
+  @media (min-width: #{$breakpoints-not-mobile-min}) {
+    @content;
+  }
+}
