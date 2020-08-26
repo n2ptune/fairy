@@ -28,3 +28,5 @@ pnpm-debug.log*
 /app/dist
 /app/dummy.json
 /app/test.js
+
+.firebase
