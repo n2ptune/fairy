@@ -1,21 +1,24 @@
 <template>
-  <el-row
-    type="flex"
-    justify="center"
-    :gutter="40"
-    :style="{ flexWrap: 'wrap' }"
-  >
-    <Column v-for="step in steps" :key="step.header" class="card-col">
-      <el-card shadow="always">
-        <template #header>
-          {{ step.header }}
-        </template>
-        <p>
-          {{ step.body }}
-        </p>
-      </el-card>
-    </Column>
-  </el-row>
+  <transition name="appear-bottom" appear>
+    <el-row
+      v-show="appearComponent"
+      class="wrap"
+      type="flex"
+      justify="center"
+      :gutter="40"
+    >
+      <Column v-for="step in steps" :key="step.header" class="card-col">
+        <el-card shadow="always">
+          <template #header>
+            {{ step.header }}
+          </template>
+          <p>
+            {{ step.body }}
+          </p>
+        </el-card>
+      </Column>
+    </el-row>
+  </transition>
 </template>
 
 <script>
@@ -43,13 +46,37 @@ export default {
         body:
           'Donec iaculis augue id nunc sagittis, ac venenatis purus lobortis. Nunc suscipit ullamcorper ante vitae ultrices. Praesent ipsum lectus, vestibulum eu egestas ac, faucibus in erat. Nunc nibh purus, lacinia.'
       }
-    ]
-  })
+    ],
+    appearComponent: false
+  }),
+
+  mounted() {
+    this.$nextTick(() => (this.appearComponent = true))
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+.appear-bottom-enter-active,
+.appear-bottom-leave-active {
+  transition: opacity 0.4s ease, transform 0.5s ease;
+}
+
+.appear-bottom-enter {
+  opacity: 0;
+  transform: translateY(50%);
+}
+
+.appear-bottom-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @import '@/assets/css/_breakpoints.scss';
+
+.wrap {
+  flex-wrap: wrap;
+}
 
 .card-col {
   position: relative;
