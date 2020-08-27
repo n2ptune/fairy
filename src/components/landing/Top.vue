@@ -53,7 +53,6 @@
 
   & .sub {
     font-size: 1.2rem;
-    font-weight: lighter;
     color: rgba(255, 255, 255, 0.75);
   }
 

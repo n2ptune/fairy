@@ -3,9 +3,15 @@
     <el-main>
       <LandingTop />
       <LandingMiddle />
-      <el-row type="flex" justify="center" class="aa">
-        <el-col :span="12">
-          Hmmmm,....
+      <el-row type="flex" justify="center" class="aa" :gutter="20">
+        <el-col :span="6" class="left">
+          <img
+            class="phone-image"
+            :src="require('@/assets/images/fairy-in-phone.png')"
+          />
+        </el-col>
+        <el-col :span="6" class="right">
+          Text
         </el-col>
       </el-row>
     </el-main>
@@ -26,6 +32,10 @@ export default {
 
 <style lang="scss" scoped>
 .aa {
-  margin: 3rem 0;
+  margin: 15rem 0;
+}
+
+.left {
+  text-align: center;
 }
 </style>

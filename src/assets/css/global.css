@@ -10,7 +10,7 @@ body {
 }
 
 .font-logo {
-  font-family: 'Merriweather', sans-serif;
+  font-family: 'Merriweather', sans-serif !important;
 }
 
 .mx-auto {
