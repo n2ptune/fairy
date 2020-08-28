@@ -1,19 +1,34 @@
 <template>
   <el-container>
-    <el-main>
+    <el-main class="home-main">
       <LandingTop />
       <LandingMiddle />
-      <el-row type="flex" justify="center" class="aa" :gutter="20">
-        <el-col :span="6" class="left">
-          <img
-            class="phone-image"
-            :src="require('@/assets/images/fairy-in-phone.png')"
-          />
-        </el-col>
-        <el-col :span="6" class="right">
-          Text
-        </el-col>
-      </el-row>
+      <LandingBottom :key="1" image="fairy-in-phone.png">
+        <template #right-top>
+          {{ 'easy input contents' | uppercase }}
+        </template>
+        <template #right-middle>
+          Maecenas lacinia ultricies tempor. Integer.
+        </template>
+        <template #right-bottom>
+          Aliquam a interdum mauris. Maecenas massa enim, malesuada vel
+          fringilla gravida, vehicula eu quam. Sed non sollicitudin ligula, et
+          finibus mauris. Sed vel mauris quis.
+        </template>
+      </LandingBottom>
+      <LandingBottom :key="2" :reverse="true" image="fairy-in-phone-detail.png">
+        <template #right-top>
+          {{ 'intuitive interface' | uppercase }}
+        </template>
+        <template #right-middle>
+          Sed elementum et erat id finibus. Nam a risus vitae.
+        </template>
+        <template #right-bottom>
+          Proin erat eros, finibus non varius ullamcorper, cursus at erat. Sed
+          iaculis dui dui, sed malesuada tellus facilisis vitae. Suspendisse
+          vehicula, turpis nec rutrum ultricies, nunc magna lacinia purus, at.
+        </template>
+      </LandingBottom>
     </el-main>
   </el-container>
 </template>
@@ -21,21 +36,27 @@
 <script>
 import LandingTop from '@/components/landing/Top.vue'
 import LandingMiddle from '@/components/landing/Middle.vue'
+import LandingBottom from '@/components/landing/Bottom.vue'
 
 export default {
   components: {
     LandingTop,
-    LandingMiddle
+    LandingMiddle,
+    LandingBottom
+  },
+
+  filters: {
+    uppercase(text) {
+      if (text) {
+        return text.toUpperCase()
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.aa {
-  margin: 15rem 0;
-}
-
-.left {
-  text-align: center;
+.home-main {
+  overflow: hidden;
 }
 </style>

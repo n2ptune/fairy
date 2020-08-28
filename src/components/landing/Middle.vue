@@ -73,6 +73,7 @@ export default {
 }
 
 @import '@/assets/css/_breakpoints.scss';
+@import '@/assets/css/_variables.scss';
 
 .wrap {
   flex-wrap: wrap;
@@ -104,7 +105,6 @@ export default {
   }
 
   & .el-card {
-    $color-dark-header-default: #f05e23;
     height: 100%;
 
     &::v-deep .el-card__header {

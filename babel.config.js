@@ -1,5 +1,14 @@
 module.exports = {
-  presets: ['@vue/cli-plugin-babel/preset'],
+  presets: [
+    [
+      '@vue/cli-plugin-babel/preset',
+      {
+        targets: {
+          ie: 11
+        }
+      }
+    ]
+  ],
   plugins: [
     [
       'component',
