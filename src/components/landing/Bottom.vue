@@ -91,7 +91,7 @@ export default {
 .bottom {
   opacity: 0;
   transform: translateY(25%);
-  transition: opacity 0.4s ease-in-out, transform 0.9s ease-in-out;
+  transition: opacity 0.4s ease, transform 0.9s ease;
   margin: 15rem 0;
 
   &.active {

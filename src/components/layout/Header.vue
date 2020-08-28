@@ -61,20 +61,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-dark-menu-active: rgba(255, 255, 255, 0.99);
-$color-dark-menu-default: rgba(255, 255, 255, 0.65);
-$color-dark-header-default: #f05e23;
-$color-dark-logo: rgba(255, 255, 255, 0.87);
-$color-light-menu-active: rgba(0, 0, 0, 0.88);
-$color-light-menu-default: rgba(0, 0, 0, 0.55);
-
-@media screen and (max-width: 768px) {
-  .header {
-    &::before {
-      height: 65% !important;
-    }
-  }
-}
+@import '@/assets/css/_breakpoints';
+@import '@/assets/css/_variables';
 
 .header,
 .header-no-main {
@@ -140,6 +128,10 @@ $color-light-menu-default: rgba(0, 0, 0, 0.55);
     height: 45%;
     background-color: $color-dark-header-default;
     z-index: -15;
+
+    @include mobile {
+      height: 65% !important;
+    }
   }
 
   & .menu {
