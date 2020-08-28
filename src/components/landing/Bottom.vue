@@ -109,10 +109,10 @@ export default {
 
     &.reverse {
       order: 2;
-    }
 
-    @include mobile {
-      order: 1;
+      @include mobile {
+        order: 1 !important;
+      }
     }
   }
 
@@ -122,11 +122,14 @@ export default {
 
     &.reverse {
       order: 1;
+
+      @include mobile {
+        order: 2 !important;
+      }
     }
 
     @include mobile {
       text-align: center;
-      order: 2;
     }
 
     @include not-mobile {
