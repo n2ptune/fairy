@@ -7,7 +7,9 @@
             <li class="font-logo">
               fairy
             </li>
-            <li></li>
+            <li>
+              Helpful for Web Service
+            </li>
           </ul>
         </el-col>
         <el-col v-bind="column">
@@ -27,8 +29,8 @@ export default {
     column: {
       xs: 24,
       md: 8,
-      lg: 6,
-      xl: 4
+      lg: 5,
+      xl: 3
     }
   })
 }
@@ -49,14 +51,24 @@ export default {
   & .el-row {
     flex-wrap: wrap;
 
-    & ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
     & .el-col {
-      text-align: center;
+      & ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        &:first-of-type {
+          & li {
+            &:first-child {
+              margin-bottom: 3rem;
+            }
+          }
+        }
+
+        & li {
+          margin: 1rem 0;
+        }
+      }
 
       & .font-logo {
         font-size: 1.7rem;
