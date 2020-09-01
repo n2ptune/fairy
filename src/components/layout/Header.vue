@@ -42,19 +42,19 @@ export default {
       {
         path: '/',
         name: 'Home'
-      },
-      {
-        path: '/about',
-        name: 'About'
-      },
-      {
-        path: '/lorem',
-        name: 'Lorem'
-      },
-      {
-        path: '/ipsum',
-        name: 'Ipsum'
       }
+      // {
+      //   path: '/about',
+      //   name: 'About'
+      // },
+      // {
+      //   path: '/lorem',
+      //   name: 'Lorem'
+      // },
+      // {
+      //   path: '/ipsum',
+      //   name: 'Ipsum'
+      // }
     ]
   })
 }

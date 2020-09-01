@@ -12,12 +12,12 @@
             </li>
           </ul>
         </el-col>
-        <el-col v-bind="column">
+        <!-- <el-col v-bind="column">
           Some Menus
         </el-col>
         <el-col v-bind="column">
           Some Menus 2
-        </el-col>
+        </el-col> -->
       </el-row>
     </el-footer>
   </el-container>
