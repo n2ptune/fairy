@@ -7,10 +7,12 @@ const MAX_UNIQUE_ID_LENGTH = 20
 /**
  * Create Fairy
  * @param {{
- * contents: Array<object>,
+ * contents?: Array<object>,
  * siteAddr: String,
  * siteName: String,
- * themeColor: String
+ * themeColor: String,
+ * isRSS?: String,
+ * rssAddr?: String
  * }} fairy
  */
 function createFairy(fairy) {
@@ -55,6 +57,17 @@ function createFairy(fairy) {
   })
 }
 
+/**
+ * Update Fairy
+ * @param {{
+ * contents?: Array<object>,
+ * siteAddr: String,
+ * siteName: String,
+ * themeColor: String,
+ * isRSS?: String,
+ * rssAddr?: String
+ * }} fairy
+ */
 function updateFairy(fairy, id) {
   return new Promise((resolve, reject) => {
     const fairies = db.collection('fairies')

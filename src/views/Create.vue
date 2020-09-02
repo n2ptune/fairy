@@ -21,7 +21,7 @@
             @cancel-accept="cancelAccept"
           />
           <keep-alive v-else>
-            <Create :ref="refFormName" />
+            <Create :ref="refFormName" :update="isUpdateProcess" />
           </keep-alive>
         </div>
         <div v-if="!stepActive" class="step-footer text-center">
@@ -73,7 +73,8 @@ export default {
       })
     },
     nextStep() {
-      const { contents, siteAddr, siteName, themeColor } = this.$refs[
+      const { isRSS } = this.$refs[this.refFormName]
+      const { contents, siteAddr, siteName, themeColor, rssAddr } = this.$refs[
         this.refFormName
       ].form
 
@@ -88,30 +89,42 @@ export default {
         })
       }
 
-      // 컨텐츠 갯수 부족
-      if (!contents.length) {
-        return this.$notify({
-          type: 'error',
-          title: '컨텐츠 갯수 부족',
-          message: '최소 하나 이상의 컨텐츠를 가져야 합니다.',
-          showClose: false
-        })
-      }
+      // RSS 표시가 아닐 때 컨텐츠 검증
+      if (!isRSS) {
+        // 컨텐츠 갯수 부족
+        if (!contents.length) {
+          return this.$notify({
+            type: 'error',
+            title: '컨텐츠 갯수 부족',
+            message: '최소 하나 이상의 컨텐츠를 가져야 합니다.',
+            showClose: false
+          })
+        }
 
-      const validateContents = content => {
-        return content.title.length >= 5 && content.body.length >= 10
-      }
+        const validateContents = content => {
+          return content.title.length >= 5 && content.body.length >= 10
+        }
 
-      // 컨텐츠 검증 실패
-      // (제목 5자 이상, 내용 10자 이상)
-      if (!contents.every(validateContents)) {
-        return this.$notify({
-          type: 'error',
-          title: '컨텐츠 제목과 내용의 길이 부적절',
-          message:
-            '컨텐츠 제목은 5자 이상 내용은 10자 이상이 포함되어야 합니다.',
-          showClose: false
-        })
+        // 컨텐츠 검증 실패
+        // (제목 5자 이상, 내용 10자 이상)
+        if (!contents.every(validateContents)) {
+          return this.$notify({
+            type: 'error',
+            title: '컨텐츠 제목과 내용의 길이 부적절',
+            message:
+              '컨텐츠 제목은 5자 이상 내용은 10자 이상이 포함되어야 합니다.',
+            showClose: false
+          })
+        }
+      } else {
+        if (!rssAddr) {
+          return this.$notify({
+            type: 'error',
+            title: 'RSS URL 누락',
+            message: 'RSS를 표시하게끔 하려면 참조할 URL을 입력해야 합니다.',
+            showClose: false
+          })
+        }
       }
 
       const loadingForWaitCreate = this.$loading({
