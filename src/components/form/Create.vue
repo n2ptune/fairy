@@ -41,6 +41,18 @@
       <h1>
         Fairy가 보여줄 컨텐츠 입력
       </h1>
+      <div class="description">
+        <span class="mark">*</span>
+        사용자에게 보여줄 컨텐츠를 지정합니다. 블로그의 RSS URL를 입력하여
+        블로그 게시물을 표시할 수도 있고, 마크다운을 작성하여 직접 표시할
+        컨텐츠를 수정할 수 있습니다.
+      </div>
+      <el-form-item>
+        <template #label>
+          switch test
+        </template>
+        <el-switch />
+      </el-form-item>
       <el-form-item
         v-for="(content, index) in form.contents"
         :key="index"
@@ -143,7 +155,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .form {
   padding: 1.5rem 0;
 }
@@ -158,5 +170,19 @@ export default {
 }
 .el-textarea >>> textarea {
   font-family: inherit;
+}
+
+.wrap {
+  &:last-of-type {
+    .description {
+      margin: 2rem 0;
+      color: gray;
+
+      & .mark {
+        color: red;
+        vertical-align: middle;
+      }
+    }
+  }
 }
 </style>

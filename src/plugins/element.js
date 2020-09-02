@@ -21,7 +21,8 @@ import {
   Menu,
   MenuItem,
   Card,
-  Footer
+  Footer,
+  Switch
 } from 'element-ui'
 import lang from 'element-ui/lib/locale/lang/ko'
 import locale from 'element-ui/lib/locale'
@@ -53,6 +54,7 @@ Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Card)
 Vue.use(Footer)
+Vue.use(Switch)
 
 Vue.prototype.$notify = Notification
 Vue.prototype.$loading = Loading.service
