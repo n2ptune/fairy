@@ -44,62 +44,82 @@
       <div class="description">
         <span class="mark">*</span>
         사용자에게 보여줄 컨텐츠를 지정합니다. 블로그의 RSS URL를 입력하여
-        블로그 게시물을 표시할 수도 있고, 마크다운을 작성하여 직접 표시할
-        컨텐츠를 수정할 수 있습니다.
+        블로그 게시물을 표시하거나 마크다운을 작성하여 직접 표시할 컨텐츠를
+        수정할 수 있습니다.
       </div>
       <el-form-item>
         <template #label>
-          switch test
-        </template>
-        <el-switch />
-      </el-form-item>
-      <el-form-item
-        v-for="(content, index) in form.contents"
-        :key="index"
-        :label="`컨텐츠 - ${index + 1}`"
-      >
-        <el-popconfirm
-          confirmButtonText="예"
-          cancelButtonText="아니오"
-          title="해당 컨텐츠를 삭제하시겠습니까?"
-          @onConfirm="deleteContent(index)"
-        >
-          <span
-            :style="{ float: 'right', marginBottom: '0.5rem' }"
-            slot="reference"
-          >
-            <el-button type="danger" icon="el-icon-close" circle size="mini" />
+          <span class="rss" :class="isRSS ? 'active' : ''">
+            RSS 표시
           </span>
-        </el-popconfirm>
-        <el-input
-          v-model="content.title"
-          type="text"
-          placeholder="제목"
-        ></el-input>
-        <el-input
-          v-model="content.body"
-          type="textarea"
-          placeholder="내용"
-          :autosize="{ minRows: 5, maxRows: 7 }"
-          :style="{ marginTop: '1rem' }"
-        ></el-input>
+        </template>
+        <el-switch v-model="isRSS" />
       </el-form-item>
-      <el-button round @click="appendContent">
-        컨텐츠 추가하기
-        <i class="el-icon-plus el-icon-right" />
-      </el-button>
+      <div v-if="isRSS">
+        <el-form-item label="RSS URL" prop="rssAddr">
+          <el-input type="url" v-model="form.rssAddr" placeholder="example.com">
+            <template #prepend>
+              https://
+            </template>
+          </el-input>
+        </el-form-item>
+      </div>
+      <div v-else>
+        <el-form-item
+          v-for="(content, index) in form.contents"
+          :key="index"
+          :label="`컨텐츠 - ${index + 1}`"
+        >
+          <el-popconfirm
+            confirmButtonText="예"
+            cancelButtonText="아니오"
+            title="해당 컨텐츠를 삭제하시겠습니까?"
+            @onConfirm="deleteContent(index)"
+          >
+            <span
+              :style="{ float: 'right', marginBottom: '0.5rem' }"
+              slot="reference"
+            >
+              <el-button
+                type="danger"
+                icon="el-icon-close"
+                circle
+                size="mini"
+              />
+            </span>
+          </el-popconfirm>
+          <el-input
+            v-model="content.title"
+            type="text"
+            placeholder="제목"
+          ></el-input>
+          <el-input
+            v-model="content.body"
+            type="textarea"
+            placeholder="내용"
+            :autosize="{ minRows: 5, maxRows: 7 }"
+            :style="{ marginTop: '1rem' }"
+          ></el-input>
+        </el-form-item>
+        <el-button round @click="appendContent">
+          컨텐츠 추가하기
+          <i class="el-icon-plus el-icon-right" />
+        </el-button>
+      </div>
     </div>
   </el-form>
 </template>
 
 <script>
-import { siteNameRule, siteAddrRule } from '@/functions/validate'
+import { siteNameRule, siteAddrRule, rssAddrRule } from '@/functions/validate'
 
 export default {
   data: () => ({
+    isRSS: false,
     form: {
       siteName: '',
       siteAddr: '',
+      rssAddr: '',
       themeColor: '#CF0063',
       contents: [
         {
@@ -110,7 +130,8 @@ export default {
     },
     rules: {
       siteName: siteNameRule,
-      siteAddr: siteAddrRule
+      siteAddr: siteAddrRule,
+      rssAddr: rssAddrRule
     },
     predefineColors: [
       '#D2082D',
@@ -174,13 +195,21 @@ export default {
 
 .wrap {
   &:last-of-type {
-    .description {
+    & .description {
       margin: 2rem 0;
       color: gray;
 
       & .mark {
         color: red;
         vertical-align: middle;
+      }
+    }
+
+    & .rss {
+      font-weight: bold;
+
+      &.active {
+        color: #409eff;
       }
     }
   }

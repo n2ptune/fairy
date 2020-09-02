@@ -25,7 +25,7 @@ const siteAddrRule = [
      * @param {Function} cb
      */
     validator: (r, v, cb) => {
-      const reg = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm
+      const reg = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/gm
       const url = 'https://' + v
       const isURL = reg.test(url)
 
@@ -58,4 +58,8 @@ const siteAddrRule = [
   }
 ]
 
-export { siteNameRule, siteAddrRule }
+const rssAddrRule = []
+
+siteAddrRule.map(val => rssAddrRule.push(Object.assign({}, val)))
+
+export { siteNameRule, siteAddrRule, rssAddrRule }
