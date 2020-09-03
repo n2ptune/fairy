@@ -31,10 +31,13 @@ function parseRSS(id) {
   return new Promise((resolve, reject) => {
     getRSSURLWithID(id)
       .then(rssAddr => {
-        parser
-          .parseURL(rssAddr)
-          .then(feed => resolve(feed))
-          .catch(error => reject(error))
+        // parser
+        //   .parseURL(rssAddr)
+        //   .then(feed => resolve(feed))
+        //   .catch(error => reject(error))
+        // Fetch rss feed data from external cloud function endpoints
+        // Why? can't access external network other than internal services
+        // URL: https://asia-northeast3-tonal-apex-262514.cloudfunctions.net/parse-rss
       })
       .catch(error => reject(error))
   })
