@@ -89,6 +89,10 @@ export default {
               title = '테마 색상'
               sort = 4
               break
+            case 'rssAddr':
+              title = 'RSS URL'
+              sort = 7
+              break
           }
 
           list.push({
@@ -112,15 +116,6 @@ export default {
                 title: '컨텐츠 갯수',
                 val: this.previewData.contents.length + '개',
                 sort: 6
-              })
-            }
-          } else if (prop === 'rssAddr') {
-            if (this.previewData.isRSS) {
-              list.push({
-                prop,
-                title: 'RSS URL',
-                val: this.previewData.rssAddr,
-                sort: 7
               })
             }
           }

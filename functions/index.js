@@ -5,16 +5,15 @@ const cors = require('cors')
 const app = express()
 
 // Express middleware
-// ...
 if (process.env.NODE_ENV === 'development') {
   app.use(cors())
 }
 
 // Express Routes
-// ...
-const { load } = require('./routes')
+const { load, rss } = require('./routes')
 
 app.use('/load', load)
+app.use('/rss', rss)
 
 // All request endpoints start prefix /api
 // /api/create

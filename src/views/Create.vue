@@ -125,6 +125,9 @@ export default {
             showClose: false
           })
         }
+
+        // 배열의 모든 내용 삭제
+        if (contents.length) contents.splice(0)
       }
 
       const loadingForWaitCreate = this.$loading({

@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 const { loadFairyData, loadFairyContents } = require('../../lib/load')
-const { requireIDMiddleware } = require('./middleware')
+const { requireIDMiddleware } = require('../middleware')
 
 router.get('/:id', requireIDMiddleware, (req, res) => {
   const { id } = req.params
