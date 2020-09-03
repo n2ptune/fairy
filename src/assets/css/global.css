@@ -7,7 +7,7 @@ body {
   padding: 0;
   font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Poppins',
-    'Noto Sans' 'Noto Sans KR', sans-serif;
+    'Noto Sans' 'Noto Sans KR', sans-serif !important;
 }
 
 .font-logo {

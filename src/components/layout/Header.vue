@@ -22,11 +22,11 @@
       <!-- Create Fairy Button -->
       <el-col :lg="4" :xl="2" class="hidden-md-and-down create-button-wrap">
         <div class="create-button-container">
-          <button class="create-button">
-            <router-link to="/create">
+          <router-link to="/create">
+            <button class="create-button">
               Create Fairy
-            </router-link>
-          </button>
+            </button>
+          </router-link>
         </div>
       </el-col>
       <!-- 모바일 메뉴 -->

@@ -106,12 +106,23 @@ export default {
               sort: 5
             })
           } else if (prop === 'contents') {
-            list.push({
-              prop,
-              title: '컨텐츠 갯수',
-              val: this.previewData.contents.length + '개',
-              sort: 6
-            })
+            if (this.previewData.contents.length) {
+              list.push({
+                prop,
+                title: '컨텐츠 갯수',
+                val: this.previewData.contents.length + '개',
+                sort: 6
+              })
+            }
+          } else if (prop === 'rssAddr') {
+            if (this.previewData.isRSS) {
+              list.push({
+                prop,
+                title: 'RSS URL',
+                val: this.previewData.rssAddr,
+                sort: 7
+              })
+            }
           }
         }
       }

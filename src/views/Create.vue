@@ -152,7 +152,7 @@ export default {
       if (this.isUpdateProcess) {
         // 업데이트일 경우
         updateFairy(
-          { contents, siteAddr, siteName, themeColor },
+          { contents, siteAddr, siteName, themeColor, isRSS, rssAddr },
           this.isUpdateProcess.id
         )
           .then(alreadyNextStep)
@@ -160,7 +160,14 @@ export default {
           .finally(loadingHandler)
       } else {
         // 업데이트가 아닐 경우
-        createFairy({ contents, siteAddr, siteName, themeColor })
+        createFairy({
+          contents,
+          siteAddr,
+          siteName,
+          themeColor,
+          isRSS,
+          rssAddr
+        })
           .then(fairy => {
             this.stepActive++
             this.previewData = fairy
