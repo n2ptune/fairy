@@ -21,7 +21,11 @@
             @cancel-accept="cancelAccept"
           />
           <keep-alive v-else>
-            <Create :ref="refFormName" :update="isUpdateProcess" />
+            <Create
+              :ref="refFormName"
+              :update="isUpdateProcess"
+              :update-data="previewData"
+            />
           </keep-alive>
         </div>
         <div v-if="!stepActive" class="step-footer text-center">

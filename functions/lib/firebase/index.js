@@ -1,4 +1,5 @@
 const admin = require('firebase-admin')
+const functions = require('firebase-functions')
 let account
 
 if (process.env.NODE_ENV === 'development') {
@@ -14,5 +15,6 @@ const app = admin.initializeApp({
 
 module.exports = {
   app,
-  db: app.firestore()
+  db: app.firestore(),
+  functions
 }

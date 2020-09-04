@@ -53,9 +53,9 @@
             RSS 표시
           </span>
         </template>
-        <el-switch :disabled="update" v-model="isRSS" />
+        <el-switch :disabled="update.status" v-model="isRSS" />
       </el-form-item>
-      <div v-if="isRSS">
+      <div v-if="checkRSS">
         <el-form-item label="RSS URL" prop="rssAddr">
           <el-input type="url" v-model="form.rssAddr" placeholder="example.com">
             <template #prepend>
@@ -116,8 +116,13 @@ import { siteNameRule, siteAddrRule, rssAddrRule } from '@/functions/validate'
 export default {
   props: {
     update: {
-      type: Boolean,
+      type: [Object, Boolean],
       required: true
+    },
+    updateData: {
+      type: Object,
+      required: false,
+      default: null
     }
   },
 
@@ -150,6 +155,30 @@ export default {
       '#7DB1B1'
     ]
   }),
+
+  computed: {
+    checkRSS() {
+      if (this.isRSS) {
+        return true
+      } else if (this.updateData === null) {
+        return false
+      } else if (this.updateData.isRSS) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      if (this.checkRSS) {
+        this.isRSS = true
+      } else {
+        this.isRSS = false
+      }
+    })
+  },
 
   methods: {
     appendContent() {
