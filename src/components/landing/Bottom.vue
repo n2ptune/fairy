@@ -138,7 +138,7 @@ export default {
 
     &-top {
       color: rgba(0, 0, 0, 0.5);
-      font-weight: lighter;
+      font-weight: 400;
       letter-spacing: 3px;
     }
 

@@ -90,9 +90,13 @@ export default {
               sort = 4
               break
             case 'rssAddr':
-              title = 'RSS URL'
-              sort = 7
-              break
+              if (this.previewData.rssAddr) {
+                title = 'RSS URL'
+                sort = 7
+                break
+              } else {
+                continue
+              }
           }
 
           list.push({
