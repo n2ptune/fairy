@@ -65,7 +65,7 @@ export default {
       const list = []
 
       for (const prop in this.previewData) {
-        if (prop === 'siteAddrWithPrefix') {
+        if (prop === 'siteAddrWithPrefix' || prop === 'rssAddrWithPrefix') {
           continue
         }
         if (typeof this.previewData[prop] === 'string') {

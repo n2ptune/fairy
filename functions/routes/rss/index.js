@@ -8,13 +8,10 @@ router.get('/parse/:id', requireIDMiddleware, async (req, res) => {
 
   try {
     const feed = await parse(id)
-    await insert(feed, id)
+    await insert(feed.data, id)
 
-    res.set('Content-Type', 'application/json')
-
-    return res.status(200).send(feed)
+    return res.status(200).end()
   } catch (error) {
-    console.log(error)
     return res.status(500).send(error)
   }
 })

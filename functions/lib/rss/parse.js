@@ -17,7 +17,7 @@ function getRSSURLWithID(id) {
       .get()
       .then(docs => {
         if (!docs.empty) {
-          docs.forEach(doc => resolve(doc.data().rssAddr))
+          docs.forEach(doc => resolve(doc.data().rssAddrWithPrefix))
         } else {
           reject(new Error('아이디를 찾을 수 없음'))
         }

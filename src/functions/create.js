@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import { db, serverTimestamp } from '@/plugins/db'
 import uid from 'uid'
+import axios from 'axios'
 
 const MAX_UNIQUE_ID_LENGTH = 20
 
@@ -24,6 +25,7 @@ function createFairy(fairy) {
     fairy.id = fairyID
     fairy.createdAt = serverTimestamp
     fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
+    fairy.rssAddrWithPrefix = 'https://' + fairy.rssAddr
     fairy.success = false
 
     // 검증
@@ -91,9 +93,10 @@ function updateFairy(fairy, id) {
             const docID = doc.id
 
             // Fairy object extend
-            fairy.createdAt = serverTimestamp
-            fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
-            fairy.success = false
+            // fairy.createdAt = serverTimestamp
+            // fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
+            // fairy.rssAddrWithPrefix = 'https://' + fairy.rssAddr
+            // fairy.success = false
 
             fairies
               .doc(docID)
@@ -113,7 +116,6 @@ function updateFairy(fairy, id) {
 
 /**
  * 최종 등록 'success' 필드 false -> true
- *
  * @param {String} id
  */
 function accpetFairy(id) {
@@ -130,12 +132,20 @@ function accpetFairy(id) {
             message: `${id}는 유효한 아이디 값이 아닙니다.`
           })
         } else {
-          docs.forEach(doc =>
+          docs.forEach(doc => {
             doc.ref
               .update({ success: true })
               .then(resolve)
               .catch(error => reject(error))
-          )
+
+            const { isRSS, id } = doc.data()
+
+            if (isRSS) {
+              axios
+                .get(`${process.env.VUE_APP_SERVER_URL}/rss/parse/${id}`)
+                .catch(error => console.error(error))
+            }
+          })
         }
       })
   })
