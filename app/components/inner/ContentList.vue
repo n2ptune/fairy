@@ -1,12 +1,8 @@
 <template>
   <div class="content-container">
     <ul v-if="active.contents" class="content-list">
-      <li
-        v-for="content in fairyData.contents"
-        :key="content.title"
-        class="content-wrap"
-      >
-        <ContentBox :isLoading="false" :content="content" />
+      <li v-for="content in contents" :key="content.title" class="content-wrap">
+        <ContentBox :isLoading="false" :content="content" :rss="isRSS" />
       </li>
     </ul>
     <div v-else class="content-loading-container">
@@ -24,10 +20,20 @@ export default {
     ContentBox
   },
 
+  data: () => ({
+    contents: null
+  }),
+
+  created() {
+    this.contents = this.isRSS ? this.rssData.items : this.defaultData.contents
+  },
+
   computed: {
     ...mapGetters({
       active: 'getActive',
-      fairyData: 'getFairyData'
+      isRSS: 'getIsRSS',
+      rssData: 'getRSSData',
+      defaultData: 'getFairyData'
     })
   },
 

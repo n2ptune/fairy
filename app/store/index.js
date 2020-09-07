@@ -70,6 +70,14 @@ export default new Vuex.Store({
 
     getFairyData(state) {
       return state.data
+    },
+
+    getIsRSS(state) {
+      return state.data.isRSS
+    },
+
+    getRSSData(state) {
+      return state.data.isRSS ? state.data.rssData : null
     }
   },
 

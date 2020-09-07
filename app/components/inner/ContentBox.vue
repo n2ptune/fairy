@@ -4,7 +4,7 @@
       <p class="title">
         {{ title }}
       </p>
-      <p class="body">
+      <p v-if="!rss" class="body">
         {{ body }}
       </p>
     </div>
@@ -39,6 +39,11 @@ export default {
       type: Object,
       required: false,
       default: () => ({})
+    },
+    rss: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
 
