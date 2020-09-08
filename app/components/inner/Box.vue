@@ -37,15 +37,9 @@ export default {
 
 .fairy-inner-box {
   overflow-y: auto;
-  // -ms-overflow-style: none;
-  // scrollbar-width: none;
   display: flex;
   flex-direction: column;
   position: relative;
-
-  // &::-webkit-scrollbar {
-  //   display: none;
-  // }
 }
 
 @include mobile {

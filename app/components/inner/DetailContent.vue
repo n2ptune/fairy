@@ -34,6 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '@styles/_variables.scss';
+@import '@styles/_breakpoints.scss';
 
 .detail-enter-active,
 .detail-leave-active {
@@ -53,11 +54,21 @@ export default {
 }
 
 .detail-view {
-  position: absolute;
-  top: $fairy-detail-cp-distance;
-  left: $fairy-detail-cp-distance;
-  width: $fairy-detail-cp-size;
-  height: $fairy-detail-cp-size;
+  position: fixed;
+  margin-left: $fairy-detail-cp-padding;
+  margin-top: $fairy-detail-cp-padding;
+  width: calc(#{$fairy-inner-box-width} - #{$fairy-detail-cp-padding * 2});
+  height: calc(#{$fairy-inner-box-height} - #{$fairy-detail-cp-padding * 2});
+
+  @include mobile {
+    width: calc(
+      #{$fairy-inner-box-mobile-width} - #{$fairy-detail-cp-padding * 2}
+    );
+    height: calc(
+      #{$fairy-inner-box-mobile-height} - #{$fairy-detail-cp-padding * 2}
+    );
+  }
+
   background: $fairy-detail-cp-bg-color;
   border-radius: $fairy-inner-box-radius;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.15);
