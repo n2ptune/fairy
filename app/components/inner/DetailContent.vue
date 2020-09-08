@@ -54,6 +54,7 @@ export default {
 }
 
 .detail-view {
+  z-index: 30;
   position: fixed;
   margin-left: $fairy-detail-cp-padding;
   margin-top: $fairy-detail-cp-padding;

@@ -1,7 +1,7 @@
 <template>
   <main
-    class="fairy-inner-box no-scroll"
     :style="{ backgroundColor: fairy.themeColor }"
+    class="fairy-inner-box no-scroll"
   >
     <InnerHeader />
     <InnerContents />
