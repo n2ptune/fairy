@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import FairyButton from '@components/FairyButton.vue'
 import InnerContainer from '@components/inner/Container.vue'
 
@@ -21,19 +21,32 @@ export default {
   computed: {
     ...mapGetters({
       fairyData: 'getFairyData',
-      fairyActive: 'getFairyActive'
+      fairyActive: 'getFairyActive',
+      detailActive: 'detail/getActive'
     })
+  },
+
+  created() {
+    this.$watch
   },
 
   methods: {
     ...mapActions({
       loadData: 'loadFairy'
     }),
+    ...mapMutations({
+      switch: 'SET_FAIRY_ACTIVE',
+      detailSwitch: 'detail/SWITCH_ACTIVE'
+    }),
     onFairy() {
-      this.$store.commit('SET_FAIRY_ACTIVE', true)
+      if (this.detailActive) this.detailSwitch()
+
+      this.switch(true)
     },
     offFairy() {
-      this.$store.commit('SET_FAIRY_ACTIVE', false)
+      if (this.detailActive) this.detailSwitch()
+
+      this.switch(false)
     }
   }
 }
