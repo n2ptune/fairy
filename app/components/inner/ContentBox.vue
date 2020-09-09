@@ -7,6 +7,9 @@
       <p v-if="!rss" class="body">
         {{ body }}
       </p>
+      <p v-else class="body rss-date">
+        {{ formattedDate }}
+      </p>
     </div>
     <div v-else class="loading">
       <content-placeholders :rounded="true">
@@ -70,6 +73,17 @@ export default {
       }
 
       return body
+    },
+    formattedDate() {
+      if (!this.content.isoDate) {
+        return null
+      }
+
+      /** @type {Date} */
+      const date = new Date(this.content.isoDate)
+
+      return `${date.getFullYear()}년 ${date.getMonth() +
+        1}월 ${date.getDate()}일`
     }
   },
 
@@ -80,6 +94,13 @@ export default {
     }),
     detail() {
       if (this.isLoading) return
+
+      // RSS
+      if (this.rss) {
+        if (!this.content.link) return
+
+        return window.open(this.content.link, '_blank')
+      }
 
       this.mutateDetailContent(this.content)
       this.mutateDetailActive()
@@ -116,13 +137,14 @@ export default {
   }
 
   & .title {
-    color: $color-dodger-blue;
+    color: rgb(48, 48, 48);
     font-weight: bold;
   }
 
   & .body {
     margin: 0.5rem 0;
-    font-size: 0.85rem;
+    font-size: 0.92rem;
+    color: rgb(68, 68, 68);
   }
 }
 </style>
