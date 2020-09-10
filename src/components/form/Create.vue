@@ -65,6 +65,11 @@
         </el-form-item>
       </div>
       <div v-else>
+        <MarkdownDialog
+          :active="dialog.active"
+          :index="dialog.index"
+          @close="closeDialog"
+        />
         <el-form-item
           v-for="(content, index) in form.contents"
           :key="index"
@@ -96,10 +101,12 @@
           <el-input
             v-model="content.body"
             type="textarea"
-            placeholder="내용"
+            placeholdr="내용"
             :autosize="{ minRows: 5, maxRows: 7 }"
             :style="{ marginTop: '1rem' }"
+            @focus="openDialog(index)"
           ></el-input>
+          <!-- Open dialog event -->
         </el-form-item>
         <el-button round @click="appendContent">
           컨텐츠 추가하기
@@ -111,6 +118,7 @@
 </template>
 
 <script>
+import MarkdownDialog from './MarkdownDialog.vue'
 import { siteNameRule, siteAddrRule, rssAddrRule } from '@/functions/validate'
 
 export default {
@@ -126,8 +134,16 @@ export default {
     }
   },
 
+  components: {
+    MarkdownDialog
+  },
+
   data: () => ({
     isRSS: false,
+    dialog: {
+      active: false,
+      index: null
+    },
     form: {
       siteName: '',
       siteAddr: '',
@@ -207,6 +223,18 @@ export default {
           showClose: false
         })
       }
+    },
+    openDialog(index) {
+      if (this.form.contents.length < index) {
+        return
+      }
+
+      this.dialog.active = true
+      this.dialog.index = index
+    },
+    closeDialog(index) {
+      console.log(index)
+      this.dialog.active = false
     }
   }
 }
