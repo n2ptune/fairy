@@ -66,8 +66,9 @@
       </div>
       <div v-else>
         <MarkdownDialog
-          :active="dialog.active"
+          v-if="dialog.active"
           :index="dialog.index"
+          :md="dialog.md"
           @close="closeDialog"
         />
         <el-form-item
@@ -142,7 +143,8 @@ export default {
     isRSS: false,
     dialog: {
       active: false,
-      index: null
+      index: null,
+      body: null
     },
     form: {
       siteName: '',
@@ -152,7 +154,8 @@ export default {
       contents: [
         {
           title: '',
-          body: ''
+          body: '',
+          md: ''
         }
       ]
     },
@@ -209,7 +212,8 @@ export default {
 
       this.form.contents.push({
         title: '',
-        body: ''
+        body: '',
+        md: ''
       })
     },
     deleteContent(index) {
@@ -231,9 +235,11 @@ export default {
 
       this.dialog.active = true
       this.dialog.index = index
+      this.dialog.md = this.form.contents[index].md
     },
-    closeDialog(index) {
-      console.log(index)
+    closeDialog({ index, html, md }) {
+      this.form.contents[index].body = html
+      this.form.contents[index].md = md
       this.dialog.active = false
     }
   }
