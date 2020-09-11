@@ -72,10 +72,6 @@ export default new Vuex.Store({
       return state.data
     },
 
-    getFairyContents(state) {
-      return state.data.contents
-    },
-
     getIsRSS(state) {
       return state.data.isRSS
     },
