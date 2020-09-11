@@ -4,8 +4,8 @@
       :visible="true"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
+      :show-close="false"
       custom-class="markdown-dialog"
-      @close="closeDialog"
     >
       <template #title>
         <div class="title">Markdown Edit ({{ index + 1 }}번째 컨텐츠)</div>
@@ -17,6 +17,26 @@
           ref="dialogMarkdownEditor"
         />
       </div>
+      <template #footer>
+        <div class="button-container">
+          <el-button
+            type="warning"
+            v-bind="buttonCommonOptions"
+            icon="el-icon-close"
+            @click="closeDialog"
+          >
+            취소
+          </el-button>
+          <el-button
+            type="success"
+            v-bind="buttonCommonOptions"
+            icon="el-icon-edit"
+            @click="submitDialog"
+          >
+            저장
+          </el-button>
+        </div>
+      </template>
     </el-dialog>
   </transition>
 </template>
@@ -26,10 +46,6 @@ import MarkdownEditor from 'vue-simplemde'
 
 export default {
   props: {
-    // active: {
-    //   type: Boolean,
-    //   required: true
-    // },
     index: {
       type: Number,
       required: false,
@@ -50,7 +66,11 @@ export default {
     mdeConfig: {
       autofocus: true
     },
-    content: ''
+    content: '',
+    buttonCommonOptions: {
+      round: true,
+      plain: true
+    }
   }),
 
   computed: {
@@ -64,21 +84,12 @@ export default {
     this.content = this.md
   },
 
-  // watch: {
-  //   active(bool) {
-  //     if (bool) {
-  //       if (this.md) {
-  //         this.content = this.md
-  //       }
-  //     } else {
-  //       this.content = ''
-  //     }
-  //   }
-  // },
-
   methods: {
     closeDialog() {
-      this.$emit('close', {
+      this.$emit('close')
+    },
+    submitDialog() {
+      this.$emit('submit', {
         index: this.index,
         html: this.mde.markdown(this.content),
         md: this.mde.value()
@@ -116,12 +127,14 @@ export default {
 .oo-enter-to,
 .oo-leave {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .el-dialog__wrapper {
   &::v-deep .markdown-dialog {
     max-width: $dialog-max-width;
     width: auto;
+    // will-change: transform;
 
     @include mobile {
       margin: auto 10px;

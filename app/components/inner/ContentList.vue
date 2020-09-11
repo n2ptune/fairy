@@ -25,7 +25,15 @@ export default {
   }),
 
   created() {
-    this.contents = this.isRSS ? this.rssData.items : this.defaultData.contents
+    if (!this.active.contents) {
+      this.loadContents()
+        .then(() => {
+          this.contents = this.isRSS
+            ? this.rssData.items
+            : this.defaultData.contents
+        })
+        .catch(error => console.error(error))
+    }
   },
 
   computed: {
@@ -37,11 +45,11 @@ export default {
     })
   },
 
-  activated() {
-    if (!this.active.contents) {
-      this.loadContents()
-    }
-  },
+  // activated() {
+  //   if (!this.active.contents) {
+  //     this.loadContents()
+  //   }
+  // },
 
   methods: {
     ...mapActions({

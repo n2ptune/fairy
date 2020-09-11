@@ -26,10 +26,6 @@ export default {
     })
   },
 
-  created() {
-    this.$watch
-  },
-
   methods: {
     ...mapActions({
       loadData: 'loadFairy'

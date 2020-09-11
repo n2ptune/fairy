@@ -70,6 +70,7 @@
           :index="dialog.index"
           :md="dialog.md"
           @close="closeDialog"
+          @submit="submitDialog"
         />
         <el-form-item
           v-for="(content, index) in form.contents"
@@ -107,7 +108,6 @@
             :style="{ marginTop: '1rem' }"
             @focus="openDialog(index)"
           ></el-input>
-          <!-- Open dialog event -->
         </el-form-item>
         <el-button round @click="appendContent">
           컨텐츠 추가하기
@@ -237,9 +237,12 @@ export default {
       this.dialog.index = index
       this.dialog.md = this.form.contents[index].md
     },
-    closeDialog({ index, html, md }) {
+    submitDialog({ index, html, md }) {
       this.form.contents[index].body = html
       this.form.contents[index].md = md
+      this.dialog.active = false
+    },
+    closeDialog() {
       this.dialog.active = false
     }
   }

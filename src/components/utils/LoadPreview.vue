@@ -64,9 +64,9 @@ export default {
         fs.src = src
         ta.parentNode.insertBefore(fs, ta)
 
-        fs.onload = function() {
+        fs.onload = () => {
           this.loadedFairy = true
-        }.bind(this)
+        }
       })(document, 'fairy-app-inject')
     }
   },

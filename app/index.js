@@ -16,7 +16,7 @@ Vue.use(ContentPlaceHolders)
 /** Entry point in development mode */
 if (process.env.NODE_ENV === 'development') {
   window.FAIRY_APP = {
-    id: 'mel3pby92sfvsmar6re8'
+    id: 'dxsyy3zo8w4mlpa4uoxs'
   }
 }
 

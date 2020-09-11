@@ -81,6 +81,11 @@ export default {
     height: $fairy-detail-cp-size;
     overflow-y: scroll;
 
+    & .title,
+    & .body {
+      word-break: break-all;
+    }
+
     & .title {
       font-size: 1.4rem;
       font-weight: bold;
