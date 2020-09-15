@@ -10,11 +10,14 @@ import { firestorePlugin } from 'vuefire'
 import 'prismjs'
 import 'prismjs/themes/prism-okaidia.css'
 import VueClipboard from 'vue-clipboard2'
+import ResponsiveContainer from '@/components/utils/ResponsiveContainer.vue'
 
 VueClipboard.config.autoSetContainer = true
 
 Vue.use(VueClipboard)
 Vue.use(firestorePlugin)
+
+Vue.component('ResponsiveContainer', ResponsiveContainer)
 
 Vue.config.productionTip = false
 

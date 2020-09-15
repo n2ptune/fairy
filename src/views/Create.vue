@@ -39,14 +39,12 @@
 </template>
 
 <script>
-import ResponsiveContainer from '@/components/utils/ResponsiveContainer.vue'
 import Create from '@/components/form/Create.vue'
 import Preview from '@/components/form/Preview.vue'
 import { createFairy, updateFairy } from '@/functions/create'
 
 export default {
   components: {
-    ResponsiveContainer,
     Create,
     Preview
   },

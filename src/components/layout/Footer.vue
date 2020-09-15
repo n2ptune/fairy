@@ -67,6 +67,7 @@ export default {
 
         & li {
           margin: 1rem 0;
+          text-align: center;
         }
       }
 

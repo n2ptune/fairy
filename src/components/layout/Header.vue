@@ -42,11 +42,11 @@ export default {
       {
         path: '/',
         name: 'Home'
+      },
+      {
+        path: '/edit',
+        name: 'Edit'
       }
-      // {
-      //   path: '/about',
-      //   name: 'About'
-      // },
       // {
       //   path: '/lorem',
       //   name: 'Lorem'
