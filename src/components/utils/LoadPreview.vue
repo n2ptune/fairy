@@ -21,6 +21,7 @@
 </template>
 
 <script>
+// import 'prismjs'
 import Prism from 'vue-prism-component'
 import { generateCode } from '@/functions/create'
 
@@ -97,6 +98,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@import '~prismjs/themes/prism-okaidia.css';
+</style>
 
 <style lang="scss" scoped>
 .code-wrap {
