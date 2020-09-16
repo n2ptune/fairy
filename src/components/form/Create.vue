@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" class="form" :rules="rules">
+  <el-form :model="form" class="form" :rules="rules" label-position="right">
     <div class="wrap">
       <h1>
         사이트 정보 입력
@@ -53,7 +53,7 @@
             RSS 표시
           </span>
         </template>
-        <el-switch :disabled="update.status" v-model="isRSS" />
+        <el-switch :disabled="update || update.status" v-model="isRSS" />
       </el-form-item>
       <div v-if="checkRSS">
         <el-form-item label="RSS URL" prop="rssAddr">

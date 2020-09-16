@@ -57,6 +57,7 @@ Vue.use(Card)
 Vue.use(Footer)
 Vue.use(Switch)
 Vue.use(Dialog)
+Vue.use(Loading.directive)
 
 Vue.prototype.$notify = Notification
 Vue.prototype.$loading = Loading.service
