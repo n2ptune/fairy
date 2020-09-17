@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import { db, serverTimestamp } from '@/plugins/db'
 import uid from 'uid'
 import axios from 'axios'
@@ -6,15 +5,24 @@ import axios from 'axios'
 const MAX_UNIQUE_ID_LENGTH = 20
 
 /**
- * Create Fairy
- * @param {{
+ * @typedef {{
  * contents?: Array<object>,
  * siteAddr: String,
+ * siteAddrWithPrefix?: String,
  * siteName: String,
  * themeColor: String,
  * isRSS?: String,
- * rssAddr?: String
- * }} fairy
+ * rssAddr?: String,
+ * rssAddrWithPrefix?: String,
+ * createdAt?: any,
+ * id: String,
+ * success?: Boolean,
+ * }} Fairy
+ */
+
+/**
+ * Create Fairy
+ * @param {Fairy} fairy
  */
 function createFairy(fairy) {
   return new Promise((resolve, reject) => {
@@ -61,14 +69,8 @@ function createFairy(fairy) {
 
 /**
  * Update Fairy
- * @param {{
- * contents?: Array<object>,
- * siteAddr: String,
- * siteName: String,
- * themeColor: String,
- * isRSS?: String,
- * rssAddr?: String
- * }} fairy
+ * @param {Fairy} fairy
+ * @return {Promise<Fairy>}
  */
 function updateFairy(fairy, id) {
   return new Promise((resolve, reject) => {
@@ -94,9 +96,10 @@ function updateFairy(fairy, id) {
 
             // Fairy object extend
             // fairy.createdAt = serverTimestamp
-            // fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
-            // fairy.rssAddrWithPrefix = 'https://' + fairy.rssAddr
-            // fairy.success = false
+            fairy.updatedAt = serverTimestamp
+            fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
+            fairy.rssAddrWithPrefix = 'https://' + fairy.rssAddr
+            fairy.success = true
 
             fairies
               .doc(docID)

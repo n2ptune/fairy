@@ -3,6 +3,7 @@
     <el-main>
       <ResponsiveContainer>
         <Form
+          ref="editForm"
           v-loading="isDataLoading"
           element-loading-text="데이터 입력 대기중..."
           element-loading-custom-class="loading-spinner"
@@ -12,6 +13,7 @@
         <div class="edit-button-wrap">
           <el-divider />
           <el-button
+            :loading="isUpdateButtonLoading"
             icon="el-icon-check"
             type="success"
             round
@@ -64,8 +66,8 @@
 <script>
 import Form from '@/components/form/Create.vue'
 import { getFairyDataFromID } from '@/functions/update'
-// eslint-disable-next-line
 import { updateFairy } from '@/functions/create'
+import { validateContent } from '@/functions/validate'
 
 export default {
   components: {
@@ -75,6 +77,7 @@ export default {
   data: () => ({
     isDataLoading: true,
     isActiveDialog: true,
+    isUpdateButtonLoading: false,
     updateData: null,
     dialog: {
       form: {
@@ -128,6 +131,65 @@ export default {
     },
     editFairy() {
       if (!this.updateData) return
+
+      const {
+        siteAddr,
+        siteName,
+        themeColor,
+        isRSS,
+        rssAddr,
+        contents
+      } = this.$refs.editForm.form
+
+      const isValidated = validateContent({
+        siteAddr,
+        siteName,
+        themeColor,
+        isRSS,
+        rssAddr,
+        contents
+      })
+
+      if (isValidated.status === 'Error') {
+        return this.$notify({
+          type: 'error',
+          title: isValidated.title,
+          message: isValidated.message
+        })
+      }
+
+      this.isDataLoading = true
+      this.isUpdateButtonLoading = true
+
+      updateFairy(
+        {
+          siteAddr,
+          siteName,
+          themeColor,
+          isRSS,
+          rssAddr,
+          contents
+        },
+        this.dialog.form.id
+      )
+        .then(_fairy => {
+          this.$notify({
+            type: 'success',
+            title: '업데이트 완료',
+            message: '정보가 업데이트 되었습니다. 페이지에 실시간 반영됩니다.'
+          })
+        })
+        .catch(error => {
+          this.$notify({
+            type: 'error',
+            title: 'Erorr',
+            message: error.message
+          })
+        })
+        .finally(() => {
+          this.isDataLoading = false
+          this.isUpdateButtonLoading = false
+        })
     }
   }
 }
