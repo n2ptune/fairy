@@ -53,7 +53,7 @@
             RSS 표시
           </span>
         </template>
-        <el-switch :disabled="update || update.status" v-model="isRSS" />
+        <el-switch :disabled="!!update" v-model="isRSS" />
       </el-form-item>
       <div v-if="checkRSS">
         <el-form-item label="RSS URL" prop="rssAddr">
@@ -114,12 +114,6 @@
           <i class="el-icon-plus el-icon-right" />
         </el-button>
       </div>
-      <div class="edit-button-wrap" v-if="edit">
-        <el-divider />
-        <el-button round icon="el-icon-check" type="success">
-          수정하기
-        </el-button>
-      </div>
     </div>
   </el-form>
 </template>
@@ -130,11 +124,6 @@ import { siteNameRule, siteAddrRule, rssAddrRule } from '@/functions/validate'
 
 export default {
   props: {
-    edit: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
     update: {
       type: [Object, Boolean],
       required: true
@@ -305,8 +294,5 @@ export default {
       }
     }
   }
-}
-.edit-button-wrap {
-  text-align: right;
 }
 </style>

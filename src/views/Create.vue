@@ -42,6 +42,7 @@
 import Create from '@/components/form/Create.vue'
 import Preview from '@/components/form/Preview.vue'
 import { createFairy, updateFairy } from '@/functions/create'
+import { validateContent } from '@/functions/validate'
 
 export default {
   components: {
@@ -80,56 +81,21 @@ export default {
         this.refFormName
       ].form
 
-      // 주소, 이름, 테마 색 검증
-      if (!siteAddr || !siteName || !themeColor) {
+      const isValidated = validateContent({
+        siteAddr,
+        siteName,
+        themeColor,
+        isRSS,
+        rssAddr,
+        contents
+      })
+
+      if (isValidated.status === 'Error') {
         return this.$notify({
           type: 'error',
-          title: '필수 요소 누락',
-          message:
-            '사이트 주소와 이름 그리고 테마 색은 반드시 지정되어야 합니다.',
-          showClose: false
+          title: isValidated.title,
+          message: isValidated.message
         })
-      }
-
-      // RSS 표시가 아닐 때 컨텐츠 검증
-      if (!isRSS) {
-        // 컨텐츠 갯수 부족
-        if (!contents.length) {
-          return this.$notify({
-            type: 'error',
-            title: '컨텐츠 갯수 부족',
-            message: '최소 하나 이상의 컨텐츠를 가져야 합니다.',
-            showClose: false
-          })
-        }
-
-        const validateContents = content => {
-          return content.title.length >= 5 && content.body.length >= 10
-        }
-
-        // 컨텐츠 검증 실패
-        // (제목 5자 이상, 내용 10자 이상)
-        if (!contents.every(validateContents)) {
-          return this.$notify({
-            type: 'error',
-            title: '컨텐츠 제목과 내용의 길이 부적절',
-            message:
-              '컨텐츠 제목은 5자 이상 내용은 10자 이상이 포함되어야 합니다.',
-            showClose: false
-          })
-        }
-      } else {
-        if (!rssAddr) {
-          return this.$notify({
-            type: 'error',
-            title: 'RSS URL 누락',
-            message: 'RSS를 표시하게끔 하려면 참조할 URL을 입력해야 합니다.',
-            showClose: false
-          })
-        }
-
-        // 배열의 모든 내용 삭제
-        if (contents.length) contents.splice(0)
       }
 
       const loadingForWaitCreate = this.$loading({

@@ -6,10 +6,20 @@
           v-loading="isDataLoading"
           element-loading-text="데이터 입력 대기중..."
           element-loading-custom-class="loading-spinner"
-          :edit="true"
           :update="true"
           :update-data="updateData"
         />
+        <div class="edit-button-wrap">
+          <el-divider />
+          <el-button
+            icon="el-icon-check"
+            type="success"
+            round
+            @click="editFairy"
+          >
+            수정하기
+          </el-button>
+        </div>
         <el-dialog
           :visible.sync="isActiveDialog"
           :close-on-click-modal="false"
@@ -28,6 +38,7 @@
               <el-form-item label="아이디" prop="id">
                 <el-input
                   v-model="dialog.form.id"
+                  ref="formID"
                   type="text"
                   autofocus
                   maxlength="20"
@@ -53,6 +64,8 @@
 <script>
 import Form from '@/components/form/Create.vue'
 import { getFairyDataFromID } from '@/functions/update'
+// eslint-disable-next-line
+import { updateFairy } from '@/functions/create'
 
 export default {
   components: {
@@ -96,12 +109,25 @@ export default {
               this.isDataLoading = false
               this.isActiveDialog = false
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+              this.$notify({
+                type: 'error',
+                title: error.name,
+                message: error.message,
+                duration: 3000,
+                showClose: false,
+                position: 'top-right'
+              })
+            })
+            .finally(() => (this.dialog.form.isButtonLoading = false))
         } else {
           // 검증 실패
+          this.dialog.form.isButtonLoading = false
         }
-        this.dialog.form.isButtonLoading = false
       })
+    },
+    editFairy() {
+      if (!this.updateData) return
     }
   }
 }
@@ -137,5 +163,9 @@ export default {
 ::v-deep .edit-dialog {
   width: 95%;
   max-width: 700px;
+}
+
+.edit-button-wrap {
+  text-align: right;
 }
 </style>

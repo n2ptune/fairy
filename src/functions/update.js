@@ -17,7 +17,13 @@ function getFairyDataFromID(id) {
       collection
         .where('id', '==', id)
         .get()
-        .then(docs => docs.forEach(doc => resolve(doc.data())))
+        .then(docs => {
+          if (docs.empty) {
+            reject(new Error('아이디를 찾을 수 없음'))
+          } else {
+            docs.forEach(doc => resolve(doc.data()))
+          }
+        })
         .catch(error => reject(error))
     }
   })

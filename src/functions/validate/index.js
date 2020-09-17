@@ -62,4 +62,49 @@ const rssAddrRule = []
 
 siteAddrRule.map(val => rssAddrRule.push(Object.assign({}, val)))
 
+/**
+ * @return {{status: String, title?: String, message?: String}}
+ */
+function validateContent({
+  siteAddr,
+  siteName,
+  themeColor,
+  isRSS,
+  rssAddr,
+  contents
+}) {
+  if (isRSS) {
+    if (!rssAddr) {
+      return {
+        status: 'Error',
+        title: 'RSS URL 누락',
+        message: 'RSS를 표시하게끔 하려면 참조할 URL을 입력해야 합니다.'
+      }
+    }
+  } else {
+    if (!siteAddr || !siteName || !themeColor) {
+      return {
+        status: 'Error',
+        title: '필수 요소 누락',
+        message: '사이트 주소와 이름 그리고 테마 색은 반드시 지정되어야 합니다.'
+      }
+    }
+    const checkAllContents = content =>
+      content.title.length >= 5 && content.body.length >= 10
+
+    if (!contents.every(checkAllContents)) {
+      return {
+        status: 'Error',
+        title: '컨텐츠 제목과 내용의 길이 부적절',
+        message: '컨텐츠 제목은 5자 이상 내용은 10자 이상이 포함되어야 합니다.'
+      }
+    }
+  }
+
+  return {
+    status: 'success'
+  }
+}
+
 export { siteNameRule, siteAddrRule, rssAddrRule }
+export { validateContent }
