@@ -6,12 +6,15 @@
           v-loading="isDataLoading"
           element-loading-text="데이터 입력 대기중..."
           element-loading-custom-class="loading-spinner"
+          :edit="true"
           :update="true"
+          :update-data="updateData"
         />
         <el-dialog
           :visible.sync="isActiveDialog"
           :close-on-click-modal="false"
           :close-on-press-escape="false"
+          custom-class="edit-dialog"
           title="Fairy 정보를 수정할 아이디 입력"
         >
           <el-row class="dialog-row" justify="center" type="flex">
@@ -49,6 +52,7 @@
 
 <script>
 import Form from '@/components/form/Create.vue'
+import { getFairyDataFromID } from '@/functions/update'
 
 export default {
   components: {
@@ -58,10 +62,10 @@ export default {
   data: () => ({
     isDataLoading: true,
     isActiveDialog: true,
+    updateData: null,
     dialog: {
       form: {
         id: '',
-        // validated: false,
         isButtonLoading: false,
         rules: {
           id: [
@@ -84,18 +88,19 @@ export default {
     submitDialogForm() {
       this.$refs.dialogForm.validate(valid => {
         this.dialog.form.isButtonLoading = true
-
         if (valid) {
           // 검증 성공
-          // Test
-          setTimeout(() => (this.dialog.form.isButtonLoading = false), 1000)
+          getFairyDataFromID(this.dialog.form.id)
+            .then(fairy => {
+              this.updateData = fairy
+              this.isDataLoading = false
+              this.isActiveDialog = false
+            })
+            .catch(error => console.error(error))
         } else {
           // 검증 실패
-          // Test
-          setTimeout(() => (this.dialog.form.isButtonLoading = false), 1000)
         }
-
-        // this.dialog.form.isButtonLoading = false
+        this.dialog.form.isButtonLoading = false
       })
     }
   }
@@ -104,6 +109,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/css/_variables.scss';
+@import '@/assets/css/_breakpoints.scss';
 
 ::v-deep .loading-spinner {
   color: $color-dark-header-default;
@@ -126,5 +132,10 @@ export default {
       border-color: $color-dark-header-default;
     }
   }
+}
+
+::v-deep .edit-dialog {
+  width: 95%;
+  max-width: 700px;
 }
 </style>

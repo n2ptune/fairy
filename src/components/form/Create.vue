@@ -114,6 +114,12 @@
           <i class="el-icon-plus el-icon-right" />
         </el-button>
       </div>
+      <div class="edit-button-wrap" v-if="edit">
+        <el-divider />
+        <el-button round icon="el-icon-check" type="success">
+          수정하기
+        </el-button>
+      </div>
     </div>
   </el-form>
 </template>
@@ -124,6 +130,11 @@ import { siteNameRule, siteAddrRule, rssAddrRule } from '@/functions/validate'
 
 export default {
   props: {
+    edit: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     update: {
       type: [Object, Boolean],
       required: true
@@ -245,6 +256,14 @@ export default {
     closeDialog() {
       this.dialog.active = false
     }
+  },
+
+  watch: {
+    updateData(data) {
+      for (const key in this.form) {
+        this.form[key] = data[key]
+      }
+    }
   }
 }
 </script>
@@ -286,5 +305,8 @@ export default {
       }
     }
   }
+}
+.edit-button-wrap {
+  text-align: right;
 }
 </style>

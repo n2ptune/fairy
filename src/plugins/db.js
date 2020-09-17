@@ -1,4 +1,6 @@
+/** @type {import('firebase/app')} */
 let firebase
+/** @type {firebase.firestore.Firestore} */
 let db
 let serverTimestamp
 
