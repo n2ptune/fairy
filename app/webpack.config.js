@@ -6,7 +6,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 /** @type {import('webpack').Configuration} */
 module.exports = {
   mode: 'production',
-  entry: './index.js',
+  entry: './main.js',
   output: {
     filename: 'fairy.app.js',
     path: path.resolve(__dirname, 'dist')
