@@ -136,10 +136,10 @@ export default {
         siteAddr,
         siteName,
         themeColor,
-        isRSS,
         rssAddr,
         contents
       } = this.$refs.editForm.form
+      const { isRSS } = this.$refs.editForm
 
       const isValidated = validateContent({
         siteAddr,
@@ -170,7 +170,8 @@ export default {
           rssAddr,
           contents
         },
-        this.dialog.form.id
+        this.dialog.form.id,
+        true
       )
         .then(_fairy => {
           this.$notify({

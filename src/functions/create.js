@@ -16,7 +16,8 @@ const MAX_UNIQUE_ID_LENGTH = 20
  * rssAddrWithPrefix?: String,
  * createdAt?: any,
  * id: String,
- * success?: Boolean,
+ * secretID: String,
+ * success?: Boolean
  * }} Fairy
  */
 
@@ -28,9 +29,11 @@ function createFairy(fairy) {
   return new Promise((resolve, reject) => {
     const currentDoc = db.collection('fairies').doc()
     const fairyID = uid(MAX_UNIQUE_ID_LENGTH)
+    const fairySecretID = uid(MAX_UNIQUE_ID_LENGTH)
 
     // Fairy object extend
     fairy.id = fairyID
+    fairy.secretID = fairySecretID
     fairy.createdAt = serverTimestamp
     fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
     fairy.rssAddrWithPrefix = 'https://' + fairy.rssAddr
@@ -72,12 +75,12 @@ function createFairy(fairy) {
  * @param {Fairy} fairy
  * @return {Promise<Fairy>}
  */
-function updateFairy(fairy, id) {
+function updateFairy(fairy, id, isEdit = false) {
   return new Promise((resolve, reject) => {
     const fairies = db.collection('fairies')
 
     fairies
-      .where('id', '==', id)
+      .where(isEdit ? 'secretID' : 'id', '==', id)
       .get()
       .then(q => {
         if (q.empty) {

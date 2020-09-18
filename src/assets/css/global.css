@@ -6,12 +6,14 @@ body {
   margin: 0;
   padding: 0;
   font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Poppins', 'Noto Sans',
+  font-family: -apple-sytem, BlinkMacSystemFont, 'Poppins', 'Noto Sans',
     'Noto Sans KR', sans-serif !important;
 }
 
 .font-logo {
-  font-family: 'Merriweather', sans-serif !important;
+  font-family: 'Merriweather', serif !important;
+  font-style: italic;
+  font-weight: 900;
 }
 
 .mx-auto {

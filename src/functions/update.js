@@ -15,7 +15,7 @@ function getFairyDataFromID(id) {
       const collection = db.collection('fairies')
 
       collection
-        .where('id', '==', id)
+        .where('secretID', '==', id)
         .get()
         .then(docs => {
           if (docs.empty) {

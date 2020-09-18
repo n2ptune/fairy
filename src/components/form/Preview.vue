@@ -89,6 +89,10 @@ export default {
               title = '테마 색상'
               sort = 4
               break
+            case 'secretID':
+              title = '비공개 아이디'
+              sort = 8
+              break
             case 'rssAddr':
               if (this.previewData.rssAddr) {
                 title = 'RSS URL'
