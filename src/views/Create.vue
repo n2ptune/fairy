@@ -29,9 +29,7 @@
           </keep-alive>
         </div>
         <div v-if="!stepActive" class="step-footer text-center">
-          <el-button @click="nextStep">
-            다음
-          </el-button>
+          <el-button @click="nextStep"> 다음 </el-button>
         </div>
       </ResponsiveContainer>
     </el-main>

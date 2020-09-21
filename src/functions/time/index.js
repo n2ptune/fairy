@@ -11,8 +11,9 @@ function convertTimestampToDate(timestamp) {
  * @param {Date} date
  */
 function dateFormatKorean(date) {
-  return `${date.getFullYear()}년 ${date.getMonth() +
-    1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`
+  return `${date.getFullYear()}년 ${
+    date.getMonth() + 1
+  }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`
 }
 
 export { convertTimestampToDate, dateFormatKorean }

@@ -2,9 +2,7 @@
   <div>
     <el-divider />
     <h1>Fairy 등록 완료</h1>
-    <h3>
-      아래 코드를 HTML 페이지에 삽입해주세요.
-    </h3>
+    <h3>아래 코드를 HTML 페이지에 삽입해주세요.</h3>
     <div class="code-wrap">
       <Prism language="html" :code="generatedCode" />
       <div class="icon" @click="copyCode">
@@ -56,7 +54,7 @@ export default {
       window.FAIRY_APP = {
         id: this.fairyId
       }
-      ;(function(t, i) {
+      ;(function (t, i) {
         if (t.getElementById(i)) return
 
         var fs = t.createElement('script')

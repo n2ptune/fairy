@@ -1,9 +1,7 @@
 <template>
   <el-form :model="form" class="form" :rules="rules" label-position="right">
     <div class="wrap">
-      <h1>
-        사이트 정보 입력
-      </h1>
+      <h1>사이트 정보 입력</h1>
       <el-form-item label="사이트 이름" required prop="siteName">
         <el-input
           type="text"
@@ -15,17 +13,13 @@
       </el-form-item>
       <el-form-item label="사이트 주소" required prop="siteAddr">
         <el-input type="url" v-model="form.siteAddr" placeholder="example.com">
-          <template #prepend>
-            https://
-          </template>
+          <template #prepend> https:// </template>
         </el-input>
       </el-form-item>
     </div>
     <el-divider />
     <div class="wrap">
-      <h1>
-        테마 지정
-      </h1>
+      <h1>테마 지정</h1>
       <el-form-item label="베이스 색상 지정" required>
         <el-color-picker
           :predefine="predefineColors"
@@ -38,9 +32,7 @@
     </div>
     <el-divider />
     <div class="wrap">
-      <h1>
-        Fairy가 보여줄 컨텐츠 입력
-      </h1>
+      <h1>Fairy가 보여줄 컨텐츠 입력</h1>
       <div class="description">
         <span class="mark">*</span>
         사용자에게 보여줄 컨텐츠를 지정합니다. 블로그의 RSS URL를 입력하여
@@ -49,18 +41,14 @@
       </div>
       <el-form-item>
         <template #label>
-          <span class="rss" :class="isRSS ? 'active' : ''">
-            RSS 표시
-          </span>
+          <span class="rss" :class="isRSS ? 'active' : ''"> RSS 표시 </span>
         </template>
         <el-switch :disabled="!!update" v-model="isRSS" />
       </el-form-item>
       <div v-if="checkRSS">
         <el-form-item label="RSS URL" prop="rssAddr">
           <el-input type="url" v-model="form.rssAddr" placeholder="example.com">
-            <template #prepend>
-              https://
-            </template>
+            <template #prepend> https:// </template>
           </el-input>
         </el-form-item>
       </div>

@@ -4,12 +4,8 @@
       <el-row type="flex" justify="center" :gutter="20">
         <el-col v-bind="column">
           <ul>
-            <li class="font-logo">
-              fairy
-            </li>
-            <li>
-              Helpful for Web Service
-            </li>
+            <li class="font-logo">fairy</li>
+            <li>Helpful for Web Service</li>
           </ul>
         </el-col>
         <!-- <el-col v-bind="column">

@@ -1,9 +1,7 @@
 <template>
   <el-row type="flex" justify="center" class="top-wrap" :gutter="20">
     <el-col :xs="22" :sm="16" :md="12" :lg="8" :xl="4" class="left">
-      <div class="title">
-        Helpful for Web Service
-      </div>
+      <div class="title">Helpful for Web Service</div>
       <div class="sub">
         Vivamus tempus pellentesque ultricies. Duis lobortis eleifend ex, nec
         egestas ex. Cras dictum odio a cursus mollis. Praesent nisi erat.

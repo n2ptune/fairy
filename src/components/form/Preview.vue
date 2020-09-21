@@ -21,9 +21,7 @@
       <h1>위의 정보로 입력을 완료시킬까요?</h1>
       <p class="desciprtion">(정보는 추후에 수정할 수 있습니다.)</p>
       <div class="accept-wrap">
-        <el-button @click="accept" :disabled="accepted">
-          예
-        </el-button>
+        <el-button @click="accept" :disabled="accepted"> 예 </el-button>
         <el-button @click="cancelAccept" :disabled="accepted">
           아니오 (정보 수정)
         </el-button>

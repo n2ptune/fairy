@@ -4,9 +4,7 @@
       <!-- 로고 -->
       <el-col :xs="22" :md="3" :lg="2" :xl="1">
         <router-link to="/" :style="{ display: 'inline-block' }">
-          <div class="logo-text font-logo">
-            fairy
-          </div>
+          <div class="logo-text font-logo">fairy</div>
         </router-link>
       </el-col>
       <!-- 메뉴 -->
@@ -23,9 +21,7 @@
       <el-col :lg="4" :xl="2" class="hidden-md-and-down create-button-wrap">
         <div class="create-button-container">
           <router-link to="/create">
-            <button class="create-button">
-              Create Fairy
-            </button>
+            <button class="create-button">Create Fairy</button>
           </router-link>
         </div>
       </el-col>
