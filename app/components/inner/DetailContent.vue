@@ -6,28 +6,24 @@
         <div class="title">
           {{ content.title }}
         </div>
-        <div class="body">
-          {{ content.body }}
-        </div>
+        <div v-dompurify-html="content.body" class="body" />
       </div>
     </div>
   </transition>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { computed } from '@vue/composition-api'
 
 export default {
-  computed: {
-    ...mapGetters({
-      content: 'detail/getContent'
-    })
-  },
+  setup(_props, { root }) {
+    const content = computed(() => root.$store.getters['detail/getContent'])
+    const close = () => root.$store.commit('detail/SWITCH_ACTIVE')
 
-  methods: {
-    ...mapMutations({
-      close: 'detail/SWITCH_ACTIVE'
-    })
+    return {
+      content,
+      close
+    }
   }
 }
 </script>

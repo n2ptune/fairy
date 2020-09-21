@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import VueCompositionAPI from '@vue/composition-api'
+import VueDompurifyHTML from 'vue-dompurify-html'
 import App from './App.vue'
 import FairyElement from './lib/init'
 import Store from './store'
@@ -12,11 +14,13 @@ Unicon.add([uniCommentNotes, uniTimes])
 
 Vue.use(Unicon)
 Vue.use(ContentPlaceHolders)
+Vue.use(VueCompositionAPI)
+Vue.use(VueDompurifyHTML)
 
 /** Entry point in development mode */
 if (process.env.NODE_ENV === 'development') {
   window.FAIRY_APP = {
-    id: 'dxsyy3zo8w4mlpa4uoxs'
+    id: '8bi2scdgqcua5kg23f06'
   }
 }
 

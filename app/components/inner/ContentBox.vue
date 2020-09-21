@@ -20,17 +20,21 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { computed, defineComponent } from '@vue/composition-api'
 
 const LIMIT_TITLE_LENGTH = 40
 const LIMIT_BODY_LENGTH = 100
 
 /**
- * @typedef {object} Content
- * @property {string} title
- * @property {string} body
+ * @typedef {{
+ * title: String,
+ * body: String,
+ * md: String,
+ * isoDate?: String
+ * link?: String
+ * }} Content
  */
-export default {
+export default defineComponent({
   props: {
     isLoading: {
       type: Boolean,
@@ -38,7 +42,7 @@ export default {
       default: false
     },
     content: {
-      /** @type {import('vue').PropType<Content>} */
+      /** @type {Content} */
       type: Object,
       required: false,
       default: () => ({})
@@ -50,63 +54,73 @@ export default {
     }
   },
 
-  computed: {
-    title() {
-      let title = ''
+  setup(props, { root }) {
+    const title = computed(() => {
+      let splitedTitle = ''
 
-      if (this.content.title.length > LIMIT_TITLE_LENGTH) {
-        title =
-          this.content.title.substring(0, LIMIT_TITLE_LENGTH).trim() + '...'
+      if (props.content.title.length > LIMIT_TITLE_LENGTH) {
+        splitedTitle =
+          props.content.title.substring(0, LIMIT_TITLE_LENGTH).trim() + '...'
       } else {
-        title = this.content.title
+        splitedTitle = props.content.title
       }
 
-      return title
-    },
-    body() {
-      let body = ''
+      return splitedTitle
+    })
 
-      if (this.content.body.length > LIMIT_BODY_LENGTH) {
-        body = this.content.body.substring(0, LIMIT_BODY_LENGTH).trim() + '...'
+    const body = computed(() => {
+      let body = props.content.body
+
+      if (props.content.body.length > LIMIT_BODY_LENGTH) {
+        body = props.content.body.substring(0, LIMIT_BODY_LENGTH).trim() + '...'
       } else {
-        body = this.content.body
+        body = props.content.body
       }
 
       return body
-    },
-    formattedDate() {
-      if (!this.content.isoDate) {
+    })
+
+    const formattedDate = computed(() => {
+      if (!props.content.isoDate) {
         return null
       }
 
-      /** @type {Date} */
-      const date = new Date(this.content.isoDate)
+      const date = new Date(props.content.isoDate)
 
       return `${date.getFullYear()}년 ${date.getMonth() +
         1}월 ${date.getDate()}일`
-    }
-  },
+    })
 
-  methods: {
-    ...mapMutations({
-      mutateDetailContent: 'detail/SET_CONTENT',
-      mutateDetailActive: 'detail/SWITCH_ACTIVE'
-    }),
-    detail() {
-      if (this.isLoading) return
+    const mutateDetailContent = content => {
+      root.$store.commit('detail/SET_CONTENT', content)
+    }
+
+    const mutateDetailActive = () => {
+      root.$store.commit('detail/SWITCH_ACTIVE')
+    }
+
+    const detail = () => {
+      if (props.isLoading) return
 
       // RSS
-      if (this.rss) {
-        if (!this.content.link) return
+      if (props.rss) {
+        if (!props.content.link) return
 
-        return window.open(this.content.link, '_blank')
+        return window.open(props.content.link, '_blank')
       }
 
-      this.mutateDetailContent(this.content)
-      this.mutateDetailActive()
+      mutateDetailContent(props.content)
+      mutateDetailActive()
+    }
+
+    return {
+      title,
+      body,
+      formattedDate,
+      detail
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

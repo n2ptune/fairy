@@ -898,6 +898,13 @@
   optionalDependencies:
     prettier "^1.18.2"
 
+"@vue/composition-api@^1.0.0-beta.14":
+  version "1.0.0-beta.14"
+  resolved "https://registry.yarnpkg.com/@vue/composition-api/-/composition-api-1.0.0-beta.14.tgz#b243d906ae5dcda7483e0b5a2b5ea1aa971a4e00"
+  integrity sha512-HYBe87RG//qpN/2+ZtgdhrIafdO8bYK/Tu1+/jMS4iNGYJi42XCbPydhEAiaRcTvsEJjZQEfP+hKKIuH+iPICg==
+  dependencies:
+    tslib "^2.0.1"
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -2277,6 +2284,11 @@ domhandler@^2.3.0:
   integrity sha512-JiK04h0Ht5u/80fdLMCEmV4zkNh2BcoMFBmZ/91WtYZ8qVXSKjiw7fXMgFPnHcSZgOo3XdinHvmnDUeMf5R4wA==
   dependencies:
     domelementtype "1"
+
+dompurify@^2.0.0:
+  version "2.0.17"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.0.17.tgz#505ffa126a580603df4007e034bdc9b6b738668e"
+  integrity sha512-nNwwJfW55r8akD8MSFz6k75bzyT2y6JEa1O3JrZFBf+Y5R9JXXU4OsRl0B9hKoPgHTw2b7ER5yJ5Md97MMUJPg==
 
 domutils@1.5.1:
   version "1.5.1"
@@ -5399,6 +5411,11 @@ tslib@^1.10.0, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
   integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
 
+tslib@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.1.tgz#410eb0d113e5b6356490eec749603725b021b43e"
+  integrity sha512-SgIkNheinmEBgx1IUNirK0TUD4X9yjjBRTqqjggWCU3pUEqIk3/Uwl3yRixYKT6WjQuGiwDv4NomL3wqRCj+CQ==
+
 tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
@@ -5629,6 +5646,13 @@ vue-content-placeholders@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/vue-content-placeholders/-/vue-content-placeholders-0.2.1.tgz#5876bda4577c80ff6d396fb33b2dbbf8b8cc140f"
   integrity sha512-Q+HPjuY98R0fLQ45eOOCYeMY7vpjU1H/Qqs0ptdBI6xe3nDDsPE4r/kN5YA9rVxQFP/PKhG5qQR4rqy02xPabw==
+
+vue-dompurify-html@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/vue-dompurify-html/-/vue-dompurify-html-2.3.0.tgz#b175edda57362cf7b03d2864468fa644e05a2ad0"
+  integrity sha512-Iz9wI4iiJF+rzC2x3r8quw/VXrkwgMsWXt9p0Le4wXtolBXwMDJOmK3QNMiNg36bzU2b0f3En/wjidoeRVNZ7A==
+  dependencies:
+    dompurify "^2.0.0"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
