@@ -29,6 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 @import '@styles/_variables.scss';
 @import '@styles/_breakpoints.scss';
 
@@ -89,7 +90,25 @@ export default {
 
     & .body {
       margin: 1rem 0 2rem 0;
+      overflow-x: hidden;
       overflow-y: auto;
+      overflow-wrap: break-word;
+
+      &::v-deep {
+        & img {
+          object-fit: cover;
+          width: 100%;
+        }
+
+        & pre {
+          font-size: 14px;
+          font-family: 'Roboto Mono', monospace;
+
+          & code {
+            font-family: 'Roboto Mono', monospace;
+          }
+        }
+      }
     }
 
     & .close {

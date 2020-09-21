@@ -69,15 +69,13 @@ export default defineComponent({
     })
 
     const body = computed(() => {
-      let body = props.content.body
+      let onlyText = props.content.body.replaceAll(/<[^>]*>/g, '')
 
-      if (props.content.body.length > LIMIT_BODY_LENGTH) {
-        body = props.content.body.substring(0, LIMIT_BODY_LENGTH).trim() + '...'
-      } else {
-        body = props.content.body
+      if (onlyText.length > LIMIT_BODY_LENGTH) {
+        onlyText = onlyText.substring(0, LIMIT_BODY_LENGTH).trim() + '...'
       }
 
-      return body
+      return onlyText
     })
 
     const formattedDate = computed(() => {
