@@ -85,8 +85,9 @@ export default defineComponent({
 
       const date = new Date(props.content.isoDate)
 
-      return `${date.getFullYear()}년 ${date.getMonth() +
-        1}월 ${date.getDate()}일`
+      return `${date.getFullYear()}년 ${
+        date.getMonth() + 1
+      }월 ${date.getDate()}일`
     })
 
     const mutateDetailContent = content => {

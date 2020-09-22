@@ -1,7 +1,7 @@
 <template>
   <transition name="detail" appear>
     <div class="detail-view">
-      <div class="detail-inner no-scroll">
+      <div class="detail-inner custom-scroll">
         <unicon name="times" class="close" @click="close" />
         <div class="title">
           {{ content.title }}
@@ -16,7 +16,7 @@
 import { computed } from '@vue/composition-api'
 
 export default {
-  setup(_props, { root }) {
+  setup(props, { root }) {
     const content = computed(() => root.$store.getters['detail/getContent'])
     const close = () => root.$store.commit('detail/SWITCH_ACTIVE')
 
