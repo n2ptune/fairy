@@ -8,44 +8,44 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { computed, defineComponent } from '@vue/composition-api'
 import FairyButton from '@components/FairyButton.vue'
 import InnerContainer from '@components/inner/Container.vue'
 
-export default {
+export default defineComponent({
   components: {
     FairyButton,
     InnerContainer
   },
 
-  computed: {
-    ...mapGetters({
-      fairyData: 'getFairyData',
-      fairyActive: 'getFairyActive',
-      detailActive: 'detail/getActive'
-    })
-  },
+  setup(props, { root }) {
+    const fairyData = computed(() => root.$store.getters.getFairyData)
+    const fairyActive = computed(() => root.$store.getters.getFairyActive)
+    const detailActive = computed(() => root.$store.getters['detail/getActive'])
 
-  methods: {
-    ...mapActions({
-      loadData: 'loadFairy'
-    }),
-    ...mapMutations({
-      switch: 'SET_FAIRY_ACTIVE',
-      detailSwitch: 'detail/SWITCH_ACTIVE'
-    }),
-    onFairy() {
-      if (this.detailActive) this.detailSwitch()
+    const onFairy = () => {
+      if (detailActive.value) {
+        root.$store.commit('detail/SWITCH_ACTIVE')
+      }
+      root.$store.commit('SET_FAIRY_ACTIVE', true)
+    }
 
-      this.switch(true)
-    },
-    offFairy() {
-      if (this.detailActive) this.detailSwitch()
+    const offFairy = () => {
+      if (detailActive.value) {
+        root.$store.commit('detail/SWITCH_ACTIVE')
+      }
+      root.$store.commit('SET_FAIRY_ACTIVE', false)
+    }
 
-      this.switch(false)
+    return {
+      fairyData,
+      fairyActive,
+      detailActive,
+      onFairy,
+      offFairy
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

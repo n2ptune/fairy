@@ -2,7 +2,7 @@
   <transition name="scale-up" appear>
     <button
       class="fairy-button"
-      @click="switchFairy"
+      @click.prevent="switchFairy"
       :style="{ backgroundColor: fairy.themeColor }"
     >
       <unicon name="comment-notes" fill="white" />
@@ -11,26 +11,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { computed, defineComponent } from '@vue/composition-api'
 
-export default {
-  computed: {
-    ...mapGetters({
-      fairy: 'getFairyData',
-      fairyActive: 'getFairyActive'
-    })
-  },
+export default defineComponent({
+  setup(props, { root, emit }) {
+    const fairy = computed(() => root.$store.getters.getFairyData)
+    const fairyActive = computed(() => root.$store.getters.getFairyActive)
 
-  methods: {
-    switchFairy() {
-      if (this.fairyActive) {
-        this.$emit('close')
+    const switchFairy = () => {
+      if (fairyActive.value) {
+        return emit('close')
       } else {
-        this.$emit('active')
+        return emit('active')
       }
     }
+
+    return {
+      fairy,
+      switchFairy
+    }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
