@@ -5,7 +5,19 @@
       @click.prevent="switchFairy"
       :style="{ backgroundColor: fairy.themeColor }"
     >
-      <unicon name="comment-notes" fill="white" />
+      <transition
+        mode="out-in"
+        :css="false"
+        @before-enter="transitionHooks.beforeEnter"
+        @enter="transitionHooks.enter"
+        @after-enter="transitionHooks.afterEnter"
+        @before-leave="transitionHooks.beforeLeave"
+        @leave="transitionHooks.leave"
+        @after-leave="transitionHooks.afterLeave"
+      >
+        <unicon v-if="fairyActive" key="close" name="times" fill="white" />
+        <unicon v-else key="active" name="comment-notes" fill="white" />
+      </transition>
     </button>
   </transition>
 </template>
@@ -18,6 +30,25 @@ export default defineComponent({
     const fairy = computed(() => root.$store.getters.getFairyData)
     const fairyActive = computed(() => root.$store.getters.getFairyActive)
 
+    const transitionHooks = {
+      // Enter
+      beforeEnter(el) {
+        const svg = el.childNodes[0]
+
+        svg.style.fill = '#121212'
+      },
+      enter(el, done) {
+        done()
+      },
+      afterEnter(el) {},
+      // Leave
+      beforeLeave(el) {},
+      leave(el, done) {
+        done()
+      },
+      afterLeave(el) {}
+    }
+
     const switchFairy = () => {
       if (fairyActive.value) {
         return emit('close')
@@ -28,7 +59,9 @@ export default defineComponent({
 
     return {
       fairy,
-      switchFairy
+      fairyActive,
+      switchFairy,
+      transitionHooks
     }
   }
 })
