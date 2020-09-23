@@ -31,6 +31,7 @@
   "dependencies": {
     "@vue/composition-api": "^1.0.0-beta.14",
     "axios": "^0.20.0",
+    "velocity-animate": "^2.0.6",
     "vue-content-placeholders": "^0.2.1",
     "vue-dompurify-html": "^2.3.0",
     "vue-unicons": "^2.3.0",

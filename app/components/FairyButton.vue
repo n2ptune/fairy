@@ -3,18 +3,27 @@
     <button
       class="fairy-button"
       @click.prevent="switchFairy"
-      :style="{ backgroundColor: fairy.themeColor }"
+      :style="{
+        backgroundColor: fairy.themeColor,
+        '--active-color': fairy.themeColor
+      }"
     >
       <transition
-        mode="out-in"
         :css="false"
+        mode="out-in"
         @before-enter="transitionHooks.beforeEnter"
         @enter="transitionHooks.enter"
-        @before-leave="transitionHooks.beforeLeave"
         @leave="transitionHooks.leave"
       >
         <unicon v-if="fairyActive" key="close" name="times" fill="white" />
-        <unicon v-else key="active" name="comment-notes" fill="white" />
+        <unicon
+          v-else
+          key="active"
+          name="comment-dots"
+          fill="white"
+          icon-style="monochrome"
+          class="no-active"
+        />
       </transition>
     </button>
   </transition>
@@ -22,6 +31,7 @@
 
 <script>
 import { computed, defineComponent } from '@vue/composition-api'
+import Velocity from 'velocity-animate'
 
 export default defineComponent({
   setup(props, { root, emit }) {
@@ -29,12 +39,37 @@ export default defineComponent({
     const fairyActive = computed(() => root.$store.getters.getFairyActive)
 
     const transitionHooks = {
-      // Enter
-      beforeEnter(el) {},
-      enter(el, done) {},
-      // Leave
-      beforeLeave(el) {},
-      leave(el, done) {}
+      beforeEnter(el) {
+        el.childNodes[0].style.opacity = 0
+      },
+      enter(el, done) {
+        Velocity(
+          el.childNodes[0],
+          {
+            opacity: 1,
+            transform: ['scale(1)', 'scale(0.85)']
+          },
+          {
+            delay: 0,
+            duration: 200,
+            complete: done
+          }
+        )
+      },
+      leave(el, done) {
+        Velocity(
+          el.childNodes[0],
+          {
+            opacity: 0,
+            transform: ['scale(0.85)', 'scale(1)']
+          },
+          {
+            delay: 0,
+            duration: 200,
+            complete: done
+          }
+        )
+      }
     }
 
     const switchFairy = () => {
@@ -73,9 +108,14 @@ export default defineComponent({
     outline: none;
   }
 
-  & .unicon::v-deep svg {
-    width: $fairy-icon-size;
-    height: $fairy-icon-size;
+  & .unicon {
+    &::v-deep svg {
+      width: $fairy-icon-size;
+      height: $fairy-icon-size;
+    }
+    &.no-active::v-deep svg circle {
+      fill: var(--active-color);
+    }
   }
 }
 
