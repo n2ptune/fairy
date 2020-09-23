@@ -10,10 +10,8 @@
         :css="false"
         @before-enter="transitionHooks.beforeEnter"
         @enter="transitionHooks.enter"
-        @after-enter="transitionHooks.afterEnter"
         @before-leave="transitionHooks.beforeLeave"
         @leave="transitionHooks.leave"
-        @after-leave="transitionHooks.afterLeave"
       >
         <unicon v-if="fairyActive" key="close" name="times" fill="white" />
         <unicon v-else key="active" name="comment-notes" fill="white" />
@@ -32,21 +30,11 @@ export default defineComponent({
 
     const transitionHooks = {
       // Enter
-      beforeEnter(el) {
-        const svg = el.childNodes[0]
-
-        svg.style.fill = '#121212'
-      },
-      enter(el, done) {
-        done()
-      },
-      afterEnter(el) {},
+      beforeEnter(el) {},
+      enter(el, done) {},
       // Leave
       beforeLeave(el) {},
-      leave(el, done) {
-        done()
-      },
-      afterLeave(el) {}
+      leave(el, done) {}
     }
 
     const switchFairy = () => {
