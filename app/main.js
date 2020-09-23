@@ -5,22 +5,12 @@ import App from './App.vue'
 import FairyElement from './lib/init'
 import Store from './store'
 import Unicon from 'vue-unicons'
-import {
-  uniCommentNotes,
-  uniTimes,
-  uniCommentDots,
-  uniCommentDotsMonochrome
-} from 'vue-unicons/src/icons'
+import { uniTimes, uniCommentDotsMonochrome } from 'vue-unicons/src/icons'
 import ContentPlaceHolders from 'vue-content-placeholders'
 import '@styles/_typography.scss'
 import '@styles/_utils.scss'
 
-Unicon.add([
-  uniCommentNotes,
-  uniTimes,
-  uniCommentDots,
-  uniCommentDotsMonochrome
-])
+Unicon.add([uniTimes, uniCommentDotsMonochrome])
 
 Vue.use(Unicon)
 Vue.use(ContentPlaceHolders)
