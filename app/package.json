@@ -1,8 +1,16 @@
 {
-  "name": "app",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "fairy-client",
+  "version": "0.0.1",
+  "main": "main.js",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/n2ptune/fairy"
+  },
+  "homepage": "https://github.com/n2ptune/fairy",
+  "keywords": [
+    "vue",
+    "in-app"
+  ],
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
