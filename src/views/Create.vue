@@ -39,8 +39,8 @@
 <script>
 import Create from '@/components/form/Create.vue'
 import Preview from '@/components/form/Preview.vue'
-import { createFairy, updateFairy } from '@/functions/create'
-import { validateContent } from '@/functions/validate'
+import { createFairy, updateFairy } from '@/api/create'
+import { validateContent } from '@/api/validate'
 
 export default {
   components: {

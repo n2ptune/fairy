@@ -21,7 +21,7 @@
 <script>
 // import 'prismjs'
 import Prism from 'vue-prism-component'
-import { generateCode } from '@/functions/create'
+import { generateCode } from '@/api/create'
 
 export default {
   components: {

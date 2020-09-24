@@ -65,9 +65,9 @@
 
 <script>
 import Form from '@/components/form/Create.vue'
-import { getFairyDataFromID } from '@/functions/update'
-import { updateFairy } from '@/functions/create'
-import { validateContent } from '@/functions/validate'
+import { getFairyDataFromID } from '@/api/update'
+import { updateFairy } from '@/api/create'
+import { validateContent } from '@/api/validate'
 
 export default {
   components: {

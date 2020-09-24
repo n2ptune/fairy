@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import { convertTimestampToDate, dateFormatKorean } from '@/functions/time'
-import { accpetFairy } from '@/functions/create'
+import { convertTimestampToDate, dateFormatKorean } from '@/api/time'
+import { accpetFairy } from '@/api/create'
 import LoadPreview from '@/components/utils/LoadPreview.vue'
 
 export default {

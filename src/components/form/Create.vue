@@ -108,7 +108,7 @@
 
 <script>
 import MarkdownDialog from './MarkdownDialog.vue'
-import { siteNameRule, siteAddrRule, rssAddrRule } from '@/functions/validate'
+import { siteNameRule, siteAddrRule, rssAddrRule } from '@/api/validate'
 
 export default {
   props: {
