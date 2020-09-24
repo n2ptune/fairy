@@ -25,8 +25,5 @@ pnpm-debug.log*
 
 *.drawio
 
-/app/dummy.json
-/app/test.js
-
 .firebase
 *.log

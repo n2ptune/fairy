@@ -24,6 +24,7 @@ const MAX_UNIQUE_ID_LENGTH = 20
 /**
  * Create Fairy
  * @param {Fairy} fairy
+ * @return {Promise<Fairy>}
  */
 function createFairy(fairy) {
   return new Promise((resolve, reject) => {
@@ -158,8 +159,6 @@ function accpetFairy(id) {
 }
 
 function generateCode(id) {
-  /* eslint no-useless-escape: "off" */
-  // const url = 'http://localhost:5000/dist/fairy.app.js'
   const url =
     process.env.NODE_EMV === 'development'
       ? 'http://localhost:5000/dist/fairy.app.js'
