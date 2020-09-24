@@ -16,8 +16,10 @@ function loadFairyData(id) {
           docs.forEach(doc => {
             const fairy = doc.data()
 
-            // 콘텐츠 부분을 없애고 전송
+            // 콘텐츠, 비공개 키 제거
             delete fairy.contents
+            delete fairy.secretID
+
             resolve(fairy)
           })
         }
