@@ -1,13 +1,11 @@
 <template>
   <el-header :class="$route.path === '/' ? 'header' : 'header-no-main'">
     <el-row type="flex" justify="center" align="middle">
-      <!-- 로고 -->
       <el-col :xs="22" :md="3" :lg="2" :xl="1">
         <router-link to="/" :style="{ display: 'inline-block' }">
           <div class="logo-text font-logo">fairy</div>
         </router-link>
       </el-col>
-      <!-- 메뉴 -->
       <el-col :md="10" :lg="6" :xl="5" class="hidden-sm-and-down menu-wrap">
         <ul class="menu">
           <li v-for="route in menuRoutes" :key="route.name">
@@ -17,7 +15,6 @@
           </li>
         </ul>
       </el-col>
-      <!-- Create Fairy Button -->
       <el-col :lg="4" :xl="2" class="hidden-md-and-down create-button-wrap">
         <div class="create-button-container">
           <router-link to="/create">
@@ -25,7 +22,6 @@
           </router-link>
         </div>
       </el-col>
-      <!-- 모바일 메뉴 -->
       <el-col class="hidden-md-and-up" :span="2">Menu</el-col>
     </el-row>
   </el-header>
@@ -43,14 +39,6 @@ export default {
         path: '/edit',
         name: 'Edit'
       }
-      // {
-      //   path: '/lorem',
-      //   name: 'Lorem'
-      // },
-      // {
-      //   path: '/ipsum',
-      //   name: 'Ipsum'
-      // }
     ]
   })
 }
@@ -121,12 +109,12 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 45%;
+    height: 45vh;
     background-color: $color-dark-header-default;
     z-index: -15;
 
     @include mobile {
-      height: 65% !important;
+      height: 65vh !important;
     }
   }
 
@@ -164,6 +152,10 @@ export default {
 
   & .logo-text {
     color: $color-dark-logo;
+
+    &:hover {
+      color: white;
+    }
   }
 
   &-no-main {

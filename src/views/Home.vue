@@ -2,7 +2,6 @@
   <el-container>
     <el-main class="home-main">
       <LandingTop />
-      <LandingMiddle />
       <LandingBottom :key="1" image="fairy-in-phone.png">
         <template #right-top>
           {{ 'easy input contents' | uppercase }}
@@ -35,13 +34,11 @@
 
 <script>
 import LandingTop from '@/components/landing/Top.vue'
-import LandingMiddle from '@/components/landing/Middle.vue'
 import LandingBottom from '@/components/landing/Bottom.vue'
 
 export default {
   components: {
     LandingTop,
-    LandingMiddle,
     LandingBottom
   },
 

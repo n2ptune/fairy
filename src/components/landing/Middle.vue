@@ -7,7 +7,7 @@
       justify="center"
       :gutter="40"
     >
-      <Column v-for="step in steps" :key="step.header" class="card-col">
+      <!-- <Column v-for="step in steps" :key="step.header" class="card-col">
         <el-card shadow="always">
           <template #header>
             {{ step.header }}
@@ -16,17 +16,17 @@
             {{ step.body }}
           </p>
         </el-card>
-      </Column>
+      </Column> -->
     </el-row>
   </transition>
 </template>
 
 <script>
-import Column from '@/components/landing/utils/Column.vue'
+// import Column from '@/components/landing/utils/Column.vue'
 
 export default {
   components: {
-    Column
+    // Column
   },
 
   data: () => ({
@@ -34,17 +34,17 @@ export default {
       {
         header: 'Create Fairy',
         body:
-          'Praesent sodales nisl nulla, id consequat orci consectetur ut. Suspendisse potenti. Sed suscipit, nisl quis vehicula condimentum, diam lectus vulputate magna, sit amet porta mi sapien at velit. Nunc luctus.'
+          'Fairy를 만드는건 매우 쉽습니다. 홈페이지 내 Create Fairy 버튼을 눌러 생성하는 곳으로 이동합니다. 홈페이지 헤더에 Create Fairy 버튼을 눌러서도 이동할 수 있습니다.'
       },
       {
         header: 'Enter Information',
         body:
-          'Proin ac egestas leo. Vestibulum pharetra sodales ante ac ultricies. Curabitur pharetra leo id leo dignissim, id volutpat elit viverra. Morbi rutrum mattis urna non volutpat. Sed malesuada sollicitudin ex.'
+          'Fairy 등록에 필요한 정보들을 입력합니다. Fairy를 삽입하고 싶은 사이트의 대략적인 정보만 있으면 됩니다. 그리고 Fairy가 표시할 컨텐츠를 작성 혹은 RSS를 표시하게 할 수 있습니다.'
       },
       {
         header: 'Insert script',
         body:
-          'Donec iaculis augue id nunc sagittis, ac venenatis purus lobortis. Nunc suscipit ullamcorper ante vitae ultrices. Praesent ipsum lectus, vestibulum eu egestas ac, faucibus in erat. Nunc nibh purus, lacinia.'
+          '입력된 정보를 기반으로 간단한 HTML 코드가 만들어집니다. 이 코드를 웹 페이지에 삽입하게 되면 Fairy가 컨텐츠를 표시합니다.'
       }
     ],
     appearComponent: false

@@ -3,8 +3,8 @@
     <el-col :xs="22" :sm="16" :md="12" :lg="8" :xl="4" class="left">
       <div class="title">Helpful for Web Service</div>
       <div class="sub">
-        Vivamus tempus pellentesque ultricies. Duis lobortis eleifend ex, nec
-        egestas ex. Cras dictum odio a cursus mollis. Praesent nisi erat.
+        마크다운으로 작성한 컨텐츠를 Fairy와 통합시켜 손쉽게 고객센터를
+        구축하거나 컨텐츠를 보여주어 접근성을 높여보세요.
       </div>
     </el-col>
     <el-col :xs="22" :sm="16" :md="12" :lg="8" :xl="4" class="right">
@@ -25,6 +25,10 @@
     & .left {
       margin-bottom: 1.5rem;
     }
+  }
+
+  .illustration {
+    display: none;
   }
 }
 
