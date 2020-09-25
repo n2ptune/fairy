@@ -57,7 +57,6 @@ export default {
   }),
 
   watch: {
-    // eslint-disable-next-line
     active(_n) {
       this.io.unobserve(this.$el)
     }
