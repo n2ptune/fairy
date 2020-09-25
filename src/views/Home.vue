@@ -28,6 +28,7 @@
           vehicula, turpis nec rutrum ultricies, nunc magna lacinia purus, at.
         </template>
       </LandingBottom>
+      <LandingSteps />
     </el-main>
   </el-container>
 </template>
@@ -35,11 +36,13 @@
 <script>
 import LandingTop from '@/components/landing/Top.vue'
 import LandingBottom from '@/components/landing/Bottom.vue'
+import LandingSteps from '@/components/landing/Steps.vue'
 
 export default {
   components: {
     LandingTop,
-    LandingBottom
+    LandingBottom,
+    LandingSteps
   },
 
   filters: {
