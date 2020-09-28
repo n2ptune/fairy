@@ -1,6 +1,6 @@
 <template>
   <el-row
-    :class="active ? 'active' : ''"
+    :class="[active ? 'active' : '', $vnode.key === 1 ? 'first' : '']"
     type="flex"
     justify="center"
     class="bottom"
@@ -86,12 +86,20 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/css/_breakpoints.scss';
+@import '@/assets/css/_variables.scss';
 
 .bottom {
   opacity: 0;
   transform: translateY(25%);
   transition: opacity 0.4s ease, transform 0.9s ease;
   margin: 15rem 0;
+  position: relative;
+
+  &.first {
+    @include mobile {
+      top: 8.5rem;
+    }
+  }
 
   &.active {
     opacity: 1;
@@ -101,6 +109,7 @@ export default {
   @include mobile {
     flex-direction: column;
     flex-wrap: wrap;
+    margin: 5rem 0;
   }
 
   & .left {
@@ -118,6 +127,19 @@ export default {
   & .right {
     padding: 3rem 0;
     text-align: left;
+
+    &::before {
+      display: block;
+      content: '';
+      margin-bottom: 1rem;
+      width: 50px;
+      height: 8px;
+      background-color: $color-dark-header-default;
+
+      @include mobile {
+        margin: 0 auto 1rem auto;
+      }
+    }
 
     &.reverse {
       order: 1;
