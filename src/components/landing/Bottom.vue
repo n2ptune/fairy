@@ -109,7 +109,6 @@ export default {
   @include mobile {
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 5rem 0;
   }
 
   & .left {
