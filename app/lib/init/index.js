@@ -33,9 +33,9 @@ const getClientID = () => {
   return 'development-mode'
 }
 
-const clientID = getClientID()
+// const clientID = getClientID()
 const element = init()
 
-export { clientID }
+export { getClientID }
 
 export default element

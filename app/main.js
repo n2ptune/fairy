@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueCompositionAPI from '@vue/composition-api'
 import VueDompurifyHTML from 'vue-dompurify-html'
 import App from './App.vue'
-import FairyElement, { clientID } from './lib/init'
+import FairyElement, { getClientID } from './lib/init'
 import Store from './store'
 import Unicon from 'vue-unicons'
 import { uniTimes, uniCommentDotsMonochrome } from 'vue-unicons/src/icons'
@@ -17,10 +17,12 @@ Vue.use(ContentPlaceHolders)
 Vue.use(VueCompositionAPI)
 Vue.use(VueDompurifyHTML)
 
-if (clientID) {
+if (getClientID()) {
   Store.dispatch(
     'loadFairy',
-    process.env.NODE_ENV === 'development' ? '8bi2scdgqcua5kg23f06' : clientID
+    process.env.NODE_ENV === 'development'
+      ? '8bi2scdgqcua5kg23f06'
+      : getClientID()
   )
 
   new Vue({

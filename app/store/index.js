@@ -85,7 +85,7 @@ export default new Vuex.Store({
     loadFairy({ commit, getters }, id) {
       const url =
         process.env.NODE_ENV === 'production'
-          ? 'http://localhost:5001/fairy-web-service/us-central1/api'
+          ? 'https://us-central1-fairy-web-service.cloudfunctions.net/api'
           : 'http://localhost:5001/fairy-web-service/us-central1/api'
 
       commit('SET_FAIRY_STATUS', { url, id })
