@@ -19,7 +19,6 @@
 </template>
 
 <script>
-// import 'prismjs'
 import Prism from 'vue-prism-component'
 import { generateCode } from '@/api/create'
 
@@ -45,36 +44,16 @@ export default {
   },
 
   mounted() {
-    const src =
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:5000/dist/fairy.app.js'
-        : null
-
-    if (src) {
-      window.FAIRY_APP = {
-        id: this.fairyId
-      }
-      ;(function (t, i) {
-        if (t.getElementById(i)) return
-
-        var fs = t.createElement('script')
-        var ta = t.getElementsByTagName('script')[0]
-        fs.async = true
-        fs.src = src
-        ta.parentNode.insertBefore(fs, ta)
-
-        fs.onload = () => {
-          this.loadedFairy = true
-        }
-      })(document, 'fairy-app-inject')
-    }
+    ;(function (wrap) {
+      wrap.innerHTML = generateCode(this.fairyId)
+      document.head.appendChild(wrap.content.firstChild)
+    })(document.createElement('template'))
   },
 
   methods: {
     copyCode() {
-      /* eslint no-unused-vars: "off" */
       this.$copyText(this.generatedCode).then(
-        e => {
+        _e => {
           this.$notify({
             type: 'success',
             title: '코드 복사됨',
@@ -83,7 +62,7 @@ export default {
             showClose: true
           })
         },
-        e => {
+        _e => {
           this.$notify({
             type: 'error',
             title: '코드를 복사할 수 없음',

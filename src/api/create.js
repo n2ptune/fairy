@@ -159,10 +159,7 @@ function accpetFairy(id) {
 }
 
 function generateCode(id) {
-  const url =
-    process.env.NODE_EMV === 'development'
-      ? 'http://localhost:5000/dist/fairy.app.js'
-      : 'https://cdn.jsdelivr.net/npm/fairy-client@latest/dist/fairy.app.js'
+  const url = process.env.VUE_APP_DEPLOY_APP_URL
 
   const code = `<script
     src="${url}"
