@@ -164,25 +164,12 @@ function generateCode(id) {
       ? 'http://localhost:5000/dist/fairy.app.js'
       : 'https://cdn.jsdelivr.net/npm/fairy-client@latest/dist/fairy.app.js'
 
-  //   const code = `
-  // <script>
-  //   var url = '${url}';
-
-  //   window.FAIRY_APP = {
-  //     id: ${id}
-  //   };
-
-  //   (function(t, i) {
-  //     if (t.getElementById(i)) return;
-
-  //     var fs = t.createElement('script')
-  //     var ta = t.getElementsByTagName('script')[0]
-  //     fs.async = true
-  //     fs.src = url
-  //     ta.parentNode.insertBefore(fs, ta)
-  //   })(document, 'fairy-app-inject')
-  // <\/script>`.trim()
-  const code = `<script src="${url}" async data-fairy-client-id="${id}" data-fairy-client-app></script>`
+  const code = `<script
+    src="${url}"
+    async
+    data-fairy-client-id="${id}"
+    data-fairy-client-app
+  ></script>`.trim()
 
   return code
 }
