@@ -23,19 +23,22 @@ const init = () => {
   return __el__
 }
 
+/** @return {string | number} */
 const getClientID = () => {
   if (process.env.NODE_ENV === 'production' && document) {
-    const fairyClient = document.querySelector('script[data-fairy-client-app]')
-    const fairyClientID = fairyClient.dataset.fairyClientID
+    const fairyClient = document.head.querySelector(
+      'script[data-fairy-client-app]'
+    )
+    const fairyClientID = fairyClient.dataset.fairyClientId
 
     return fairyClientID
   }
   return 'development-mode'
 }
 
-// const clientID = getClientID()
+const clientID = getClientID()
 const element = init()
 
-export { getClientID }
+export { clientID }
 
 export default element
