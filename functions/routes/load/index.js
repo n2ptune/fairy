@@ -39,13 +39,12 @@ router.get('/contents/:id', requireIDMiddleware, (req, res) => {
       if (process.env.NODE_ENV === 'production') {
         // Fairy에 등록되어 있지 않은 출처에서 요청시
         // CORS 발생
-        res.set('Access-Control-Allow-Origin', result.cors.siteAddrWithPrefix)
+        res.set('Access-Control-Allow-Origin', result.cors)
       }
       res.append('Content-Type', 'application/json; charset=utf-8')
       res.append('Vary', 'Origin')
 
       return res.status(200).send(result.contents)
-      // setTimeout(() => res.status(200).send(result.contents), 3000)
     })
     .catch(error => {
       let status

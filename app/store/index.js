@@ -109,9 +109,9 @@ export default new Vuex.Store({
       })
     },
 
-    loadContents({ state, commit }) {
+    loadContents({ getters, commit }) {
       return new Promise((resolve, reject) => {
-        const url = `${state.fairy.url}/load/contents/${state.fairy.id}`
+        const url = `${getters.getServerURL}/load/contents/${getters.getFairyID}`
 
         axios
           .get(url)
