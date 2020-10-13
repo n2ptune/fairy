@@ -142,7 +142,7 @@ export default {
   }
 
   .vue-simplemde {
-    &::v-deep .CodeMirror-scroll {
+    &::v-deep .CodeMirror:not(.CodeMirror-fullscreen) .CodeMirror-scroll {
       max-height: $dialog-mde-max-height;
     }
   }
