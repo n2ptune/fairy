@@ -163,7 +163,7 @@ function generateCode(id) {
 
   const code = `<script
     src="${url}"
-    async
+    defer
     data-fairy-client-id="${id}"
     data-fairy-client-app
   ></script>`.trim()
