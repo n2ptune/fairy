@@ -19,7 +19,7 @@
 
 <script>
 import { computed, defineComponent, ref } from '@vue/composition-api'
-import ContentBox from './ContentBox.vue'
+import ContentBox from './Box.vue'
 
 export default defineComponent({
   components: {

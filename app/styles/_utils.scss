@@ -24,3 +24,9 @@
     border: 3px solid transparent;
   }
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

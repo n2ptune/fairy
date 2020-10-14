@@ -1,16 +1,18 @@
 <template>
-  <section class="contents">
-    <ContentList v-if="fairyActive" />
-  </section>
+  <Layout>
+    <List v-if="fairyActive" />
+  </Layout>
 </template>
 
 <script>
-import ContentList from './ContentList.vue'
+import List from './List.vue'
+import Layout from './Layout.vue'
 import { computed, defineComponent } from '@vue/composition-api'
 
 export default defineComponent({
   components: {
-    ContentList
+    List,
+    Layout
   },
 
   setup(props, { root }) {

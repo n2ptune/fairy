@@ -90,8 +90,13 @@ export default {
   }
 
   & .mobile-close-icon {
+    @include not-mobile {
+      display: none;
+    }
+
     $icon-distance: 5px;
 
+    display: block;
     position: absolute;
     right: $icon-distance;
     top: $icon-distance;

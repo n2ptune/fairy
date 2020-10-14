@@ -6,15 +6,16 @@
     <InnerHeader />
     <component :is="innerComponents" />
     <DetailContent v-if="detailActive" />
+    <footer>Fairy</footer>
   </main>
 </template>
 
 <script>
 import { computed } from '@vue/composition-api'
 import InnerHeader from './Header.vue'
-import InnerContents from './Contents.vue'
-import CounselForm from './CounselForm.vue'
-import DetailContent from './DetailContent.vue'
+import InnerContents from '../contents/ListContainer.vue'
+import CounselForm from '../contents/CounselForm.vue'
+import DetailContent from '../contents/detail/Content.vue'
 
 export default {
   components: {
@@ -77,16 +78,5 @@ export default {
     width: $fairy-inner-box-width;
     height: $fairy-inner-box-height;
   }
-}
-
-.contents {
-  background-color: white;
-  padding: 1rem;
-  border-top-left-radius: $fairy-inner-contents-box-radius;
-  border-top-right-radius: $fairy-inner-contents-box-radius;
-  height: auto;
-  min-height: 100%;
-  position: relative;
-  top: $fairy-header-to-inner-distance;
 }
 </style>
