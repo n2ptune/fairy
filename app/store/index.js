@@ -13,10 +13,15 @@ export default new Vuex.Store({
         contents: false
       }
     },
-    data: null
+    data: null,
+    innerContentActive: true
   }),
 
   mutations: {
+    SET_INNER_CONTENT_ACTIVE(state, active) {
+      state.innerContentActive = active
+    },
+
     SET_FAIRY_STATUS(state, data) {
       if (data) {
         state.fairy = {
@@ -48,6 +53,10 @@ export default new Vuex.Store({
   },
 
   getters: {
+    getInnerContentActive(state) {
+      return state.innerContentActive
+    },
+
     getFairyActive(state) {
       return state.fairy.active.fairy
     },

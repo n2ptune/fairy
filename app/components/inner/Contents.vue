@@ -1,49 +1,25 @@
 <template>
   <section class="contents">
-    <transition name="disappear">
-      <keep-alive>
-        <ContentList v-if="fairyActive" />
-      </keep-alive>
-    </transition>
+    <ContentList v-if="fairyActive" />
   </section>
 </template>
 
 <script>
 import ContentList from './ContentList.vue'
-import { mapGetters } from 'vuex'
+import { computed, defineComponent } from '@vue/composition-api'
 
-export default {
+export default defineComponent({
   components: {
     ContentList
   },
 
-  computed: {
-    ...mapGetters({
-      fairyActive: 'getFairyActive'
-    })
+  setup(props, { root }) {
+    const { $store: store } = root
+    const fairyActive = computed(() => store.getters.getFairyActive)
+
+    return {
+      fairyActive
+    }
   }
-}
+})
 </script>
-
-<style lang="scss" scoped>
-.disappear-leave-active {
-  transition: opacity 0.5s ease-out;
-}
-
-.disappear-leave-to {
-  opacity: 0;
-}
-
-@import '@styles/_variables.scss';
-
-.contents {
-  background-color: white;
-  padding: 1rem;
-  border-top-left-radius: $fairy-inner-contents-box-radius;
-  border-top-right-radius: $fairy-inner-contents-box-radius;
-  height: auto;
-  min-height: 100%;
-  position: relative;
-  top: $fairy-header-to-inner-distance;
-}
-</style>

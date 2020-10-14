@@ -5,12 +5,16 @@ import App from './App.vue'
 import FairyElement, { clientID } from './lib/init'
 import Store from './store'
 import Unicon from 'vue-unicons'
-import { uniTimes, uniCommentDotsMonochrome } from 'vue-unicons/src/icons'
+import {
+  uniTimes,
+  uniCommentDotsMonochrome,
+  uniSmile
+} from 'vue-unicons/src/icons'
 import ContentPlaceHolders from 'vue-content-placeholders'
 import '@styles/_typography.scss'
 import '@styles/_utils.scss'
 
-Unicon.add([uniTimes, uniCommentDotsMonochrome])
+Unicon.add([uniTimes, uniCommentDotsMonochrome, uniSmile])
 
 Vue.use(Unicon)
 Vue.use(ContentPlaceHolders)
@@ -20,7 +24,7 @@ Vue.use(VueDompurifyHTML)
 if (clientID) {
   Store.dispatch(
     'loadFairy',
-    process.env.NODE_ENV === 'development' ? '8bi2scdgqcua5kg23f06' : clientID
+    process.env.NODE_ENV === 'development' ? 'pb5uuxvfmpeoac74lzbk' : clientID
   ).then(
     () =>
       new Vue({

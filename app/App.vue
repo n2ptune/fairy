@@ -2,7 +2,7 @@
   <div id="fairy-app">
     <div class="fairy-inner-container" v-if="fairyData">
       <InnerContainer v-show="fairyActive" />
-      <FairyButton v-if="fairyData" @active="onFairy" @close="offFairy" />
+      <FairyButton v-if="fairyData" />
     </div>
   </div>
 </template>
@@ -19,30 +19,14 @@ export default defineComponent({
   },
 
   setup(props, { root }) {
-    const fairyData = computed(() => root.$store.getters.getFairyData)
-    const fairyActive = computed(() => root.$store.getters.getFairyActive)
-    const detailActive = computed(() => root.$store.getters['detail/getActive'])
+    const { $store: store } = root
 
-    const onFairy = () => {
-      if (detailActive.value) {
-        root.$store.commit('detail/SWITCH_ACTIVE')
-      }
-      root.$store.commit('SET_FAIRY_ACTIVE', true)
-    }
-
-    const offFairy = () => {
-      if (detailActive.value) {
-        root.$store.commit('detail/SWITCH_ACTIVE')
-      }
-      root.$store.commit('SET_FAIRY_ACTIVE', false)
-    }
+    const fairyData = computed(() => store.getters.getFairyData)
+    const fairyActive = computed(() => store.getters.getFairyActive)
 
     return {
       fairyData,
-      fairyActive,
-      detailActive,
-      onFairy,
-      offFairy
+      fairyActive
     }
   }
 })

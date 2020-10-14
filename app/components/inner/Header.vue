@@ -1,20 +1,68 @@
 <template>
   <header :style="{ backgroundColor: fairy.themeColor }" class="inner-header">
-    <!-- <div class="site-name">{{ fairy.siteName }}</div> -->
     <div class="fixed-menu" :style="{ backgroundColor: fairy.themeColor }">
-      <div class="fixed-item">{{ fairy.siteName }}</div>
+      <div
+        :class="innerContentActive ? 'active' : ''"
+        class="fixed-menu__item"
+        @click="switchActive(true)"
+      >
+        {{ fairy.siteName }}
+      </div>
+      <div
+        :class="!innerContentActive ? 'active' : ''"
+        class="fixed-menu__item"
+        @click="switchActive(false)"
+      >
+        <unicon
+          name="smile"
+          fill="white"
+          style="display: inline-block; vertical-align: middle"
+        />
+        문의하기
+      </div>
+    </div>
+    <div class="mobile-close-icon">
+      <unicon
+        name="times"
+        fill="white"
+        width="25px"
+        height="25px"
+        @click="switchFairyActive(false)"
+      />
     </div>
   </header>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { computed } from '@vue/composition-api'
 
 export default {
-  computed: {
-    ...mapGetters({
-      fairy: 'getFairyData'
-    })
+  setup(props, { root: { $store: store } }) {
+    const fairy = computed(() => store.getters.getFairyData)
+    const innerContentActive = computed(
+      () => store.getters.getInnerContentActive
+    )
+    const detailActive = computed(() => store.getters['detail/getActive'])
+
+    const switchActive = active => {
+      if (active === innerContentActive.value) return
+
+      return store.commit('SET_INNER_CONTENT_ACTIVE', active)
+    }
+
+    const switchFairyActive = active => {
+      if (detailActive.value) {
+        store.commit('detail/SWITCH_ACTIVE')
+      }
+      store.commit('SET_FAIRY_ACTIVE', active)
+    }
+
+    return {
+      fairy,
+      innerContentActive,
+      switchActive,
+      switchFairyActive
+    }
   }
 }
 </script>
@@ -41,10 +89,31 @@ export default {
     border-top-right-radius: 0;
   }
 
+  & .mobile-close-icon {
+    $icon-distance: 5px;
+
+    position: absolute;
+    right: $icon-distance;
+    top: $icon-distance;
+
+    & .unicon {
+      cursor: pointer;
+    }
+  }
+
   & .fixed-menu {
     &__item {
-      font-size: 1rem;
+      vertical-align: middle;
+      display: inline-block;
       color: white;
+      font-size: 1rem;
+      padding: 0.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.25);
+      }
     }
   }
 }

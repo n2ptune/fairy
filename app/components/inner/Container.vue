@@ -15,8 +15,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// Transition
-// Entry point (enter, leave)
+@import '@styles/_breakpoints.scss';
+
 $translate-distance: 10%;
 
 .appear-from-bottom-enter-active,
@@ -27,12 +27,18 @@ $translate-distance: 10%;
 .appear-from-bottom-enter,
 .appear-from-bottom-leave-to {
   opacity: 0;
-  transform: translateY($translate-distance);
+
+  @include not-mobile {
+    transform: translateY($translate-distance);
+  }
 }
 
 .appear-from-bottom-enter-to,
 .appear-from-bottom-leave {
   opacity: 1;
-  transform: translateY(0);
+
+  @include not-mobile {
+    transform: translateY(0);
+  }
 }
 </style>

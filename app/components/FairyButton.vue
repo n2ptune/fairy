@@ -34,9 +34,12 @@ import { computed, defineComponent } from '@vue/composition-api'
 import Velocity from 'velocity-animate'
 
 export default defineComponent({
-  setup(props, { root, emit }) {
-    const fairy = computed(() => root.$store.getters.getFairyData)
-    const fairyActive = computed(() => root.$store.getters.getFairyActive)
+  setup(props, { root }) {
+    const { $store: store } = root
+
+    const fairy = computed(() => store.getters.getFairyData)
+    const fairyActive = computed(() => store.getters.getFairyActive)
+    const detailActive = computed(() => store.getters['detail/getActive'])
 
     const transitionHooks = {
       beforeEnter(el) {
@@ -73,11 +76,10 @@ export default defineComponent({
     }
 
     const switchFairy = () => {
-      if (fairyActive.value) {
-        return emit('close')
-      } else {
-        return emit('active')
+      if (detailActive.value) {
+        store.commit('detail/SWITCH_ACTIVE')
       }
+      store.commit('SET_FAIRY_ACTIVE', !fairyActive.value)
     }
 
     return {
