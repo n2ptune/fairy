@@ -107,6 +107,8 @@ export default {
   }
 
   & .fixed-menu {
+    padding: 0 2rem;
+
     &__item {
       vertical-align: middle;
       display: inline-block;

@@ -58,6 +58,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import '@styles/_variables.scss';
 
+.contents {
+  top: 0;
+}
+
 .counsel-form {
   &-inner {
     & textarea {
