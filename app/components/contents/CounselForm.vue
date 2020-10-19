@@ -32,6 +32,7 @@
 
 <script>
 import { defineComponent, reactive, ref, watch } from '@vue/composition-api'
+import axios from 'axios'
 import Layout from './Layout.vue'
 
 export default defineComponent({
@@ -39,7 +40,7 @@ export default defineComponent({
     Layout
   },
 
-  setup(_, { root }) {
+  setup(_, { root: { $store: store } }) {
     const form = reactive({
       userName: '',
       userEmail: '',
@@ -53,7 +54,7 @@ export default defineComponent({
       userContent: '전달할 내용'
     }
 
-    const { themeColor } = root.$store.getters.getFairyData
+    const { themeColor } = store.getters.getFairyData
 
     watch(isCompleted, (_isCompleted, _) => {
       if (_isCompleted) {
@@ -66,9 +67,26 @@ export default defineComponent({
 
     const submitForm = () => {
       if (form.userContent.length >= 10) {
-        // API Logic
-        isCompleted.value = true
-        isDisabled.value = true
+        axios
+          .post(
+            '/counsel/write',
+            {
+              message: form.userContent,
+              userName: form.userName,
+              userEmail: form.userEmail,
+              id: store.getters.getFairyID
+            },
+            {
+              baseURL: store.getters.getServerURL
+            }
+          )
+          .catch(error => {
+            console.log(error)
+          })
+          .finally(() => {
+            isCompleted.value = true
+            isDisabled.value = true
+          })
       } else {
         return
       }
@@ -106,7 +124,7 @@ export default defineComponent({
   }
 }
 
-@import '@styles/_variables.scss';
+@import '@app/styles/_variables.scss';
 
 .contents {
   top: 0;

@@ -68,8 +68,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@styles/_variables.scss';
-@import '@styles/_breakpoints.scss';
+@import '@app/styles/_variables.scss';
+@import '@app/styles/_breakpoints.scss';
 
 .inner-header {
   top: 0;

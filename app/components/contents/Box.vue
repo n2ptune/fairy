@@ -123,7 +123,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '@styles/_variables.scss';
+@import '@app/styles/_variables.scss';
 
 .content-box {
   position: relative;

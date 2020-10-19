@@ -48,7 +48,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '@styles/_breakpoints.scss';
+@import '@app/styles/_breakpoints.scss';
 
 $translate-distance: 10%;
 
@@ -75,7 +75,7 @@ $translate-distance: 10%;
   }
 }
 
-@import '@styles/_variables.scss';
+@import '@app/styles/_variables.scss';
 
 .fairy-inner-box {
   overflow-y: auto;

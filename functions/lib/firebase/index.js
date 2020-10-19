@@ -16,5 +16,6 @@ const app = admin.initializeApp({
 module.exports = {
   app,
   db: app.firestore(),
-  functions
+  functions,
+  admin
 }

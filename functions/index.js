@@ -10,10 +10,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Express Routes
-const { load, rss } = require('./routes')
+const { load, rss, counsel } = require('./routes')
 
 app.use('/load', load)
 app.use('/rss', rss)
+app.use('/counsel', counsel)
 
 // All request endpoints start prefix /api
 // /api/create

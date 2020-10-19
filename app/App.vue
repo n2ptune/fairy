@@ -9,8 +9,8 @@
 
 <script>
 import { computed, defineComponent } from '@vue/composition-api'
-import FairyButton from '@components/FairyButton.vue'
-import InnerContainer from '@components/inner/Container.vue'
+import FairyButton from '@app/components/FairyButton.vue'
+import InnerContainer from '@app/components/inner/Container.vue'
 
 export default defineComponent({
   components: {
@@ -33,7 +33,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '@styles/_variables.scss';
+@import '@app/styles/_variables.scss';
 
 #fairy-app {
   position: fixed;

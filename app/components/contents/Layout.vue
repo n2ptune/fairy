@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import '@styles/_variables.scss';
+@import '@app/styles/_variables.scss';
 
 .contents {
   background-color: white;

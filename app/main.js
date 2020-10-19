@@ -11,8 +11,8 @@ import {
   uniSmile
 } from 'vue-unicons/src/icons'
 import ContentPlaceHolders from 'vue-content-placeholders'
-import '@styles/_typography.scss'
-import '@styles/_utils.scss'
+import '@app/styles/_typography.scss'
+import '@app/styles/_utils.scss'
 import 'normalize.css'
 
 Unicon.add([uniTimes, uniCommentDotsMonochrome, uniSmile])

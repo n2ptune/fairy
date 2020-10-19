@@ -30,8 +30,8 @@ export default {
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-@import '@styles/_variables.scss';
-@import '@styles/_breakpoints.scss';
+@import '@app/styles/_variables.scss';
+@import '@app/styles/_breakpoints.scss';
 
 .detail-enter-active,
 .detail-leave-active {

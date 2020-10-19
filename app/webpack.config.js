@@ -40,7 +40,7 @@ module.exports = {
           {
             loader: 'style-loader',
             options: {
-              insert: function(el) {
+              insert: function (el) {
                 const _shadowContainer = document.querySelector(
                   '#fairy-app-container'
                 )
@@ -72,8 +72,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@styles': path.resolve(__dirname, './styles/'),
-      '@components': path.resolve(__dirname, './components/')
+      '@app': path.resolve(__dirname, './')
     }
   },
   plugins: [
@@ -81,7 +80,7 @@ module.exports = {
     new VueLoaderPlugin(),
     process.env.NODE_ENV === 'development'
       ? new HtmlWebpackPlugin({ template: './public/index.html' })
-      : function() {}
+      : function () {}
   ],
   devServer: {
     port: 9000
