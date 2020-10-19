@@ -128,6 +128,7 @@ export default defineComponent({
 
 .contents {
   top: 0;
+  height: 100%;
 }
 
 .counsel-form {
