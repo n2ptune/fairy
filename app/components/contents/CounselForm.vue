@@ -67,6 +67,9 @@ export default defineComponent({
 
     const submitForm = () => {
       if (form.userContent.length >= 10) {
+        isCompleted.value = true
+        isDisabled.value = true
+
         axios
           .post(
             '/counsel/write',
@@ -77,15 +80,12 @@ export default defineComponent({
               id: store.getters.getFairyID
             },
             {
-              baseURL: store.getters.getServerURL
+              baseURL: store.getters.getServerURL,
+              method: 'POST'
             }
           )
           .catch(error => {
             console.log(error)
-          })
-          .finally(() => {
-            isCompleted.value = true
-            isDisabled.value = true
           })
       } else {
         return
