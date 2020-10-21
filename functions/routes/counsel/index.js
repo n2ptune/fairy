@@ -13,19 +13,18 @@ router.post('/write', requireIDMiddleware, async (req, res) => {
 
   if (process.env.NODE_ENV === 'production') {
     // if (process.env.NODE_ENV) {
-    const isMatchOrigin = await checkOrigin(
-      body.id,
-      req.get('Origin').replace(/https?:\/\//, '')
-    )
+    try {
+      const siteAddr = await checkOrigin(body.id)
 
-    if (!isMatchOrigin || isMatchOrigin instanceof Error) {
-      return res.status(400).send({
-        message: isMatchOrigin.message || 'No Match Origin'
-      })
-    } else {
-      res.set('Access-Control-Allow-Origin', req.get('Origin'))
-      res.append('Accept', 'application/json')
-      res.append('Content-Type', 'application/json')
+      if (!siteAddr) {
+        return res.status(500).end()
+      } else {
+        res.set('Access-Control-Allow-Origin', siteAddr)
+        res.append('Accept', 'application/json')
+        res.append('Content-Type', 'application/json')
+      }
+    } catch (error) {
+      return res.status(400).send(error)
     }
   }
 

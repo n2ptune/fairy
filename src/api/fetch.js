@@ -5,7 +5,7 @@ function fetchMessage(id) {
     const collection = db.collection('fairies')
 
     collection
-      .where('id', '==', id)
+      .where('secretID', '==', id)
       .get()
       .then(qs => {
         if (!qs.empty) {
