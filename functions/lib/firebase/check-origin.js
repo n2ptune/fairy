@@ -10,7 +10,7 @@ exports.checkOrigin = async function (fairyID) {
   const querySnapshot = await collection.where('id', '==', fairyID).get()
 
   if (!querySnapshot.empty) {
-    return querySnapshot.docs[0].data().siteAddr
+    return querySnapshot.docs[0].data().siteAddrWithPrefix
   } else {
     throw new Error('Not Found Fairy')
   }

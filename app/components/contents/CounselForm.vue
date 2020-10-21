@@ -70,18 +70,22 @@ export default defineComponent({
         isCompleted.value = true
         isDisabled.value = true
 
+        const qs = require('qs')
+
         axios
           .post(
             '/counsel/write',
-            {
+            qs.stringify({
               message: form.userContent,
               userName: form.userName,
               userEmail: form.userEmail,
               id: store.getters.getFairyID
-            },
+            }),
             {
               baseURL: store.getters.getServerURL,
-              method: 'POST'
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
             }
           )
           .catch(error => {

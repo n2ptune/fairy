@@ -3,6 +3,8 @@ const MAX_UNIQUE_ID_LENGTH = 20
 const requireIDMiddleware = (req, res, next) => {
   let id
 
+  console.log(req.body)
+
   if (req.method === 'GET') {
     id = req.params.id
   } else if (req.method === 'POST') {
