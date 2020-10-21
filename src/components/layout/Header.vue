@@ -38,6 +38,10 @@ export default {
       {
         path: '/edit',
         name: 'Edit'
+      },
+      {
+        path: '/manage',
+        name: 'Manage'
       }
     ]
   })

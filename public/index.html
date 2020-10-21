@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <%= process.env.NODE_ENV === 'production' ? `
+    <script src="/__/firebase/7.20.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.20.0/firebase-analytics.js"></script>
+    <script src="/__/firebase/7.20.0/firebase-firestore.js"></script>
+    <script src="/__/firebase/init.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/fairy-client@latest/dist/fairy.app.js"
       defer
       data-fairy-client-id="pb5uuxvfmpeoac74lzbk"
       data-fairy-client-app
     ></script>
-    <%= process.env.NODE_ENV === 'production' ? `
-    <script src="/__/firebase/7.20.0/firebase-app.js"></script>
-    <script src="/__/firebase/7.20.0/firebase-analytics.js"></script>
-    <script src="/__/firebase/7.20.0/firebase-firestore.js"></script>
-    <script src="/__/firebase/init.js"></script>
     ` : '' %>
   </head>
   <body>

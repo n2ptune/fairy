@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Create from '../views/Create.vue'
 import Edit from '../views/Edit.vue'
+import Manage from '../views/Manage.vue'
 
 Vue.use(VueRouter)
 
@@ -19,8 +20,13 @@ const routes = [
   },
   {
     path: '/edit',
-    name: 'edit',
+    name: 'Edit',
     component: Edit
+  },
+  {
+    path: '/manage',
+    name: 'Manage',
+    component: Manage
   }
 ]
 
