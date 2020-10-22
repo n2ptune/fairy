@@ -15,6 +15,10 @@ import '@app/styles/_typography.scss'
 import '@app/styles/_utils.scss'
 import 'normalize.css'
 
+const { version } = require('./package.json')
+
+window.FAIRY_APP = { version }
+
 Unicon.add([uniTimes, uniCommentDotsMonochrome, uniSmile])
 
 Vue.use(Unicon)

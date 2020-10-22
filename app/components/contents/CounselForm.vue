@@ -6,23 +6,26 @@
           v-model="form.userName"
           type="text"
           :placeholder="placeholder.userName"
+          :disabled="isDisabled"
         />
         <input
           v-model="form.userEmail"
           type="email"
           :placeholder="placeholder.userEmail"
+          :disabled="isDisabled"
         />
         <textarea
           v-model="form.userContent"
           rows="10"
           :placeholder="placeholder.userContent"
+          :disabled="isDisabled"
         />
         <button class="submit" :disabled="isDisabled" @click="submitForm">
           문의하기
         </button>
         <transition name="appear-bottom" appear>
           <div v-if="isCompleted" class="completed-message">
-            문의하신 내용이 접수되었습니다.
+            {{ statusMessage }}
           </div>
         </transition>
       </div>
@@ -31,7 +34,13 @@
 </template>
 
 <script>
-import { defineComponent, reactive, ref, watch } from '@vue/composition-api'
+import {
+  computed,
+  defineComponent,
+  reactive,
+  ref,
+  watch
+} from '@vue/composition-api'
 import axios from 'axios'
 import Layout from './Layout.vue'
 
@@ -48,6 +57,14 @@ export default defineComponent({
     })
     const isCompleted = ref(false)
     const isDisabled = ref(false)
+    const status = ref('')
+    const statusMessage = computed(() => {
+      return !status.value
+        ? ''
+        : status.value === 'error'
+        ? '오류가 발생하였습니다. 잠시 후 다시 시도해주세요.'
+        : '문의하신 내용이 접수되었습니다.'
+    })
     const placeholder = {
       userName: '이름 혹은 닉네임',
       userEmail: '회신받을 이메일',
@@ -61,7 +78,7 @@ export default defineComponent({
         setTimeout(() => {
           isCompleted.value = false
           isDisabled.value = false
-        }, 3000)
+        }, 5000)
       }
     })
 
@@ -88,8 +105,12 @@ export default defineComponent({
               }
             }
           )
-          .catch(error => {
-            console.log(error)
+          .then(() => (status.value = 'success'))
+          .catch(_e => (status.value = 'error'))
+          .finally(() => {
+            form.userContent = ''
+            form.userName = ''
+            form.userEmail = ''
           })
       } else {
         return
@@ -102,7 +123,8 @@ export default defineComponent({
       themeColor,
       submitForm,
       isCompleted,
-      isDisabled
+      isDisabled,
+      statusMessage
     }
   }
 })
