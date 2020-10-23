@@ -1,5 +1,5 @@
 /**
- * @param {{seconds: Number, nanoseconds: Number}} timestamp
+ * @param {firebase.firestore.Timestamp} timestamp
  */
 function convertTimestampToDate(timestamp) {
   if (timestamp.seconds && timestamp.nanoseconds) {

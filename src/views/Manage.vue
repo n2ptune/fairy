@@ -41,7 +41,12 @@
             </el-form>
           </div>
           <el-divider />
-          <div v-if="isLoad" class="messages">message</div>
+          <MessageList
+            v-if="isLoad"
+            :id="form.secretID"
+            :messages="messages"
+            @update-message="update"
+          />
         </div>
       </ResponsiveContainer>
     </el-main>
@@ -50,16 +55,19 @@
 
 <script>
 import ResponsiveContainer from '@/components/utils/ResponsiveContainer.vue'
+import MessageList from '@/components/message/List.vue'
 import { fetchMessage } from '@/api/fetch'
 
 export default {
   components: {
-    ResponsiveContainer
+    ResponsiveContainer,
+    MessageList
   },
 
   data: () => ({
     isLoad: false,
     buttonLoading: false,
+    messages: null,
     form: {
       secretID: '',
       rules: {
@@ -87,7 +95,7 @@ export default {
           // 메세지 불러오기 로직
           fetchMessage(this.form.secretID)
             .then(messages => {
-              console.log(messages)
+              this.messages = messages
               this.isLoad = true
             })
             .catch(error => {
@@ -107,14 +115,10 @@ export default {
           this.buttonLoading = false
         }
       })
+    },
+    update(messages) {
+      this.messages = messages
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.inner {
-  & .form {
-  }
-}
-</style>
