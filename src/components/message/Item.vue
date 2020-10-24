@@ -10,6 +10,26 @@
       <div class="timestamp">
         {{ formatDate }}
       </div>
+      <div class="icon">
+        <el-popconfirm
+          title="메세지를 삭제할까요?"
+          icon="el-icon-delete"
+          iconColor="#ED2939"
+          confirmButtonText="삭제"
+          cancelButtonText="취소"
+          confirmButtonType="danger"
+          cancelButtonType="info"
+          @onConfirm="deleteMessage"
+        >
+          <el-button
+            slot="reference"
+            type="danger"
+            icon="el-icon-delete"
+            circle
+            size="small"
+          />
+        </el-popconfirm>
+      </div>
     </div>
     <div slot="default">
       {{ message.body }}
@@ -37,6 +57,12 @@ export default {
     formatDate() {
       return dateFormatKorean(convertTimestampToDate(this.message.ts))
     }
+  },
+
+  methods: {
+    deleteMessage() {
+      console.log(this.message)
+    }
   }
 }
 </script>
@@ -48,8 +74,12 @@ export default {
   border: 1px solid #eee;
 
   & .header {
+    position: relative;
+    word-break: break-all;
+
     & .user-name {
       font-weight: bold;
+      padding-right: 4rem;
     }
 
     & .user-email {
@@ -60,6 +90,12 @@ export default {
       margin-top: 1rem;
       font-size: 0.85rem;
       color: darkgray;
+    }
+
+    & .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
     }
   }
 }
