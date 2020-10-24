@@ -19,4 +19,19 @@ function fetchMessage(id) {
   })
 }
 
+function removeMessage(message, id) {
+  return new Promise((resolve, reject) => {
+    const collection = db.collection('fairies')
+
+    collection
+      .where('secretID', '==', 'id')
+      .get()
+      .then(qs => {
+        if (!qs.empty) {
+          // remove
+        }
+      })
+  })
+}
+
 export { fetchMessage }

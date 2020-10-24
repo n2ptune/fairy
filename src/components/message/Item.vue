@@ -61,7 +61,10 @@ export default {
 
   methods: {
     deleteMessage() {
-      console.log(this.message)
+      this.$emit('delete-message', {
+        index: this.$vnode.key,
+        message: this.message
+      })
     }
   }
 }

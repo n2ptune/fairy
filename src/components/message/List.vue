@@ -15,6 +15,7 @@
       v-for="(message, index) in sortedMessagesByDate"
       :key="index"
       :message="message"
+      @delete-message="deleteMessage"
     />
   </div>
 </template>
@@ -22,7 +23,7 @@
 <script>
 import Item from './Item.vue'
 import { convertTimestampToDate } from '@/api/time'
-import { fetchMessage } from '@/api/fetch'
+import { fetchMessage } from '@/api/message'
 
 export default {
   components: {
@@ -72,7 +73,8 @@ export default {
           })
         )
         .finally(() => (this.refreshing = false))
-    }
+    },
+    deleteMessage({ index, message }) {}
   }
 }
 </script>

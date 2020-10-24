@@ -56,7 +56,7 @@
 <script>
 import ResponsiveContainer from '@/components/utils/ResponsiveContainer.vue'
 import MessageList from '@/components/message/List.vue'
-import { fetchMessage } from '@/api/fetch'
+import { fetchMessage } from '@/api/message'
 
 export default {
   components: {
