@@ -3,6 +3,7 @@ let firebase
 /** @type {firebase.firestore.Firestore} */
 let db
 let serverTimestamp
+let arrayRemove
 
 // 개발 환경
 if (process.env.NODE_ENV === 'development') {
@@ -22,15 +23,17 @@ if (process.env.NODE_ENV === 'development') {
 
   db = firebaseApp.firestore()
   serverTimestamp = firebaseApp.firestore.FieldValue.serverTimestamp()
+  arrayRemove = firebaseApp.firestore.FieldValue.arrayRemove
 } else if (process.env.NODE_ENV === 'production') {
   firebase = window.firebase || null
   db = firebase.firestore() || null
   serverTimestamp =
     window.firebase.firestore.FieldValue.serverTimestamp() || null
+  arrayRemove = window.firebase.firestore.FieldValue.arrayRemove || null
 
   if (!firebase && !db && !serverTimestamp) {
     console.error('Not initialize firebase app')
   }
 }
 
-export { firebase, db, serverTimestamp }
+export { firebase, db, serverTimestamp, arrayRemove }

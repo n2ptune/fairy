@@ -23,7 +23,7 @@
 <script>
 import Item from './Item.vue'
 import { convertTimestampToDate } from '@/api/time'
-import { fetchMessage } from '@/api/message'
+import { fetchMessage, removeMessage } from '@/api/message'
 
 export default {
   components: {
@@ -74,7 +74,24 @@ export default {
         )
         .finally(() => (this.refreshing = false))
     },
-    deleteMessage({ index, message }) {}
+    deleteMessage({ _index, message }) {
+      removeMessage(message, this.id)
+        .then(() => {
+          this.$notify({
+            type: 'success',
+            title: '삭제 완료',
+            message: '메세지가 삭제되었습니다.'
+          })
+          this.refresh()
+        })
+        .catch(error =>
+          this.$notify({
+            type: 'error',
+            title: '삭제 실패',
+            message: error.message || '메세지 삭제에 실패했습니다.'
+          })
+        )
+    }
   }
 }
 </script>
