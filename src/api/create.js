@@ -95,26 +95,20 @@ function updateFairy(fairy, id, isEdit = false) {
             message: '데이터가 중복되었습니다.'
           })
         } else {
-          q.forEach(doc => {
-            const docID = doc.id
+          const doc = q.docs[0]
 
-            // Fairy object extend
-            // fairy.createdAt = serverTimestamp
-            fairy.updatedAt = serverTimestamp
-            fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
-            fairy.rssAddrWithPrefix = 'https://' + fairy.rssAddr
-            fairy.success = true
+          // Fairy object extend
+          // fairy.createdAt = serverTimestamp
+          fairy.updatedAt = serverTimestamp
+          fairy.siteAddrWithPrefix = 'https://' + fairy.siteAddr
+          fairy.rssAddrWithPrefix = 'https://' + fairy.rssAddr
+          fairy.success = true
 
-            fairies
-              .doc(docID)
-              .update(fairy)
-              .then(() => {
-                fairies
-                  .doc(docID)
-                  .get()
-                  .then(updatedFairy => resolve(updatedFairy.data()))
-                  .catch(error => reject(error))
-              })
+          doc.ref.update(fairy).then(() => {
+            doc.ref
+              .get()
+              .then(updatedFairy => resolve(updatedFairy.data()))
+              .catch(error => reject(error))
           })
         }
       })
@@ -132,26 +126,26 @@ function accpetFairy(id) {
     fairies
       .where('id', '==', id)
       .get()
-      .then(docs => {
-        if (docs.empty) {
+      .then(qs => {
+        if (!qs.empty) {
+          const doc = qs.docs[0]
+
+          doc.ref
+            .update({ success: true })
+            .then(resolve)
+            .catch(error => reject(error))
+
+          const { isRSS, id } = doc.data()
+
+          if (isRSS) {
+            axios
+              .get(`${process.env.VUE_APP_SERVER_URL}/rss/parse/${id}`)
+              .catch(error => console.error(error))
+          }
+        } else {
           reject({
             title: '데이터를 찾을 수 없음',
             message: `${id}는 유효한 아이디 값이 아닙니다.`
-          })
-        } else {
-          docs.forEach(doc => {
-            doc.ref
-              .update({ success: true })
-              .then(resolve)
-              .catch(error => reject(error))
-
-            const { isRSS, id } = doc.data()
-
-            if (isRSS) {
-              axios
-                .get(`${process.env.VUE_APP_SERVER_URL}/rss/parse/${id}`)
-                .catch(error => console.error(error))
-            }
           })
         }
       })

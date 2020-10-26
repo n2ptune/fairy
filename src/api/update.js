@@ -17,11 +17,11 @@ function getFairyDataFromID(id) {
       collection
         .where('secretID', '==', id)
         .get()
-        .then(docs => {
-          if (docs.empty) {
-            reject(new Error('아이디를 찾을 수 없음'))
+        .then(qs => {
+          if (!qs.empty) {
+            resolve(qs.docs[0].data())
           } else {
-            docs.forEach(doc => resolve(doc.data()))
+            reject(new Error('아이디를 찾을 수 없음'))
           }
         })
         .catch(error => reject(error))
