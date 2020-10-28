@@ -4,7 +4,7 @@
       <el-row type="flex" justify="center" :gutter="20">
         <el-col v-bind="column">
           <ul>
-            <li class="font-logo">fairy</li>
+            <li class="logo">FAIRY</li>
             <li>Helpful for Web Service</li>
           </ul>
         </el-col>
@@ -67,7 +67,7 @@ export default {
         }
       }
 
-      & .font-logo {
+      & .logo {
         font-size: 1.7rem;
         color: $color-dark-header-default;
       }

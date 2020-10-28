@@ -7,12 +7,6 @@ body {
     sans-serif !important;
 }
 
-.font-logo {
-  font-family: 'Merriweather', serif !important;
-  font-style: italic;
-  font-weight: 900;
-}
-
 .mx-auto {
   margin: 0 auto;
 }
