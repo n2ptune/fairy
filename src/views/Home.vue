@@ -4,6 +4,7 @@
       <ResponsiveContainer>
         <Top />
         <Examples />
+        <Features />
       </ResponsiveContainer>
     </el-main>
   </el-container>
@@ -12,11 +13,13 @@
 <script>
 import Top from '@/components/landing/Top.vue'
 import Examples from '@/components/landing/Examples.vue'
+import Features from '@/components/landing/Features.vue'
 
 export default {
   components: {
     Top,
-    Examples
+    Examples,
+    Features
   },
 
   filters: {

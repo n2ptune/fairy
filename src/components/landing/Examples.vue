@@ -55,13 +55,23 @@
             </div>
           </li>
         </transition-group>
+        <div class="dots">
+          <div v-for="i in 3" :key="i" class="dot"></div>
+        </div>
+        <Process />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Process from './Process.vue'
+
 export default {
+  components: {
+    Process
+  },
+
   data: () => ({
     icons: ['edit', 'star-off', 'zoom-in', 'picture-outline', 'delete', 'more'],
     lines: 7,
@@ -199,6 +209,21 @@ export default {
   & .body {
     margin: 1rem 0;
 
+    & .dots {
+      margin: 1rem 0;
+
+      & .dot {
+        --dot-size: 7px;
+
+        display: block;
+        width: var(--dot-size);
+        height: var(--dot-size);
+        border-radius: 999px;
+        background-color: rgba(0, 0, 0, 0.08);
+        margin: 1rem auto;
+      }
+    }
+
     & .top {
       & .icon-list {
         margin: 2rem 0;
@@ -238,21 +263,6 @@ export default {
             & .highlight {
               color: $color-dark-header-default;
             }
-          }
-        }
-
-        & .dots {
-          margin: 1rem 0;
-
-          & .dot {
-            --dot-size: 7px;
-
-            display: block;
-            width: var(--dot-size);
-            height: var(--dot-size);
-            border-radius: 999px;
-            background-color: rgba(0, 0, 0, 0.08);
-            margin: 1rem auto;
           }
         }
       }
