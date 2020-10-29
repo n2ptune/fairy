@@ -111,6 +111,10 @@ export default defineComponent({
   }
 
   & .unicon {
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+
     &::v-deep svg {
       width: $fairy-icon-size;
       height: $fairy-icon-size;
