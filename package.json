@@ -20,7 +20,7 @@
     "uid": "^2.0.0",
     "vue": "^2.6.12",
     "vue-clipboard2": "^0.3.1",
-    "vue-prism-component": "^1.2.0",
+    "vue-prism-component": "^2.0.0",
     "vue-router": "^3.4.9",
     "vue-simplemde": "^1.1.2",
     "vue-unicons": "^2.3.0"
