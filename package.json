@@ -15,7 +15,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.10.0",
     "element-ui": "^2.14.1",
-    "firebase": "^8.0.2",
+    "firebase": "^8.4.1",
     "prismjs": "^1.23.0",
     "uid": "^2.0.0",
     "vue": "^2.6.12",
@@ -23,7 +23,7 @@
     "vue-prism-component": "^2.0.0",
     "vue-router": "^3.5.1",
     "vue-simplemde": "^2.0.0",
-    "vue-unicons": "^2.3.0"
+    "vue-unicons": "^3.2.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.11",
