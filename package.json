@@ -23,7 +23,7 @@
     "vue-prism-component": "^2.0.0",
     "vue-router": "^3.5.1",
     "vue-simplemde": "^2.0.0",
-    "vue-unicons": "^2.3.0"
+    "vue-unicons": "^3.2.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.11",
