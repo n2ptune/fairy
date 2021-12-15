@@ -1,4 +1,8 @@
 {
-  "name": "@fairy/app
-  "version": "0.0.1"
+  "name": "@fairy/app",
+  "version": "0.0.1",
+  "dependencies": {
+    "@fairy/shared": "*"
+  },
+  "scripts": {}
 }
