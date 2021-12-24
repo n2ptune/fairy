@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Main from '../components/views/Main'
+import Main from './components/views/Main'
 
 const App = () => {
   return (

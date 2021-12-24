@@ -4,12 +4,12 @@ const path = require('path')
 /** @type {import('webpack').Configuration} */
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './src/index.jsx',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     symlinks: true
   },
   externals: ['React', 'ReactDOM'],
@@ -19,9 +19,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js)x?$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: [{ loader: 'babel-loader' }]
+        use: [
+          'babel-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            }
+          }
+        ]
       }
     ]
   },
