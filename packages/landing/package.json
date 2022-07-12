@@ -5,10 +5,7 @@
   "main": "src/main.ts",
   "devDependencies": {},
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "dev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
