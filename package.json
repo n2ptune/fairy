@@ -5,7 +5,8 @@
   "scripts": {},
   "dependencies": {
     "vue": "^3.2.37",
-    "vue-router": "^4.1.2"
+    "vue-router": "^4.1.2",
+    "vuex": "^4.0.2"
   },
   "eslintConfig": {
     "root": true,
